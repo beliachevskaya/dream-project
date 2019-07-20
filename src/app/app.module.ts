@@ -10,6 +10,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { RestorePasswordComponent } from './auth/restore-password/restore-password.component';
 import { SetNewPasswordComponent } from './auth/set-new-password/set-new-password.component';
 import { LinkExpiredComponent } from './auth/link-expired/link-expired.component';
+import { StartComponent } from './auth/start/start.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { LinkExpiredComponent } from './auth/link-expired/link-expired.component
     LoginComponent,
     RestorePasswordComponent,
     SetNewPasswordComponent,
-    LinkExpiredComponent
+    LinkExpiredComponent,
+    StartComponent
   ],
   imports: [
     BrowserModule,

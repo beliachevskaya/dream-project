@@ -1,15 +1,29 @@
-<div class="sign">
-  <div class="sign__image">
-  </div>
-  <div class="sign__form_container">
-    <h1 class="sign__form_name">Sign Up</h1>
-    <form novalidate class="sign__form">
-     <input type="text" placeholder="Full Name" class="sign__form_input">
-      <input type="email" placeholder="Email" class="sign__form_input">
-      <input type="password" placeholder="Password" class="sign__form_input">
-      <button class='sign__form_button' type="submit" routerLink="/login">Sign up</button>
-    </form>
-    <p class="sign__form_sign-in">Already have an account?<a routerLink="/login">Sign In</a></p>
+<div class="signUp">
+  <h1>Sign Up</h1>
+  <div class="form-container">
+    <div class="form-item">
+      <mat-form-field>
+        <input matInput placeholder="Full Name">
+      </mat-form-field>
+    </div>
+    <div class="form-item">
+      <mat-form-field>
+        <input matInput placeholder="Email">
+      </mat-form-field>
+    </div>
+    <div class="form-item">
+      <mat-form-field>
+        <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? "visibility_off" : "visibility"}}</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <div>
+      <button class="signUpButton" mat-raised-button color="primary">Sign Up</button>
+    </div>
+    <div>
+      <p>Already have an account? <a routerLink="/login">Sign In</a></p>
+    </div>
   </div>
 </div>
-
