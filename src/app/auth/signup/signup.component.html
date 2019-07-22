@@ -1,29 +1,35 @@
 <div class="signUp">
   <h1>Sign Up</h1>
   <div class="form-container">
-    <div class="form-item">
-      <mat-form-field>
-        <input matInput placeholder="Full Name">
-      </mat-form-field>
-    </div>
-    <div class="form-item">
-      <mat-form-field>
-        <input matInput placeholder="Email">
-      </mat-form-field>
-    </div>
-    <div class="form-item">
-      <mat-form-field>
-        <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'">
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-        <mat-icon>{{hide ? "visibility_off" : "visibility"}}</mat-icon>
-        </button>
-      </mat-form-field>
-    </div>
-    <div>
-      <button class="signUpButton" mat-raised-button color="primary">Sign Up</button>
-    </div>
-    <div>
-      <p>Already have an account? <a routerLink="/login">Sign In</a></p>
-    </div>
+    <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+      <div class="form-item">
+        <mat-form-field>
+          <input matInput type="text" id="name" name="name" placeholder="Full Name" ngModel required>
+          <mat-error>Field must not be empty</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-item">
+        <mat-form-field>
+          <input matInput type="email" id="email" name="email" placeholder="Email" ngModel email required #emailInput="ngModel">
+          <mat-error *ngIf="emailInput.hasError('required')">Field must not be empty</mat-error>
+          <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form-item">
+        <mat-form-field hintLabel="Should be at least 6 characters long">
+          <input matInput type="password" id="password" name="password" placeholder="Password" ngModel #pwInput="ngModel" required minlength="6" [type]="hide ? 'password' : 'text'">
+          <mat-hint align="end">{{ pwInput.value?.length }}/6</mat-hint>
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? "visibility_off" : "visibility"}}</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <div>
+        <button class="signUpButton" mat-raised-button color="primary" type="submit">Sign Up</button>
+      </div>
+      <div>
+        <p>Already have an account? <a routerLink="/login">Sign In</a></p>
+      </div>
+    </form>
   </div>
 </div>

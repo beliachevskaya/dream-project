@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./set-new-password.component.sass']
 })
 export class SetNewPasswordComponent implements OnInit {
-
+  hide = false;
+  
   constructor() { }
 
   ngOnInit() {
