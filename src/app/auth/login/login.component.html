@@ -1,30 +1,39 @@
-<div class="signIn">
-    <h1>Sign In</h1>
-    <div class="form-container">
-      <form>
-        <div class="form-item">
-          <mat-form-field>
-            <input matInput type="email" id="email" name="email" placeholder="Email" ngModel email required #emailInput="ngModel">
-            <mat-error *ngIf="emailInput.hasError('required')">Field must not be empty</mat-error>
-            <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid</mat-error>
-          </mat-form-field>
+<div class="login__page">
+    <div class="login__page_image">
+      <div class="image">
+      </div>
+    </div>
+    <div class="login__page_content">
+      <div class="signIn">
+        <h1>Sign In</h1>
+        <div class="form-container">
+          <form>
+            <div class="form-item">
+              <mat-form-field>
+                <input matInput type="email" id="email" name="email" placeholder="Email" ngModel email required #emailInput="ngModel">
+                <mat-error *ngIf="emailInput.hasError('required')">Field must not be empty</mat-error>
+                <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid</mat-error>
+              </mat-form-field>
+            </div>
+            <a routerLink="/restore-password" class="forgot-password">Forgot password?</a>
+            <div class="form-item">
+              <mat-form-field hintLabel="Should be at least 6 characters long">
+                <input type="password" id="password" name="password" matInput placeholder="Password" ngModel #pwInput="ngModel" required minlength="6" [type]="hide ? 'password' : 'text'">
+                <mat-hint align="end">{{ pwInput.value?.length }}/6</mat-hint>
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                  <mat-icon>{{hide ? "visibility_off" : "visibility"}}</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+            <div>
+              <button class="signInButton" mat-raised-button color="primary">Sign In</button>
+            </div>
+            <div>
+              <p>I don't have account <a routerLink="/signup">Sign Up</a></p>
+            </div>
+          </form>
         </div>
-        <a routerLink="/restore-password" class="forgot-password">Forgot password?</a>
-        <div class="form-item">
-          <mat-form-field hintLabel="Should be at least 6 characters long">
-            <input type="password" id="password" name="password" matInput placeholder="Password" ngModel #pwInput="ngModel" required minlength="6" [type]="hide ? 'password' : 'text'">
-            <mat-hint align="end">{{ pwInput.value?.length }}/6</mat-hint>
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? "visibility_off" : "visibility"}}</mat-icon>
-            </button>
-          </mat-form-field>
-        </div>
-        <div>
-          <button class="signInButton" mat-raised-button color="primary">Sign In</button>
-        </div>
-        <div>
-          <p>I don't have account <a routerLink="/signup">Sign Up</a></p>
-        </div>
-      </form>
+      </div>
+
     </div>
   </div>
