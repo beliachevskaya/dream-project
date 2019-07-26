@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
@@ -12,6 +14,9 @@ import { LoginComponent } from './auth/login/login.component';
 import { RestorePasswordComponent } from './auth/restore-password/restore-password.component';
 import { SetNewPasswordComponent } from './auth/set-new-password/set-new-password.component';
 import { LinkExpiredComponent } from './auth/link-expired/link-expired.component';
+import { AuthService } from './auth/auth.service';
+import { environment } from '../environments/environment';
+import { NextPageComponent } from './auth/next-page/next-page.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +25,8 @@ import { LinkExpiredComponent } from './auth/link-expired/link-expired.component
     LoginComponent,
     RestorePasswordComponent,
     SetNewPasswordComponent,
-    LinkExpiredComponent
+    LinkExpiredComponent,
+    NextPageComponent
   ],
   imports: [
     BrowserModule,
@@ -28,9 +34,11 @@ import { LinkExpiredComponent } from './auth/link-expired/link-expired.component
     MaterialModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

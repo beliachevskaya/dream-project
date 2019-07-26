@@ -31,7 +31,7 @@
               </mat-form-field>
             </div>
             <div>
-              <button class="signUpButton" mat-raised-button color="primary" type="submit">Sign Up</button>
+              <button class="signUpButton" mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Sign Up</button>
             </div>
             <div>
               <p>Already have an account? <a routerLink="/login">Sign In</a></p>
