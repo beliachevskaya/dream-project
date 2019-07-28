@@ -11,7 +11,7 @@ import { ContainerComponent } from "./container/container.component";
 // import {HeaderComponent} from "./header/header.component";
 // import {LogoUserCompanyComponent} from "./logo-user-company/logo-user-company.component";
 // import {MenuComponent} from "./menu/menu.component";
-// import {PageComponent} from "./page/page.component";
+// import { PageComponent } from "./page/page.component";
 import { CommonModule } from "@angular/common";
 
 @NgModule({
@@ -21,7 +21,7 @@ import { CommonModule } from "@angular/common";
     // HeaderComponent,
     // LogoUserCompanyComponent,
     // MenuComponent,
-    // PageComponent,
+    // PageComponent
   ],
   imports: [
     RouterModule,
@@ -38,7 +38,7 @@ import { CommonModule } from "@angular/common";
     // HeaderComponent,
     // LogoUserCompanyComponent,
     // MenuComponent,
-    // PageComponent,
+    // PageComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
