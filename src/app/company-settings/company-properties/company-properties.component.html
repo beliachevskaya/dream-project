@@ -1,0 +1,68 @@
+<div class="company-properties">
+  <div class="company-properties__header">
+    <mat-form-field class="company-width">
+      <input matInput value="{{ name }}" />
+    </mat-form-field>
+    <button mat-raised-button class="save-button" color="primary" type="submit">
+      Save
+    </button>
+  </div>
+
+  <div class="company-properties__body">
+    <div class="company-properties__box">
+      <p>Activities:</p>
+      <div *ngFor="let item of activities">
+        <mat-checkbox [(ngModel)]="item.checked" (change)="onToggle()">{{
+          item.label
+        }}</mat-checkbox>
+      </div>
+    </div>
+
+    <div class="company-properties__box">
+      <p>Default Projects:</p>
+      <mat-form-field>
+        <mat-label>Choose project</mat-label>
+        <mat-select [(ngModel)]="selectedValue" name="project">
+          <mat-option
+            *ngFor="let item of defaultProjects"
+            [value]="item.checked"
+          >
+            {{ item.project }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="company-properties__box">
+      <label id="example-radio-group-label">Start week from:</label>
+      <mat-radio-group
+        class="week-day-radio-group"
+        [(ngModel)]="startWeekDay[1]"
+      >
+        <mat-radio-button
+          class="example-radio-button"
+          *ngFor="let day of startWeekDay[0]"
+          [value]="day"
+        >
+          {{ day }}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div class="company-properties__box">
+      <p>Default Workload:</p>
+      <form class="workload-form">
+        <mat-form-field class="workload-width">
+          <input type="number" matInput [(value)]="workload[0]" />
+        </mat-form-field>
+        <p>hours per</p>
+        <mat-form-field class="time-measure-width">
+          <mat-select [(value)]="workload[1]">
+            <mat-option value="week">week</mat-option>
+            <mat-option value="day">day</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+    </div>
+  </div>
+</div>

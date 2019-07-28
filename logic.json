@@ -1,0 +1,18 @@
+{
+  "company-settings": {
+    "company-properties": {
+      "name": "string",
+      "activities": "any[]",
+      "defaultProjects": "any[]",
+      "startWeekDay": "string",
+      "workload": "any[]"
+    },
+    "approval-period": {
+      "approvalPeriod": "string",
+      "autoSubmit": "boolean",
+      "notDifTime": "any[]",
+      "abilityForget": "boolean"
+    }
+    
+  }
+}
