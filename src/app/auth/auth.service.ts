@@ -8,7 +8,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 export class AuthService {
   authChange = new Subject<boolean>();
   private isAuthenticated = false;
-
+  errorMessage: string;
+  errorCode: string;
   constructor(private router: Router, private angularFireAuth: AngularFireAuth) {}
 
   registerUser(authData: AuthData) {
@@ -20,6 +21,8 @@ export class AuthService {
       })
       .catch(error => {
         console.log(error);
+        this.errorMessage = error.message;
+        alert(this.errorMessage);
       });
     }
 
@@ -31,7 +34,13 @@ export class AuthService {
       this.authSuccessfully();
     })
     .catch(error => {
-      console.log(error);
+      this.errorCode = error.code;
+      this.errorMessage = error.message;
+      if (this.errorCode === 'auth/wrong-password') {
+        alert('Wrong password.');
+      } else {
+        alert(this.errorMessage);
+      }
     });
 }
 
@@ -49,5 +58,15 @@ export class AuthService {
     this.isAuthenticated = true;
     this.authChange.next(true);
     this.router.navigate(['/next-page']);
+  }
+  getAuth() {
+    return this.angularFireAuth.auth;
+  }
+
+  restorePassword(email: string) {
+    return this.angularFireAuth.auth.sendPasswordResetEmail(email)
+    .then(() => alert('A password reset link has been sent to your email address'),
+    (rejectionReason) => alert(rejectionReason))
+  .catch(e => alert('An error occurred while attempting to reset your password'));
   }
 }

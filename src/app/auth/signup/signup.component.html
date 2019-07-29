@@ -25,9 +25,9 @@
               <mat-form-field hintLabel="Should be at least 6 characters long">
                 <input matInput type="password" id="password" name="password" placeholder="Password" ngModel #pwInput="ngModel" required minlength="6" [type]="hide ? 'password' : 'text'">
                 <mat-hint align="end">{{ pwInput.value?.length }}/6</mat-hint>
-                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                   <mat-icon>{{hide ? "visibility_off" : "visibility"}}</mat-icon>
-                </button>
+                </a>
               </mat-form-field>
             </div>
             <div>
