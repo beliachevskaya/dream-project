@@ -1,0 +1,48 @@
+<div class="approval-period">
+  <div class="approval-block">
+    <p>Approval Period:</p>
+    <mat-form-field class="select-period">
+      <mat-select [(value)]="approvalPeriod">
+        <mat-option *ngFor="let item of approvalPeriodItems" [value]="item">
+          {{ item }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-slide-toggle [color]="accent" [(checked)]="autoSubmit">
+      Submit Time Logs automatically in the end of period
+    </mat-slide-toggle>
+  </div>
+
+  <div class="approval-block">
+    <p>Notify about difference between expected and actual time:</p>
+
+    <div class="notify-block">
+      <mat-checkbox [(ngModel)]="notDifTime[0].notification"></mat-checkbox>
+      <p class="notifi-sign">≤</p>
+      <input type="number" [(value)]="notDifTime[0].time" />
+      <p class="notifi-sign">%</p>
+      <mat-select class="select-notify" [(value)]="notDifTime[0].caution">
+        <mat-option value="error">error</mat-option>
+        <mat-option value="warn">warn</mat-option>
+      </mat-select>
+    </div>
+
+    <div class="notify-block">
+      <mat-checkbox [(ngModel)]="notDifTime[1].notification"></mat-checkbox>
+      <p class="notifi-sign">≥</p>
+      <input type="number" [(value)]="notDifTime[1].time" />
+      <p class="notifi-sign">%</p>
+      <mat-select class="select-notify" [(value)]="notDifTime[1].caution">
+        <mat-option value="error">error</mat-option>
+        <mat-option value="warn">warn</mat-option>
+      </mat-select>
+    </div>
+  </div>
+
+  <div class="approval-block">
+    <mat-slide-toggle [(checked)]="abilityForget">
+      Ability to forget timesheets
+    </mat-slide-toggle>
+  </div>
+</div>
