@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { AuthService } from '../auth.service';
 import {FormControl, Validators} from '@angular/forms';
 
 @Component({
@@ -8,9 +10,12 @@ import {FormControl, Validators} from '@angular/forms';
 })
 export class RestorePasswordComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
+
+  onSubmit(form: NgForm) {
+    this.authService.restorePassword(form.value.email);
+  }
 
   ngOnInit() {
   }
-
 }
