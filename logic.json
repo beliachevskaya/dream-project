@@ -1,4 +1,9 @@
 {
+  "user-profile": {
+    "id": "number",
+    "name": "string",
+    "companyList": "any[]"
+  },
   "company-settings": {
     "company-properties": {
       "name": "string",
@@ -13,6 +18,5 @@
       "notDifTime": "any[]",
       "abilityForget": "boolean"
     }
-    
   }
 }

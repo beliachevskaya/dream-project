@@ -7,8 +7,10 @@ import { RestorePasswordComponent } from "./auth/restore-password/restore-passwo
 import { SetNewPasswordComponent } from "./auth/set-new-password/set-new-password.component";
 import { LinkExpiredComponent } from "./auth/link-expired/link-expired.component";
 import { CompanySettingsComponent } from "./company-settings/company-settings.component";
+import { PageComponent } from "./core/page/page.component";
 
 const routes: Routes = [
+  { path: "", component: PageComponent },
   { path: "signup", component: SignupComponent },
   { path: "login", component: LoginComponent },
   { path: "restore-password", component: RestorePasswordComponent },
