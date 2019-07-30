@@ -7,7 +7,7 @@
       <div class="signIn">
         <h1>Sign In</h1>
         <div class="form-container">
-          <form>
+          <form (ngSubmit)="onSubmit(form)" #form="ngForm">
             <div class="form-item">
               <mat-form-field>
                 <input matInput type="email" id="email" name="email" placeholder="Email" ngModel email required #emailInput="ngModel">
@@ -20,13 +20,13 @@
               <mat-form-field hintLabel="Should be at least 6 characters long">
                 <input type="password" id="password" name="password" matInput placeholder="Password" ngModel #pwInput="ngModel" required minlength="6" [type]="hide ? 'password' : 'text'">
                 <mat-hint align="end">{{ pwInput.value?.length }}/6</mat-hint>
-                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
                   <mat-icon>{{hide ? "visibility_off" : "visibility"}}</mat-icon>
-                </button>
+                </a>
               </mat-form-field>
             </div>
             <div>
-              <button class="signInButton" mat-raised-button color="primary">Sign In</button>
+              <button type="submit" class="signInButton" mat-raised-button color="primary" [disabled]="form.invalid">Sign In</button>
             </div>
             <div>
               <p>I don't have account <a routerLink="/signup">Sign Up</a></p>
