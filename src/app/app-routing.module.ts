@@ -9,9 +9,11 @@ import { LinkExpiredComponent } from './auth/link-expired/link-expired.component
 import { CompanySettingsComponent } from './company-settings/company-settings.component';
 import { PageComponent } from './core/page/page.component';
 import { NextPageComponent } from './auth/next-page/next-page.component';
+import { TimelogComponent } from './timelogs/timelog/timelog.component';
 
 const itemMenu: Routes = [
-  { path: 'company-settings', component: CompanySettingsComponent }
+  { path: 'company-settings', component: CompanySettingsComponent },
+  { path: 'timelog-day', component: TimelogComponent }
 ];
 
 const routes: Routes = [
