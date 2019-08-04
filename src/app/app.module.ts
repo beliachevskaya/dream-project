@@ -20,6 +20,7 @@ import { LinkExpiredComponent } from './auth/link-expired/link-expired.component
 import { AuthService } from './auth/auth.service';
 import { environment } from '../environments/environment';
 import { NextPageComponent } from './auth/next-page/next-page.component';
+import { TimelogsModule } from './timelogs/timelogs.module';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { NextPageComponent } from './auth/next-page/next-page.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     CoreModule,
-    CompanySettingModule
+    CompanySettingModule,
+    TimelogsModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
