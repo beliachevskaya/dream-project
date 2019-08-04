@@ -1,0 +1,15 @@
+<mat-form-field [floatLabel]="'never'">
+  <mat-label>
+    <div class="round"></div>&nbsp;&nbsp;<span>Choose Project</span>
+  </mat-label>
+  <mat-select [(value)]="mark">
+    <mat-select-trigger *ngIf="mark" class="mark">
+      <mat-icon class="mat-24" [ngStyle]="{'color': mark.color}">brightness_1</mat-icon>
+      <span>{{mark.name}}</span>
+    </mat-select-trigger>
+    <mat-option *ngFor="let mark of marks" [value]="mark">
+      <mat-icon class="mat-24" [ngStyle]="{'color': mark.color}">brightness_1</mat-icon>
+      <span>{{mark.name}}</span>
+    </mat-option>
+  </mat-select>
+</mat-form-field>
