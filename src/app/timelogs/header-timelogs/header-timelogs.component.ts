@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-head',
-  templateUrl: './head.component.html',
-  styleUrls: ['./head.component.sass']
+  selector: 'app-header-timelogs',
+  templateUrl: './header-timelogs.component.html',
+  styleUrls: ['./header-timelogs.component.sass']
 })
-export class HeadComponent implements OnInit {
+export class HeaderTimelogsComponent implements OnInit {
   timeNow = '';
   toggleFlag = true;
   time() {
