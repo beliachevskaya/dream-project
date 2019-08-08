@@ -8,14 +8,23 @@ export interface Timesheet {
   comment: string;
 }
 
+export interface Marks {
+  id: number;
+  name: string;
+  color: string;
+}
+
 @Component({
   selector: 'app-timelog',
   templateUrl: './timelog.component.html',
   styleUrls: ['./timelog.component.sass']
 })
 export class TimelogComponent {
+
+  time;
+
   constructor() {
-    console.log(this.mark);
+
   }
 
   timesheets: Timesheet[] = [
@@ -29,17 +38,12 @@ export class TimelogComponent {
 
 
 
-  mark: object = null;
-  marks: object[] = [
-    {id: 1, name: 'test1', color: 'red'},
-    {id: 2, name: 'test2', color: 'orange'},
-    {id: 3, name: 'test3', color: 'yellow'},
-    {id: 4, name: 'test4', color: 'blue'},
+  mark: Marks = null;
+  marks: Marks[] = [
+    {id: 1, name: 'Windows', color: 'red' },
+    {id: 2, name: 'Skype', color: 'yellow' },
+    {id: 3, name: 'Mifot', color: 'blue' }
   ];
-
-  removeRow() {
-
-  }
 
   deleteTimesheet(index) {
     this.dataSource.data.splice(index, 1);

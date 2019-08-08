@@ -1,10 +1,15 @@
-<div class="table">
-  <table mat-table [dataSource]="dataSource">
+<div>
+  <app-header-timelogs>
+  </app-header-timelogs>
+
+  <div class="table">
+
+    <table mat-table [dataSource]="dataSource">
 
       <ng-container matColumnDef="project">
         <th mat-header-cell *matHeaderCellDef> Project </th>
-        <td mat-cell *matCellDef="let timesheet">
-          <app-timelog-select [marks]="marks"></app-timelog-select>
+        <td mat-cell *matCellDef="let timesheet; let i = index">
+          <app-timelog-select [timesheets]="timesheets[i]" [marks]="marks"></app-timelog-select>
         </td>
         <td mat-footer-cell *matFooterCellDef> Total </td>
       </ng-container>
@@ -26,7 +31,7 @@
         <td mat-footer-cell *matFooterCellDef></td>
       </ng-container>
 
-      <ng-container matColumnDef="item-description">
+      <ng-container matColumnDef="project-description">
         <td class="bottom-border-none" mat-footer-cell *matFooterCellDef>
           <mat-form-field [floatLabel]="'never'">
             <mat-label>
@@ -46,8 +51,10 @@
         </td>
       </ng-container>
 
-      <ng-container matColumnDef="cost-description">
-        <td class="bottom-border-none" mat-footer-cell *matFooterCellDef> <input matInput placeholder="0.0"> </td>
+      <ng-container matColumnDef="time-description">
+        <td class="bottom-border-none" mat-footer-cell *matFooterCellDef>
+          <input matInput placeholder="0.0">
+        </td>
       </ng-container>
 
       <ng-container matColumnDef="comment-description">
@@ -56,9 +63,12 @@
 
       <tr mat-header-row class="height" *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      <tr mat-footer-row *matFooterRowDef="['item-description', 'cost-description', 'comment-description']"></tr>
+      <tr mat-footer-row *matFooterRowDef="['project-description', 'time-description', 'comment-description']"></tr>
+
       <tr mat-footer-row *matFooterRowDef="displayedColumns;"></tr>
     </table>
+  </div>
+
 </div>
 
 
