@@ -6,13 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header-timelogs.component.sass']
 })
 export class HeaderTimelogsComponent implements OnInit {
-  timeNow = '';
-  toggleFlag = true;
-  time() {
-    this.toggleFlag = false;
-    const now = new Date();
-    this.timeNow = now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
-  }
 
   constructor() { }
 

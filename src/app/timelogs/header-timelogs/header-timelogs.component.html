@@ -1,17 +1,18 @@
 <div class="employees-header">
   <div class="data">
-    <i class="material-icons">chevron_left</i>
-    <p>24/04/2019</p>
-    <i class="material-icons">chevron_right</i>
+<!--    <i class="material-icons">chevron_left</i>-->
+    <mat-form-field>
+      <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+<!--    <i class="material-icons">chevron_right</i>-->
   </div>
-<!--  <div class="buttons">-->
-<!--    <button [routerLink]="timelog-day">Day</button>-->
-<!--    <button [routerLink]="timelog-week">Week</button>-->
-<!--  </div>-->
-  <div *ngIf="toggleFlag; else elseBlock">
-    <button (click) = time() class="button__save">Save</button>
+  <div class="toggle">
+    <button routerLink="/timelog-day">Day</button>
+    <button>Week</button>
   </div>
-  <ng-template #elseBlock>
-    <button (click) = time() class="button_save_time">Save at {{timeNow}}</button>
-  </ng-template>
+  <div>
+    <button class="button-save">Save</button>
+  </div>
 </div>
