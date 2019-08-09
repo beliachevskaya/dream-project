@@ -6,6 +6,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { RestorePasswordComponent } from './auth/restore-password/restore-password.component';
 import { SetNewPasswordComponent } from './auth/set-new-password/set-new-password.component';
 import { LinkExpiredComponent } from './auth/link-expired/link-expired.component';
+
 import { CompanySettingsComponent } from './company-settings/company-settings.component';
 import { PageComponent } from './core/page/page.component';
 import { NextPageComponent } from './auth/next-page/next-page.component';
@@ -18,8 +19,13 @@ const itemMenu: Routes = [
   { path: 'profile', component: ProfileComponent }
 ];
 
+const itemMenu: Routes = [
+  { path: 'company-settings', component: CompanySettingsComponent }
+];
+
 const routes: Routes = [
   { path: '', component: PageComponent, children: itemMenu },
+
   { path: 'test', component: MyComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
@@ -27,6 +33,7 @@ const routes: Routes = [
   { path: 'set-new-password', component: SetNewPasswordComponent },
   { path: 'link-expired', component: LinkExpiredComponent },
   { path: 'next-page', component: NextPageComponent }
+
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

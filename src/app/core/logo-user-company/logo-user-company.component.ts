@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+
 import { MyUserService, Iuser } from '../../../app/myTest/my.service';
+
 
 // interface IuserProfile {
 //   id: number;
@@ -10,6 +12,7 @@ import { MyUserService, Iuser } from '../../../app/myTest/my.service';
 @Component({
   selector: 'app-logo-user-company',
   templateUrl: './logo-user-company.component.html',
+
   styleUrls: ['./logo-user-company.component.sass'],
   providers: [MyUserService]
 })
