@@ -9,13 +9,18 @@ import { LinkExpiredComponent } from './auth/link-expired/link-expired.component
 import { CompanySettingsComponent } from './company-settings/company-settings.component';
 import { PageComponent } from './core/page/page.component';
 import { NextPageComponent } from './auth/next-page/next-page.component';
+import { ProfileComponent } from './profile-page/profile.component';
+
+import { MyComponent } from './myTest/my.component';
 
 const itemMenu: Routes = [
-  { path: 'company-settings', component: CompanySettingsComponent }
+  { path: 'company-settings', component: CompanySettingsComponent },
+  { path: 'profile', component: ProfileComponent }
 ];
 
 const routes: Routes = [
   { path: '', component: PageComponent, children: itemMenu },
+  { path: 'test', component: MyComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
   { path: 'restore-password', component: RestorePasswordComponent },
