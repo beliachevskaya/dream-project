@@ -19,10 +19,6 @@ const itemMenu: Routes = [
   { path: 'profile', component: ProfileComponent }
 ];
 
-const itemMenu: Routes = [
-  { path: 'company-settings', component: CompanySettingsComponent }
-];
-
 const routes: Routes = [
   { path: '', component: PageComponent, children: itemMenu },
 
