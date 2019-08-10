@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'app-signup',
@@ -10,10 +11,14 @@ import { AuthService } from '../auth.service';
 export class SignupComponent implements OnInit {
   hide = false;
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    private authService: AuthService,
+    private angularFireAuth: AngularFireAuth
+    ) { }
 
   ngOnInit() {
   }
+
   onSubmit(form: NgForm) {
     this.authService.registerUser({
       name: form.value.name,
@@ -21,4 +26,8 @@ export class SignupComponent implements OnInit {
       password: form.value.password
     });
   }
+
+  socialSignIn() {
+    this.authService.googleSignIn();
+    }
 }

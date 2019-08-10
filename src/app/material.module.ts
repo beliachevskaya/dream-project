@@ -11,6 +11,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {
   MatInputModule,
   MatNativeDateModule,
@@ -37,7 +38,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatNativeDateModule,
     MatSliderModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSnackBarModule
   ],
   exports: [
     MatSidenavModule,
@@ -55,7 +57,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatNativeDateModule,
     MatSliderModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSnackBarModule
   ]
 })
 export class MaterialModule {}

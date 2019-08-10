@@ -6,6 +6,10 @@
     <div class="login__page_content">
       <div class="signIn">
         <h1>Sign In</h1>
+        <button class="sign__button_google" mat-raised-button (click)="socialSignIn()" >
+          <img src="assets/image/new-google-favicon-512.svg" alt="">
+          <p>Sign In with Google</p>
+        </button>
         <div class="form-container">
           <form (ngSubmit)="onSubmit(form)" #form="ngForm">
             <div class="form-item">
