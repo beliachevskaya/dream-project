@@ -7,7 +7,8 @@ import { MaterialModule } from '../material.module';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TimelogSelectComponent } from './timelog-select/timelog-select.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DatepickerComponent, HeaderComponent } from './datepicker/datepicker.component';
 
 @NgModule({
   declarations: [
@@ -15,14 +16,19 @@ import { FormsModule } from '@angular/forms';
     TimelogComponent,
     HeaderTimelogsComponent,
     TimelogSelectComponent,
+    DatepickerComponent,
+    HeaderComponent
   ],
   imports: [
     RouterModule,
     MaterialModule,
     CommonModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   entryComponents: [
+    DatepickerComponent,
+    HeaderComponent
   ],
   exports: [
     TimelogComponent
