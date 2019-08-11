@@ -31,9 +31,9 @@ export class AuthService {
       .catch(error => {
         console.log(error);
         this.errorMessage = error.message;
-        alert(this.errorMessage);
         this.snackBar.open(this.errorMessage, 'OK', {
           duration: 10000,
+          panelClass: 'error'
         });
       });
     }
@@ -49,9 +49,15 @@ export class AuthService {
       this.errorCode = error.code;
       this.errorMessage = error.message;
       if (this.errorCode === 'auth/wrong-password') {
-        alert('Wrong password.');
+        this.snackBar.open('Wrong password', 'OK', {
+          duration: 10000,
+          panelClass: 'error'
+        });
       } else {
-        alert(this.errorMessage);
+        this.snackBar.open(this.errorMessage, 'OK', {
+          duration: 10000,
+          panelClass: 'error'
+        });
       }
     });
   }
@@ -76,10 +82,28 @@ export class AuthService {
     return this.angularFireAuth.auth
     .sendPasswordResetEmail(email)
     .then(result => {
-      alert('A password reset link has been sent to your email address');
+      this.snackBar.open('A password reset link has been sent to your email address', 'OK', {
+        duration: 10000,
+        panelClass: 'success'
+      });
     })
     .catch(error => {
-      alert('An error occurred while attempting to reset your password');
+      this.snackBar.open('An error occurred while attempting to reset your password', 'OK', {
+        duration: 10000,
+        panelClass: 'error'
+      });
+    });
+  }
+
+  setNewPassword(authData: AuthData) {
+    return this.angularFireAuth.auth.currentUser
+    .updatePassword(authData.password)
+    .then(result => {
+      this.snackBar.open('Password changed', 'OK', {
+        duration: 10000,
+        panelClass: 'success'
+      });
+      this.authSuccessfully();
     });
   }
 
