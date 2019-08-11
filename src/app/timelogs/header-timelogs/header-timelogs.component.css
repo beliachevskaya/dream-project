@@ -37,16 +37,10 @@
   text-align: center;
 }
 .employees-header .data {
+  width: 105px;
+  height: 25px;
   display: flex;
-}
-.employees-header .data .material-icons {
-  margin-top: 2px;
-  font-size: 13px;
-}
-.employees-header .data p {
-  padding: 0 10px;
-  margin: 0 5px;
-  font-size: 15px;
+  align-items: center;
 }
 
 .button-save {

@@ -21,7 +21,7 @@ export interface Marks {
 })
 export class TimelogComponent {
 
-  time;
+  time: Array<number>;
 
   constructor() {
 
@@ -45,13 +45,13 @@ export class TimelogComponent {
     {id: 3, name: 'Mifot', color: 'blue' }
   ];
 
-  deleteTimesheet(index) {
+  deleteTimesheet(index: number): void {
     this.dataSource.data.splice(index, 1);
-    // console.log(this.dataSource.data);
+    console.log(this.dataSource.data);
     this.dataSource = new MatTableDataSource<Timesheet>( this.dataSource.data );
   }
 
-  getTotalCost() {
+  getTotalCost(): number {
     return this.timesheets.map(t => t.time).reduce((acc, value) => acc + value, 0);
   }
 }
