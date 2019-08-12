@@ -14,16 +14,13 @@ import { CompanySettingModule } from './company-settings/company-settings.module
 
 import { ProfilePageModule } from './profile-page/profile-page.module';
 
-
 import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RestorePasswordComponent } from './auth/restore-password/restore-password.component';
 import { SetNewPasswordComponent } from './auth/set-new-password/set-new-password.component';
 import { LinkExpiredComponent } from './auth/link-expired/link-expired.component';
-
 import { AuthService } from './auth/auth.service';
 import { environment } from '../environments/environment';
-import { NextPageComponent } from './auth/next-page/next-page.component';
 
 
 //max test
@@ -40,7 +37,6 @@ import { HttpClientModule } from '@angular/common/http';
     RestorePasswordComponent,
     SetNewPasswordComponent,
     LinkExpiredComponent,
-    NextPageComponent,
     MyComponent // max test
     // CompanySettingsComponent
   ],
