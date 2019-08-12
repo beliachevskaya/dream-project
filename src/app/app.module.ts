@@ -17,10 +17,12 @@ import { LoginComponent } from './auth/login/login.component';
 import { RestorePasswordComponent } from './auth/restore-password/restore-password.component';
 import { SetNewPasswordComponent } from './auth/set-new-password/set-new-password.component';
 import { LinkExpiredComponent } from './auth/link-expired/link-expired.component';
+
 import { AuthService } from './auth/auth.service';
 import { environment } from '../environments/environment';
 import { NextPageComponent } from './auth/next-page/next-page.component';
 import { TimelogsModule } from './timelogs/timelogs.module';
+
 
 @NgModule({
   declarations: [
@@ -30,8 +32,8 @@ import { TimelogsModule } from './timelogs/timelogs.module';
     RestorePasswordComponent,
     SetNewPasswordComponent,
     LinkExpiredComponent,
-    NextPageComponent
-    // CompanySettingsComponent
+    NextPageComponent,
+
   ],
   imports: [
     BrowserModule,

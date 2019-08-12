@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit } from '@angular/core';
 
 interface IcompanyProperties {
   name: string;
@@ -9,32 +9,32 @@ interface IcompanyProperties {
 }
 
 @Component({
-  selector: "app-company-properties",
-  templateUrl: "./company-properties.component.html",
-  styleUrls: ["./company-properties.component.sass"]
+  selector: 'app-company-properties',
+  templateUrl: './company-properties.component.html',
+  styleUrls: ['./company-properties.component.sass']
 })
 export class CompanyPropertiesComponent implements OnInit {
   private cp: IcompanyProperties = {
-    name: "Microsoft inc.",
+    name: 'Microsoft inc.',
     activities: [
-      { label: "Vacation", checked: true },
-      { label: "Sick Leave", checked: false },
-      { label: "Business Trip", checked: true }
+      { label: 'Vacation', checked: true },
+      { label: 'Sick Leave', checked: false },
+      { label: 'Business Trip', checked: true }
     ],
     defaultProjects: [
-      { project: "Adaptation", checked: true },
-      { project: "Adaptation2", checked: true },
-      { project: "Adaptation3", checked: false }
+      { project: 'Adaptation', checked: true },
+      { project: 'Adaptation2', checked: true },
+      { project: 'Adaptation3', checked: false }
     ],
-    startWeekDay: "Sunday",
-    workload: [35, "week"]
+    startWeekDay: 'Sunday',
+    workload: [35, 'week']
   };
 
   public name: string;
   public activities: any[];
   public defaultProjects: any[] = [];
-  public startWeekDay: any[] = [["Sunday", "Monday"], "Monday"];
-  public workload: any[] = [40, "week"];
+  public startWeekDay: any[] = [['Sunday', 'Monday'], 'Monday'];
+  public workload: any[] = [40, 'week'];
 
   constructor() {
     this.name = this.cp.name;
