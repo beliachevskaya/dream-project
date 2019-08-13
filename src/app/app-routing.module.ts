@@ -10,12 +10,14 @@ import { AuthGuard } from './auth/auth.guard';
 import { CompanySettingsComponent } from './company-settings/company-settings.component';
 import { PageComponent } from './core/page/page.component';
 import { ProfileComponent } from './profile-page/profile.component';
+import { ProjectsComponent } from './projects/projects.component';
 
 import { MyComponent } from './myTest/my.component';
 
 const itemMenu: Routes = [
   { path: 'company-settings', component: CompanySettingsComponent },
-  { path: 'profile', component: ProfileComponent }
+  { path: 'profile', component: ProfileComponent },
+  { path: 'projects', component: ProjectsComponent }
 ];
 
 const routes: Routes = [

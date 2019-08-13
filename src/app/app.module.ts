@@ -11,7 +11,7 @@ import { MaterialModule } from './material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { CompanySettingModule } from './company-settings/company-settings.module';
-
+import { ProjectsModule } from './projects/projects.module';
 import { ProfilePageModule } from './profile-page/profile-page.module';
 
 import { SignupComponent } from './auth/signup/signup.component';
@@ -27,6 +27,7 @@ import { environment } from '../environments/environment';
 import { MyUserService } from './myTest/my.service';
 import { MyComponent } from './myTest/my.component';
 import { HttpClientModule } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { HttpClientModule } from '@angular/common/http';
     CoreModule,
     CompanySettingModule,
     HttpClientModule,
-    ProfilePageModule
+    ProfilePageModule,
+    ProjectsModule
   ],
   providers: [AuthService, MyUserService],
   bootstrap: [AppComponent]
