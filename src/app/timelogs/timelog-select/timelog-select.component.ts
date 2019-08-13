@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Timesheet} from '../timelog/timelog.component';
-import {Marks} from '../timelog/timelog.component';
+import {Timesheet} from '../timelog-day/timelog-day.component';
+import {Project} from '../timelog-day/timelog-day.component';
 
 @Component({
   selector: 'app-timelog-select',
@@ -13,22 +13,21 @@ export class TimelogSelectComponent implements OnInit {
   }
 
   @Input()
-  marks: Marks[];
+  projects: Project[];
 
   @Input()
   timesheets: Timesheet;
 
-  mark: object = null;
+  project: object = null;
 
   ngOnInit() {
     if (this.timesheets.project !== '') {
-    this.mark = this.marks.filter((elem) => {
+    this.project = this.projects.filter((elem) => {
       if (elem.name === this.timesheets.project) {
         return elem;
       }
     })[0];
     }
-    console.log(this.mark);
   }
 
 }

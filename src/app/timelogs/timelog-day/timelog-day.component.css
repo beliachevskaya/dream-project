@@ -73,4 +73,9 @@
   margin-left: 28px;
 }
 
-/*# sourceMappingURL=timelog.component.css.map */
+.timesheetForm {
+  font-weight: normal;
+  color: #707683;
+}
+
+/*# sourceMappingURL=timelog-day.component.css.map */

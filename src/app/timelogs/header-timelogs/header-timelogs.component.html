@@ -1,22 +1,12 @@
 <div class="employees-header">
   <div class="data">
-  <app-datepicker></app-datepicker>
-<!--    <button mat-icon-button (click)="decrementDate()" matTooltip="Previous day">-->
-<!--      <mat-icon>keyboard_arrow_left</mat-icon>-->
-<!--    </button>-->
-<!--      <input  [matDatepicker]="picker" (click)="picker.open()"-->
-<!--             placeholder="Choose a date" [formControl]="date" readonly>-->
-<!--      <mat-datepicker #picker startView="year" ></mat-datepicker>-->
-<!--    <button mat-icon-button (click)="incrementDate()" matTooltip="Next day">-->
-<!--      <mat-icon>keyboard_arrow_right</mat-icon>-->
-<!--    </button>-->
-
+    <app-datepicker></app-datepicker>
   </div>
   <div class="toggle">
     <button routerLink="/timelog-day">Day</button>
-    <button>Week</button>
+    <button routerLink="/timelog-week">Week</button>
   </div>
   <div>
-    <button class="button-save">Save</button>
+<!--    <button class="button-save">Save</button>-->
   </div>
 </div>
