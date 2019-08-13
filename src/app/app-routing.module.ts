@@ -9,11 +9,13 @@ import { LinkExpiredComponent } from './auth/link-expired/link-expired.component
 import { CompanySettingsComponent } from './company-settings/company-settings.component';
 import { PageComponent } from './core/page/page.component';
 import { NextPageComponent } from './auth/next-page/next-page.component';
-import { TimelogComponent } from './timelogs/timelog/timelog.component';
+import { TimelogDayComponent } from './timelogs/timelog-day/timelog-day.component';
+import {TimelogWeekComponent} from './timelogs/timelog-week/timelog-week.component';
 
 const itemMenu: Routes = [
   { path: 'company-settings', component: CompanySettingsComponent },
-  { path: 'timelog-day', component: TimelogComponent }
+  { path: 'timelog-day', component: TimelogDayComponent },
+  { path: 'timelog-week', component: TimelogWeekComponent }
 ];
 
 const routes: Routes = [
