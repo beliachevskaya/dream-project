@@ -37,9 +37,9 @@ import { RouterModule } from '@angular/router';
     // CompanyIntegrationComponent,
 
     // CommentsComponent,
-    CompanySettingsComponent,
-    CompanyPropertiesComponent,
-    ApprovalPeriodComponent
+    CompanySettingsComponent
+    // CompanyPropertiesComponent,
+    // ApprovalPeriodComponent
   ]
 })
 export class CompanySettingModule {}

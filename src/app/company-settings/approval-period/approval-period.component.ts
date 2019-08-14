@@ -41,12 +41,19 @@ export class ApprovalPeriodComponent implements OnInit {
   public notDifTime: any[];
   public abilityForget: boolean;
 
+  public сaution1: string;
+  public сaution2: string;
+
   constructor() {
     this.approvalPeriod = this.cp.approvalPeriod;
     this.autoSubmit = this.cp.autoSubmit;
     this.notDifTime = this.cp.notDifTime;
     this.abilityForget = this.cp.abilityForget;
+    this.сaution1 = this.notDifTime[0].сaution;
+    this.сaution2 = this.notDifTime[1].сaution;
+    // console.log(this.сaution1);
   }
+  // public test = this.cp.notDifTime[1]['caution'];
 
   ngOnInit() {}
 }
