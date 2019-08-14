@@ -1,9 +1,15 @@
 <div class="company-properties">
   <div class="company-properties__header">
     <mat-form-field class="company-width">
-      <input matInput value="{{ _company.name }}" />
+      <input matInput [(ngModel)]="_company.name" />
     </mat-form-field>
-    <button mat-raised-button class="save-button" color="primary" type="submit">
+    <button
+      mat-raised-button
+      (click)="onSave(_company)"
+      class="save-button"
+      color="primary"
+      type="submit"
+    >
       Save
     </button>
   </div>
@@ -12,23 +18,40 @@
     <div class="company-properties__box">
       <p>Activities:</p>
       <div *ngFor="let item of _company.activities">
-        <mat-checkbox [(ngModel)]="item.checked" (change)="onToggle()">{{
-          item.label
-        }}</mat-checkbox>
+        <mat-checkbox
+          [(ngModel)]="item.checked"
+          (change)="onToggle(item.checked)"
+          >{{ item.label }}</mat-checkbox
+        >
       </div>
     </div>
 
+    <!-- <div class="company-properties__box">
+      <p>Default Projects:</p>
+      <div *ngFor="let company of _company.defaultProject">
+        <mat-form-field *ngIf="company.selected">
+          <mat-label>Choose project</mat-label>
+          <mat-select [(value)]="company">
+            <mat-option
+              *ngFor="let item of _company.defaultProject"
+              value="item"
+            >
+              {{ item.project }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div> -->
     <div class="company-properties__box">
       <p>Default Projects:</p>
       <mat-form-field>
         <mat-label>Choose project</mat-label>
-        <mat-select [(ngModel)]="selectedValue" name="project">
+        <mat-select [(ngModel)]="_company.defaultProject">
           <mat-option
-            *ngFor="let item of _company.defaultProjects"
-            [value]="item.checked"
+            *ngFor="let project of _company.defaultProject"
+            [value]="project"
+            >{{ project }}</mat-option
           >
-            {{ item.project }}
-          </mat-option>
         </mat-select>
       </mat-form-field>
     </div>
@@ -51,9 +74,9 @@
 
     <div class="company-properties__box">
       <p>Default Workload:</p>
-      <form class="workload-form">
+      <div class="workload-form">
         <mat-form-field class="workload-width">
-          <input type="number" matInput [(value)]="_company.workload[0]" />
+          <input type="number" matInput [(ngModel)]="_company.workload[0]" />
         </mat-form-field>
         <p>hours per</p>
         <mat-form-field class="time-measure-width">
@@ -62,7 +85,7 @@
             <mat-option value="day">day</mat-option>
           </mat-select>
         </mat-form-field>
-      </form>
+      </div>
     </div>
   </div>
 </div>

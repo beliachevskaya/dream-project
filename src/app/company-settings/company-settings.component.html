@@ -1,6 +1,9 @@
 <div class="company-container">
   <app-container class="company-card">
-    <app-company-properties [company]="Company"></app-company-properties>
+    <app-company-properties
+      [company]="Company"
+      (onSaved)="onSaved($event)"
+    ></app-company-properties>
   </app-container>
 
   <app-container class="approval-card">

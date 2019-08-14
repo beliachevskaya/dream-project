@@ -14,7 +14,6 @@ import { CompanySettingModule } from './company-settings/company-settings.module
 
 import { ProfilePageModule } from './profile-page/profile-page.module';
 
-
 import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RestorePasswordComponent } from './auth/restore-password/restore-password.component';
@@ -25,12 +24,11 @@ import { AuthService } from './auth/auth.service';
 import { environment } from '../environments/environment';
 import { NextPageComponent } from './auth/next-page/next-page.component';
 
-
-//max test
-import { MyUserService } from './myTest/my.service';
+// max test
+import { MyUserService } from './myTest/user.service';
+import { CompanyService } from './myTest/company.service';
 import { MyComponent } from './myTest/my.component';
 import { HttpClientModule } from '@angular/common/http';
-
 
 @NgModule({
   declarations: [
@@ -58,7 +56,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     ProfilePageModule
   ],
-  providers: [AuthService, MyUserService],
+  providers: [AuthService, MyUserService, CompanyService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

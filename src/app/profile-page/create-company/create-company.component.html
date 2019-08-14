@@ -2,7 +2,13 @@
   <p>
     Or create a new company:
   </p>
-  <button mat-raised-button class="create-button" color="primary" type="submit">
+  <button
+    mat-raised-button
+    class="create-button"
+    color="primary"
+    type="submit"
+    (click)="createCompany()"
+  >
     + Create company
   </button>
 </div>

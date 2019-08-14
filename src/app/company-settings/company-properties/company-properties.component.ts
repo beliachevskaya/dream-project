@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { IcompanyProperties, WeekDay } from '../company-settings.component';
 
 @Component({
@@ -9,18 +9,26 @@ import { IcompanyProperties, WeekDay } from '../company-settings.component';
 export class CompanyPropertiesComponent implements OnInit {
   _company: IcompanyProperties;
   public startWeekDay = [['Sunday', 'Monday'], 'Monday'];
+  public checked: boolean;
 
   @Input()
   set company(Company: IcompanyProperties) {
     this._company = Company;
+    this._company.defaultProject = ['Adaptation', 'Test period'];
+    this._company.defaultProject.push('Choose project');
     this.startWeekDay[1] = this._company.startWeekDay;
   }
 
-  constructor() {
-    console.log(this._company);
+  @Output() onSaved = new EventEmitter<IcompanyProperties>();
+  onSave(data: IcompanyProperties) {
+    this.onSaved.emit(data);
   }
 
-  ngOnInit() {
-    console.log(this._company);
+  onToggle(checked) {
+    checked = !checked;
   }
+
+  constructor() {}
+
+  ngOnInit() {}
 }

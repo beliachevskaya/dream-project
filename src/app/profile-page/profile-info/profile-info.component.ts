@@ -6,7 +6,7 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./profile-info.component.sass']
 })
 export class ProfileInfoComponent implements OnInit {
-  // @Input() user: any;
+  @Input() currentUser: any;
   _user: any;
   projectList: any[];
   displayedColumns: string[] = ['name', 'role', 'workload'];

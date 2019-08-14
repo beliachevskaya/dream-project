@@ -1,4 +1,7 @@
-<div class="menu-link company-link">
+<div
+  *ngIf="currentUser.role == 'Owner' && currentUser.registered == true"
+  class="menu-link company-link"
+>
   <a routerLink="/company-settings">
     <i class="material-icons-round">business</i>
     <span>Company settings</span>
@@ -10,19 +13,19 @@
     <span>Profile</span>
   </a>
 </div>
-<div class="menu-link">
+<div *ngIf="currentUser.registered" class="menu-link">
   <a routerLink="/projects">
     <i class="material-icons-round">work_outline</i>
-    <span>Projects</span>
+    <span class="lineThrough">Projects</span>
   </a>
 </div>
-<div class="menu-link">
+<div *ngIf="currentUser.registered" class="menu-link">
   <a routerLink="/employees">
     <i class="material-icons-round">supervisor_account</i>
-    <span>Employees</span>
+    <span class="lineThrough">Employees</span>
   </a>
 </div>
-<div class="menu-link">
+<div *ngIf="currentUser.registered" class="menu-link">
   <a routerLink="/timelog-day">
     <i class="material-icons-round">schedule</i>
     <span>Time Logs</span>

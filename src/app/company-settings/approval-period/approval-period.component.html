@@ -9,7 +9,7 @@
       </mat-select>
     </mat-form-field>
 
-    <mat-slide-toggle [color]="accent" [(checked)]="autoSubmit">
+    <mat-slide-toggle [(checked)]="autoSubmit">
       Submit Time Logs automatically in the end of period
     </mat-slide-toggle>
   </div>
@@ -22,7 +22,7 @@
       <p class="notifi-sign">≤</p>
       <input type="number" [(value)]="notDifTime[0].time" />
       <p class="notifi-sign">%</p>
-      <mat-select class="select-notify" [(value)]="notDifTime[1].caution">
+      <mat-select class="select-notify" [(value)]="notDifTime[0].caution">
         <mat-option value="error">error</mat-option>
         <mat-option value="warn">warn</mat-option>
       </mat-select>

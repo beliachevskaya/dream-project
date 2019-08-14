@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { CompanyService } from '../../myTest/company.service';
 
 @Component({
   selector: 'app-create-company',
@@ -6,7 +7,10 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./create-company.component.sass']
 })
 export class CreateCompanyComponent implements OnInit {
-  constructor() {}
+  constructor(private companyService: CompanyService) {}
+  createCompany() {
+    this.companyService.createCompany();
+  }
 
   ngOnInit() {}
 }
