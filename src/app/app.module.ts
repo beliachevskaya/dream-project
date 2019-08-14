@@ -22,13 +22,14 @@ import { LinkExpiredComponent } from './auth/link-expired/link-expired.component
 
 import { AuthService } from './auth/auth.service';
 import { environment } from '../environments/environment';
-import { NextPageComponent } from './auth/next-page/next-page.component';
 
 // max test
 import { MyUserService } from './myTest/user.service';
 import { CompanyService } from './myTest/company.service';
 import { MyComponent } from './myTest/my.component';
 import { HttpClientModule } from '@angular/common/http';
+
+import { TimelogsModule } from './timelogs/timelogs.module';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,6 @@ import { HttpClientModule } from '@angular/common/http';
     RestorePasswordComponent,
     SetNewPasswordComponent,
     LinkExpiredComponent,
-    NextPageComponent,
     MyComponent // max test
     // CompanySettingsComponent
   ],
@@ -53,6 +53,7 @@ import { HttpClientModule } from '@angular/common/http';
     AngularFireAuthModule,
     CoreModule,
     CompanySettingModule,
+    TimelogsModule,
     HttpClientModule,
     ProfilePageModule
   ],

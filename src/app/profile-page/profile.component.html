@@ -6,25 +6,25 @@
     ></app-profile-info>
   </app-container>
 
-  <app-container *ngIf="currentUser.registered" class="profile__bar-chart">
+  <!-- <app-container *ngIf="currentUser.registered" class="profile__bar-chart">
     <app-bar-chart></app-bar-chart>
-  </app-container>
+  </app-container> -->
 
-  <app-container *ngIf="currentUser.registered" class="profile__pending">
-    <!-- <div class="inline">
+  <!-- <app-container *ngIf="currentUser.registered" class="profile__pending">
+    <div class="inline">
         <app-table [tableData]="tableData" (onRemove)="removeItem($event)"></app-table>
         <div class="donut_chart">
           <app-donut-chart></app-donut-chart>
         </div>
-      </div> -->
-  </app-container>
+      </div>
+  </app-container> -->
 
-  <app-container
+  <!-- <app-container
     *ngIf="currentUser.registered"
     class="profile__notification-preferences"
   >
     <app-notification-preferences></app-notification-preferences>
-  </app-container>
+  </app-container> -->
 
   <div *ngIf="!currentUser.registered" class="profile__first-login">
     <app-container class="profile__send-email">

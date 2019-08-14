@@ -14,10 +14,16 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
- onSubmit(form: NgForm) {
+
+  onSubmit(form: NgForm) {
    this.authService.login({
      email: form.value.email,
      password: form.value.password
    });
- }
+  }
+
+  socialSignIn() {
+  this.authService.googleSignIn();
+  }
 }
+
