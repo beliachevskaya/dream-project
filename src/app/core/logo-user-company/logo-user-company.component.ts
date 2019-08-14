@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { MyUserService, Iuser } from '../../../app/myTest/my.service';
 
 
@@ -12,7 +11,6 @@ import { MyUserService, Iuser } from '../../../app/myTest/my.service';
 @Component({
   selector: 'app-logo-user-company',
   templateUrl: './logo-user-company.component.html',
-
   styleUrls: ['./logo-user-company.component.sass'],
   providers: [MyUserService]
 })
@@ -20,6 +18,7 @@ export class LogoUserCompanyComponent implements OnInit {
   private cp: Iuser = {
     name: 'Profile 1',
     email: 'dgfdgdf',
+
     companyList: ['Company1', 'Company2']
   };
   // public id: number;

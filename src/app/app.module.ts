@@ -19,14 +19,18 @@ import { LoginComponent } from './auth/login/login.component';
 import { RestorePasswordComponent } from './auth/restore-password/restore-password.component';
 import { SetNewPasswordComponent } from './auth/set-new-password/set-new-password.component';
 import { LinkExpiredComponent } from './auth/link-expired/link-expired.component';
+
 import { AuthService } from './auth/auth.service';
 import { environment } from '../environments/environment';
 
+
+import { TimelogsModule } from './timelogs/timelogs.module';
 
 //max test
 import { MyUserService } from './myTest/my.service';
 import { MyComponent } from './myTest/my.component';
 import { HttpClientModule } from '@angular/common/http';
+
 
 
 @NgModule({
@@ -51,6 +55,7 @@ import { HttpClientModule } from '@angular/common/http';
     AngularFireAuthModule,
     CoreModule,
     CompanySettingModule,
+    TimelogsModule,
     HttpClientModule,
     ProfilePageModule
   ],
