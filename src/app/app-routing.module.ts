@@ -27,8 +27,8 @@ const routes: Routes = [
   {
     path: '',
     component: PageComponent,
-    children: itemMenu,
-    canActivate: [AuthGuard]
+    children: itemMenu
+    // canActivate: [AuthGuard]
   },
   { path: 'test', component: MyComponent },
   { path: 'signup', component: SignupComponent },

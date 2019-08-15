@@ -8,15 +8,11 @@ import { IcompanyProperties, WeekDay } from '../company-settings.component';
 })
 export class CompanyPropertiesComponent implements OnInit {
   _company: IcompanyProperties;
-  public startWeekDay = [['Sunday', 'Monday'], 'Monday'];
   public checked: boolean;
 
   @Input()
   set company(Company: IcompanyProperties) {
     this._company = Company;
-    this._company.defaultProject = ['Adaptation', 'Test period'];
-    this._company.defaultProject.push('Choose project');
-    this.startWeekDay[1] = this._company.startWeekDay;
   }
 
   @Output() onSaved = new EventEmitter<IcompanyProperties>();
@@ -31,4 +27,12 @@ export class CompanyPropertiesComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  onChange(event, select) {
+    this._company.defaultProject[1].push(event);
+    select.value = '';
+  }
+  onChangeProject(event, i) {
+    this._company.defaultProject[1][i] = event;
+  }
 }

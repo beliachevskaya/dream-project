@@ -15,7 +15,7 @@ interface IapprovalPeriod {
 export class ApprovalPeriodComponent implements OnInit {
   private cp: IapprovalPeriod = {
     approvalPeriod: '1 month',
-    autoSubmit: true,
+    autoSubmit: false,
     notDifTime: [
       {
         notification: true,
@@ -23,12 +23,12 @@ export class ApprovalPeriodComponent implements OnInit {
         сaution: 'error'
       },
       {
-        notification: false,
-        time: 15,
+        notification: true,
+        time: 125,
         сaution: 'warn'
       }
     ],
-    abilityForget: false
+    abilityForget: true
   };
   protected approvalPeriodItems: string[] = [
     '1 week',

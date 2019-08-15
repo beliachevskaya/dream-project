@@ -1,0 +1,96 @@
+.employee__information
+  margin-left: 50px
+  display: flex
+  padding-top: 40px
+.employee__photo
+  width: 126px
+  height: 126px
+  background: url('https://66.media.tumblr.com/ffed88e762c2bfcab576b7826bec96bb/tumblr_onfqddb22p1w1drrho3_250.png')
+.employee-time
+  display: flex
+  width: 300px
+
+.employee-time__input
+  width: 30px
+  border: none
+  border-bottom: 1px solid #000000
+  margin-left: 20px
+  outline: none
+.employee__data
+  margin-left: 30px
+.switch
+  position: relative
+  display: inline-block
+  width: 26px
+  height: 16px
+  margin: 11px
+.switch input
+  opacity: 0
+  width: 0
+  height: 0
+
+.slider
+  position: absolute
+  cursor: pointer
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  background-color: #ccc
+  -webkit-transition: .2s
+  transition: .2s
+
+.slider:before
+  position: absolute
+  content: ""
+  height: 13px
+  width: 13px
+  left: 0px
+  bottom: 2px
+  background-color: white
+  -webkit-transition: .2s
+  transition: .2s
+input:checked + .slider
+  background-color: #2196F3
+
+input:focus + .slider
+  box-shadow: 0 0 1px #2196F3
+
+input:checked + .slider:before
+  -webkit-transform: translateX(16px)
+  -ms-transform: translateX(16px)
+  transform: translateX(12px)
+
+.slider.round
+  border-radius: 34px
+
+.slider.round:before
+  border-radius: 50%
+.employee__activate
+  display: flex
+
+.workload
+  margin-top: 250px
+  margin-left: 0px
+.bar-chart
+  margin-top: 30px
+  margin-left: -450px
+.employee__contacts
+  margin-top: -25px
+  margin-left: 180px
+  span
+    margin-right: 20px
+.employee__timesheet
+  margin-left: -950px
+  margin-top: 265px
+
+.information_about_role
+  position: absolute
+  background: #FFFFFF
+  border-radius: 15px
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2)
+  z-index: 1
+h3, p
+  margin: 10px 20px
+i
+  cursor: pointer

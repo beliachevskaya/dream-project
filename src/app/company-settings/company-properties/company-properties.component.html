@@ -1,7 +1,7 @@
 <div class="company-properties">
   <div class="company-properties__header">
     <mat-form-field class="company-width">
-      <input matInput [(ngModel)]="_company.name" />
+      <input matInput [(ngModel)]="_company.name" placeholder="Company name" />
     </mat-form-field>
     <button
       mat-raised-button
@@ -26,45 +26,51 @@
       </div>
     </div>
 
-    <!-- <div class="company-properties__box">
+    <div class="company-properties__box">
       <p>Default Projects:</p>
-      <div *ngFor="let company of _company.defaultProject">
-        <mat-form-field *ngIf="company.selected">
+      <div *ngFor="let _project of _company.defaultProject[1]; index as i">
+        <mat-form-field>
           <mat-label>Choose project</mat-label>
-          <mat-select [(value)]="company">
+          <mat-select
+            [(ngModel)]="_project"
+            (ngModelChange)="onChangeProject($event, i)"
+          >
             <mat-option
-              *ngFor="let item of _company.defaultProject"
-              value="item"
+              *ngFor="let project of _company.defaultProject[0]"
+              [value]="project"
+              >{{ project }}</mat-option
             >
-              {{ item.project }}
-            </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
-    </div> -->
-    <div class="company-properties__box">
-      <p>Default Projects:</p>
-      <mat-form-field>
-        <mat-label>Choose project</mat-label>
-        <mat-select [(ngModel)]="_company.defaultProject">
-          <mat-option
-            *ngFor="let project of _company.defaultProject"
-            [value]="project"
-            >{{ project }}</mat-option
+
+      <div>
+        <mat-form-field>
+          <mat-label>Choose project</mat-label>
+          <mat-select
+            #select
+            ngModel
+            (ngModelChange)="onChange($event, select)"
           >
-        </mat-select>
-      </mat-form-field>
+            <mat-option
+              *ngFor="let project of _company.defaultProject[0]"
+              [value]="project"
+              >{{ project }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
     </div>
 
     <div class="company-properties__box">
-      <label id="example-radio-group-label">Start week from:</label>
+      <label id="example-radio-group-label"><p>Start week from:</p></label>
       <mat-radio-group
         class="week-day-radio-group"
-        [(ngModel)]="startWeekDay[1]"
+        [(ngModel)]="_company.startWeekDay[1][0]"
       >
         <mat-radio-button
           class="example-radio-button"
-          *ngFor="let day of startWeekDay[0]"
+          *ngFor="let day of _company.startWeekDay[0]"
           [(value)]="day"
         >
           {{ day }}

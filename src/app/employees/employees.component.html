@@ -1,0 +1,68 @@
+<div class="employees-container">
+  <app-container class="profile__info"> </app-container>
+</div>
+
+<!-- <app-block>
+  <div class="employees-header">
+    <div class="buttons">
+      <button>Active</button>
+      <button>Deactivated</button>
+      <button>Pending</button>
+    </div>
+    <div class="invite">
+      <span>Invite an employee:</span>
+      <input type="text" (input) = "nameChange($event.target.value)" id="" placeholder="alex@timesheet.com">
+      <select>
+        <option value="">Chose Role</option>
+      </select>
+      <button routerLinkActive="active" routerLink='/employees/{{employee_name}}'>Invite</button>
+    </div>
+  </div>
+  <app-container class="table">
+
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search for a employee">
+    </mat-form-field>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="photo">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <div class="circle circle__main" [ngStyle]="{ 'background': element.photo}"></div>
+        </td>
+      </ng-container>
+
+      <!— Name —>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element" routerLink="/profile"> {{element.name}} </td>
+      </ng-container>
+
+      <!— role —>
+      <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef> Role </th>
+        <td mat-cell *matCellDef="let element" >{{element.role}} </td>
+      </ng-container>
+
+      <!— Planned / Actual (hours per week) —>
+      <ng-container matColumnDef="planned_actual">
+        <th mat-header-cell *matHeaderCellDef> Planned / Actual (hours per week) </th>
+        <td mat-cell *matCellDef="let element" > {{element.planned_actual}} </td>
+      </ng-container>
+
+      <!— Pending Approval —>
+      <ng-container matColumnDef="pending_approval">
+        <th mat-header-cell *matHeaderCellDef> Pending Approval </th>
+        <td mat-cell *matCellDef="let element">
+          <app-pending-approval
+            [value] = 'element.pending_approval'
+          >
+          </app-pending-approval>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
+    </table>
+  </app-container>
+</app-block> -->

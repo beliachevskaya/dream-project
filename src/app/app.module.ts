@@ -13,6 +13,7 @@ import { CoreModule } from './core/core.module';
 import { CompanySettingModule } from './company-settings/company-settings.module';
 
 import { ProfilePageModule } from './profile-page/profile-page.module';
+import { EmployeesModule } from './employees/employees.module';
 
 import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
@@ -55,7 +56,8 @@ import { TimelogsModule } from './timelogs/timelogs.module';
     CompanySettingModule,
     TimelogsModule,
     HttpClientModule,
-    ProfilePageModule
+    ProfilePageModule,
+    EmployeesModule
   ],
   providers: [AuthService, MyUserService, CompanyService],
   bootstrap: [AppComponent]

@@ -11,7 +11,7 @@ export interface IcompanyProperties {
   name: string;
   activities: any[];
   defaultProject: any[];
-  startWeekDay: WeekDay;
+  startWeekDay: any[];
   workload: [number, string];
 }
 
@@ -50,8 +50,6 @@ export class CompanySettingsComponent implements OnInit {
     console.log(this.userService.setUser(this.Company.name));
   }
   ngOnInit() {
-    console.log('onInit page');
-
     this.Company = this.companyService.get();
     this.companyService.currentCompanyPage.subscribe(company => {
       this.Company = this.companyService.get();
