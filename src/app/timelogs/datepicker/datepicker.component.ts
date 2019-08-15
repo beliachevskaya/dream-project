@@ -5,6 +5,7 @@ import {
   Inject,
   OnDestroy
 } from '@angular/core';
+import {MatDatepicker} from '@angular/material/datepicker';
 import {MatCalendar} from '@angular/material/datepicker';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatDateFormats} from '@angular/material/core';
 import {Subject} from 'rxjs';
@@ -96,7 +97,7 @@ export class HeaderComponent<D> implements OnDestroy {
   private destroyed = new Subject<void>();
 
   constructor(
-    private calendar: MatCalendar<D>, private dateAdapter: DateAdapter<D>,
+    private calendar: MatCalendar<D>, private dateAdapter: DateAdapter<D>, private datepicker: MatDatepicker<D>,
     @Inject(MAT_DATE_FORMATS) private dateFormats: MatDateFormats, cdr: ChangeDetectorRef) {
     calendar.stateChanges
       .pipe(takeUntil(this.destroyed))
@@ -115,11 +116,8 @@ export class HeaderComponent<D> implements OnDestroy {
   }
 
   todayClicked() {
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = date.getMonth();
-    const day = date.getDate();
-    this.calendar.activeDate = this.dateAdapter.createDate( year, month, day);
+    this.datepicker.select(moment());
+    this.datepicker.close();
   }
 
   previousClicked() {
