@@ -1,0 +1,14 @@
+<div class="integration">
+  <div class="integration__connected">
+    <p class="integration__text">Connected Integrations:</p>
+    <div class="integration__connected-box" *ngFor="let app of integrationApp">
+      <img src="{{ app }}" alt="" />
+    </div>
+  </div>
+  <div class="integration__new-connect">
+    <p class="integration__text-blue">Connect new</p>
+    <div class="integration__new-connect-box" *ngFor="let app of integratedApp">
+      <img src="{{ app }}" alt="" />
+    </div>
+  </div>
+</div>

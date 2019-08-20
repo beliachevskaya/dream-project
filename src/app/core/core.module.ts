@@ -40,6 +40,7 @@ import { CommonModule } from '@angular/common';
     MenuComponent,
     PageComponent
   ],
+  providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CoreModule {}

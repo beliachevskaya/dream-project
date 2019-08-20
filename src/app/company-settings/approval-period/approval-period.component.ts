@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 interface IapprovalPeriod {
-  approvalPeriod: string;
+  approvalPeriod: any[];
   autoSubmit: boolean;
   notDifTime: any[];
   abilityForget: boolean;
@@ -13,39 +13,14 @@ interface IapprovalPeriod {
   styleUrls: ['./approval-period.component.sass']
 })
 export class ApprovalPeriodComponent implements OnInit {
-  private cp: IapprovalPeriod = {
-    approvalPeriod: '1 month',
-    autoSubmit: true,
-    notDifTime: [
-      {
-        notification: true,
-        time: 10,
-        сaution: 'error'
-      },
-      {
-        notification: false,
-        time: 15,
-        сaution: 'warn'
-      }
-    ],
-    abilityForget: false
-  };
-  protected approvalPeriodItems: string[] = [
-    '1 week',
-    '2 weeks',
-    '1 month',
-    'I don’t need approvals'
-  ];
-  public approvalPeriod: string;
-  public autoSubmit: boolean;
-  public notDifTime: any[];
-  public abilityForget: boolean;
+  @Input() company;
 
-  constructor() {
-    this.approvalPeriod = this.cp.approvalPeriod;
-    this.autoSubmit = this.cp.autoSubmit;
-    this.notDifTime = this.cp.notDifTime;
-    this.abilityForget = this.cp.abilityForget;
+  public arr = ['warm', 'error'];
+  public approvDis = false;
+
+  constructor() {}
+  onChange(event) {
+    this.approvDis = event === 'I don’t need approvals' ? true : false;
   }
 
   ngOnInit() {}

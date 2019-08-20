@@ -1,31 +1,51 @@
-import { Component, OnInit } from '@angular/core';
-
-interface IuserProfile {
-  id: number;
-  name: string;
-  companyList: any[];
-}
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges
+} from '@angular/core';
+import { Router } from '@angular/router';
+import { CompanyService } from '../../myTest/company.service';
+import { Iuser } from '../../myTest/user.service';
 
 @Component({
   selector: 'app-logo-user-company',
   templateUrl: './logo-user-company.component.html',
+
   styleUrls: ['./logo-user-company.component.sass']
 })
-export class LogoUserCompanyComponent implements OnInit {
-  private cp: IuserProfile = {
-    id: 101,
-    name: 'Profile 1',
-    companyList: ['Company1', 'Company2']
-  };
-  public id: number;
-  public name: string;
-  public companyList: any[];
-  constructor() {
-    this.id = this.cp.id;
-    this.name = this.cp.name;
-    this.companyList = this.cp.companyList;
-    this.companyList.push('+ Create company');
+export class LogoUserCompanyComponent implements OnInit, OnChanges {
+  @Input() currentUser: Iuser;
+  @Input() firstCompany: string;
+  selectedCompany: any;
+
+  constructor(private router: Router, private companyService: CompanyService) {}
+  isHide = () => this.currentUser.companyList.length < 2;
+  ngOnInit() {
+    this.router.navigate(['profile']);
+    this.currentUser.companyList.push('+ Create company');
   }
-  isHide = () => this.companyList.length === 0;
-  ngOnInit() {}
+
+  @Output() onChanged = new EventEmitter<string>();
+
+  onChange(company) {
+    this.onChanged.emit(company);
+  }
+  ngOnChanges() {
+    if (this.firstCompany) {
+      if (
+        this.currentUser.companyList.some(item => item === this.firstCompany)
+      ) {
+        this.selectedCompany = this.firstCompany;
+      } else {
+        this.selectedCompany = this.firstCompany;
+        this.currentUser.companyList.unshift(this.selectedCompany);
+      }
+    }
+  }
+  onKlick() {
+    this.companyService.createCompany();
+  }
 }

@@ -12,7 +12,9 @@ export const environment = {
     storageBucket: '',
     messagingSenderId: '845899414104',
     appId: '1:845899414104:web:0d25a3fa5cca8111'
-  }
+  },
+  database: 'firebase',
+  socialAuthEnabled: true
 };
 
 /*

@@ -1,0 +1,52 @@
+<div class="employee__information">
+  <div mat-card-avatar class = "employee__photo"></div>
+  <div class="employee__data">
+    <mat-card-title class="employee__name">{{employeeName}}</mat-card-title>
+    <div class="employee__contacts">
+      <span>daenerys@gmail.com</span>
+      <span>+375297564432</span>
+    </div>
+    <div class="employee-time">
+      <p> Workload: select</p>
+      <input type="text" class="employee-time__input" placeholder="30">
+      <p>h/week </p>
+      <div >
+        <i (click)="open_information()" class="material-icons">help_outline</i>
+        <ng-template [ngIf]="toggleFlag">
+          <div  class="information_about_role">
+            <h3>Owner</h3>
+            <p>description</p>
+            <h3>Admin</h3>
+            <p>description</p>
+            <h3>Project Manager</h3>
+            <p>description</p>
+            <h3>HR Manager</h3>
+            <p>description</p>
+            <h3>Employee</h3>
+            <p>description</p>
+          </div>
+        </ng-template>
+      </div>
+
+    </div>
+    <mat-form-field class="select-company">
+      <mat-select [(value)]="employee__position">
+        <mat-option value="option1">Король Севера</mat-option>
+        <mat-option value="option2">Hockage</mat-option>
+        <mat-option value="option3">Killer</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="employee__activate">
+      <p>Deactivate</p>
+      <label class="switch">
+        <input type="checkbox" checked>
+        <span class="slider round"></span>
+      </label>
+      <p>Activate</p>
+    </div>
+  </div>
+</div>
+
+
+

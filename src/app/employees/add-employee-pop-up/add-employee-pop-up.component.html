@@ -1,0 +1,7 @@
+<mat-dialog-content class="popup" mat-dialog-content >
+    <h3>Are you sure you want to deactivate employee_name?</h3>
+    <p>Deactivated users are not able to sign in to your organization. But<br> you will be able to see all their logs, charts and export reports.</p>
+    <button class="deactivate__popup_buttons" (click)='deactivate()' [mat-dialog-close]="true">Yes, deactivate</button>
+    <button class="deactivate__popup_buttons" (click)='changeDeactivatePopupCondition()' mat-dialog-close>No, cancel</button>
+</mat-dialog-content>
+

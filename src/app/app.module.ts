@@ -12,6 +12,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { CompanySettingModule } from './company-settings/company-settings.module';
 
+import { ProfilePageModule } from './profile-page/profile-page.module';
+import { EmployeesModule } from './employees/employees.module';
+
 import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RestorePasswordComponent } from './auth/restore-password/restore-password.component';
@@ -20,8 +23,14 @@ import { LinkExpiredComponent } from './auth/link-expired/link-expired.component
 
 import { AuthService } from './auth/auth.service';
 import { environment } from '../environments/environment';
-import { NextPageComponent } from './auth/next-page/next-page.component';
 
+// max test
+import { MyUserService } from './myTest/user.service';
+import { CompanyService } from './myTest/company.service';
+import { MyComponent } from './myTest/my.component';
+import { HttpClientModule } from '@angular/common/http';
+
+import { TimelogsModule } from './timelogs/timelogs.module';
 
 @NgModule({
   declarations: [
@@ -31,7 +40,8 @@ import { NextPageComponent } from './auth/next-page/next-page.component';
     RestorePasswordComponent,
     SetNewPasswordComponent,
     LinkExpiredComponent,
-    NextPageComponent,
+    MyComponent // max test
+    // CompanySettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -43,9 +53,13 @@ import { NextPageComponent } from './auth/next-page/next-page.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     CoreModule,
-    CompanySettingModule
+    CompanySettingModule,
+    TimelogsModule,
+    HttpClientModule,
+    ProfilePageModule,
+    EmployeesModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, MyUserService, CompanyService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
