@@ -3,7 +3,7 @@ export const user1 = {
   email: '111@tut.by',
   password: '1234',
   avatar: '',
-  companyList: ['Company1', 'Company2']
+  companyList: ['Apple']
 };
 export const user2 = {
   name: 'profile Two',

@@ -9,6 +9,7 @@ import { IcompanyProperties, WeekDay } from '../company-settings.component';
 export class CompanyPropertiesComponent implements OnInit {
   _company: IcompanyProperties;
   public checked: boolean;
+  public buttonDisabled = true;
 
   @Input()
   set company(Company: IcompanyProperties) {
@@ -22,17 +23,25 @@ export class CompanyPropertiesComponent implements OnInit {
 
   onToggle(checked) {
     checked = !checked;
+    this.onChangeAll();
   }
 
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this._company);
+  }
 
   onChange(event, select) {
     this._company.defaultProject[1].push(event);
     select.value = '';
+    this.onChangeAll();
+  }
+  onChangeAll() {
+    this.buttonDisabled = false;
   }
   onChangeProject(event, i) {
     this._company.defaultProject[1][i] = event;
+    this.onChangeAll();
   }
 }

@@ -21,23 +21,34 @@ export interface IcompanyProperties {
   styleUrls: ['./company-settings.component.sass']
 })
 export class CompanySettingsComponent implements OnInit {
-  // public Company: IcompanyProperties = {
-  //   name: 'Microsoft inc.',
-  //   activities: [
-  //     { label: 'Vacation', checked: true },
-  //     { label: 'Sick Leave', checked: false },
-  //     { label: 'Business Trip', checked: true }
-  //   ],
-  //   defaultProjects: [
-  //     { project: 'Adaptation', selected: true },
-  //     { project: 'Adaptation2', selected: false },
-  //     { project: 'Adaptation3', selected: false }
-  //   ],
-  //   startWeekDay: WeekDay.Mon,
-  //   workload: [35, 'week']
-  // };
-
   public Company: any;
+  public user = {
+    integrationApp:
+    ['Jira', 'Slack'],
+    integratedApp:
+    ['Asana','Trello', 'IdeaJet', 'Git', 'Telegram', 'WhattsApp', 'GitHub']
+  }
+
+  // public Company2 = {
+  //   approvalPeriod: [
+  //     ['1 week', '2 weeks', '1 month', 'I don’t need approvals'],
+  //     ['1 month']
+  //   ],
+  //   autoSubmit: true,
+  //   notDifTime: [
+  //     {
+  //       notification: true,
+  //       time: 10,
+  //       imp: 'error'
+  //     },
+  //     {
+  //       notification: true,
+  //       time: 125,
+  //       imp: 'warm'
+  //     }
+  //   ],
+  //   abilityForget: true
+  // };
 
   constructor(
     private userService: MyUserService,

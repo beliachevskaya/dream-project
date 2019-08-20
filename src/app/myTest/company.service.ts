@@ -4,6 +4,18 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
+export interface Icompany {
+  name: string;
+  activities?: any[];
+  defaultProject?: any[];
+  startWeekDay?: any[];
+  workload?: any[];
+  approvalPeriod?: string;
+  autoSubmit?: boolean;
+  notDifTime?: any[];
+  abilityForget?: boolean;
+  date?: string;
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -25,9 +37,27 @@ export class CompanyService {
       { label: 'Sick Leave', checked: false },
       { label: 'Business Trip', checked: false }
     ],
-    defaultProjects: [],
-    startWeekDay: 'Monday',
-    workload: [40, 'week']
+    defaultProject: [['Adaptation', 'Test period', 'Party'], []],
+    startWeekDay: [['Monday', 'Sunday'], ['Monday']],
+    workload: [40, 'week'],
+    approvalPeriod: [
+      ['1 week', '2 weeks', '1 month', 'I don’t need approvals'],
+      ['1 month']
+    ],
+    autoSubmit: true,
+    notDifTime: [
+      {
+        notification: true,
+        time: 10,
+        imp: 'error'
+      },
+      {
+        notification: true,
+        time: 15,
+        imp: 'warm'
+      }
+    ],
+    abilityForget: false
   };
 
   constructor(private http: HttpClient, private router: Router) {

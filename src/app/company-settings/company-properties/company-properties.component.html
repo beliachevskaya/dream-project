@@ -1,4 +1,4 @@
-<div class="company-properties">
+<div class="company-properties" (change)="onChangeAll()">
   <div class="company-properties__header">
     <mat-form-field class="company-width">
       <input matInput [(ngModel)]="_company.name" placeholder="Company name" />
@@ -9,6 +9,7 @@
       class="save-button"
       color="primary"
       type="submit"
+      [disabled]="buttonDisabled"
     >
       Save
     </button>
@@ -67,6 +68,7 @@
       <mat-radio-group
         class="week-day-radio-group"
         [(ngModel)]="_company.startWeekDay[1][0]"
+        (change)="onChangeAll()"
       >
         <mat-radio-button
           class="example-radio-button"
@@ -86,7 +88,10 @@
         </mat-form-field>
         <p>hours per</p>
         <mat-form-field class="time-measure-width">
-          <mat-select [(value)]="_company.workload[1]">
+          <mat-select
+            [(ngModel)]="_company.workload[1]"
+            (ngModelChange)="onChangeAll()"
+          >
             <mat-option value="week">week</mat-option>
             <mat-option value="day">day</mat-option>
           </mat-select>
