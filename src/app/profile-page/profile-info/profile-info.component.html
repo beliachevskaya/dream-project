@@ -1,19 +1,27 @@
 <div class="profile-info">
   <div class="profile-info__avatar">
-    <div class="profile__photo"></div>
+    <div
+      class="profile__photo"
+      [ngStyle]="{
+        background: 'url(' + currentUser.avatar + ') no-repeat ',
+        'background-size': '100%'
+      }"
+    ></div>
   </div>
 
   <div class="profile-info__user">
-    <h2>{{ _user.name }}</h2>
-    <p *ngIf="_user.registered" class="text">Role: {{ _user.role }}</p>
-    <p *ngIf="_user.registered" class="text">
+    <h2>{{ currentUser.name }}</h2>
+    <p *ngIf="currentUser.registered" class="text">
+      Role: {{ currentUser.role }}
+    </p>
+    <p *ngIf="currentUser.registered" class="text">
       Workload: {{ _user.workload }} h/week
     </p>
-    <p class="text gray">{{ _user.email }}</p>
-    <p *ngIf="_user.tel" class="text gray">{{ _user.tel }}</p>
+    <p class="text gray">{{ currentUser.email }}</p>
+    <p *ngIf="_user.tel" class="text gray">{{ currentUser.tel }}</p>
   </div>
 
-  <div *ngIf="_user.registered" class="profile-info__projects">
+  <div *ngIf="currentUser.registered" class="profile-info__projects">
     <h3>Projects:</h3>
     <table mat-table [dataSource]="projectList" class="mat-elevation-z8">
       <ng-container matColumnDef="name">

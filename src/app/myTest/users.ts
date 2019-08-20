@@ -1,18 +1,22 @@
 export const user1 = {
-  name: 'profile1',
+  name: 'profile One',
   email: '111@tut.by',
   password: '1234',
-  avatar: 'src/assets/image/profile-1.jpg'
+  avatar: '',
+  companyList: ['Apple']
 };
 export const user2 = {
-  name: 'profile2',
+  name: 'profile Two',
   email: '2222@tut.by',
   password: '1234',
-  avatar: 'ava2'
+  avatar: '../../../assets/image/profile-owner1.jpg',
+  companyList: ['Microsoft inc.', 'MTS'],
+  role: 'Emloyee'
 };
 export const user3 = {
-  name: 'profile3',
-  email: '33@tut.by',
+  name: 'Profile New',
+  email: 'new33@tut.by',
   password: '1234',
-  avatar: 'ava3'
+  avatar: '../../../assets/image/profile-1.jpg',
+  role: ''
 };
