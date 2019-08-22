@@ -1,21 +1,15 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  Inject,
-  OnDestroy
+  Component
 } from '@angular/core';
-import {MatDatepicker} from '@angular/material/datepicker';
-import {MatCalendar} from '@angular/material/datepicker';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatDateFormats} from '@angular/material/core';
-import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {FormControl} from '@angular/forms';
 import * as _moment from 'moment';
 
 // @ts-ignore
 import {default as _rollupMoment} from 'moment';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
+import {CustomHeaderComponent} from './custom-header/custom-header.component';
 
 const moment = _rollupMoment || _moment;
 
@@ -45,7 +39,7 @@ export class DatepickerComponent {
 
   date = new FormControl(moment());
 
-  exampleHeader = HeaderComponent;
+  customHeader = CustomHeaderComponent;
 
   incrementDate() {
     const date = this.date;
@@ -57,75 +51,3 @@ export class DatepickerComponent {
     date.setValue(moment(date.value).add(-1, 'days'));
   }
 }
-
-/** Custom header component for datepicker. */
-@Component({
-  selector: 'app-header',
-  styles: [`
-    .example-header {
-      display: flex;
-      align-items: center;
-      padding: 0.5em;
-    }
-
-    .example-header-label {
-      flex: 1;
-      height: 1em;
-      font-weight: 500;
-      text-align: center;
-    }
-
-    .example-double-arrow .mat-icon {
-      margin: -22%;
-    }
-  `],
-  template: `
-    <div class="example-header">
-      <button mat-stroked-button color="primary" (click)="todayClicked()">Today</button>
-      <span class="example-header-label">{{periodLabel}}</span>
-        <button mat-icon-button (click)="previousClicked()">
-            <mat-icon>keyboard_arrow_left</mat-icon>
-        </button>
-      <button mat-icon-button (click)="nextClicked()">
-        <mat-icon>keyboard_arrow_right</mat-icon>
-      </button>
-    </div>
-  `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-})
-export class HeaderComponent<D> implements OnDestroy {
-  private destroyed = new Subject<void>();
-
-  constructor(
-    private calendar: MatCalendar<D>, private dateAdapter: DateAdapter<D>, private datepicker: MatDatepicker<D>,
-    @Inject(MAT_DATE_FORMATS) private dateFormats: MatDateFormats, cdr: ChangeDetectorRef) {
-    calendar.stateChanges
-      .pipe(takeUntil(this.destroyed))
-      .subscribe(() => cdr.markForCheck());
-  }
-
-  ngOnDestroy() {
-    this.destroyed.next();
-    this.destroyed.complete();
-  }
-
-  get periodLabel() {
-    return this.dateAdapter
-      .format(this.calendar.activeDate, this.dateFormats.parse.dateInput)
-      .toLocaleUpperCase();
-  }
-
-  todayClicked() {
-    this.datepicker.select(moment());
-    this.datepicker.close();
-  }
-
-  previousClicked() {
-    this.calendar.activeDate = this.dateAdapter.addCalendarMonths(this.calendar.activeDate, -1);
-  }
-
-  nextClicked() {
-    this.calendar.activeDate = this.dateAdapter.addCalendarMonths(this.calendar.activeDate, 1);
-  }
-}
-

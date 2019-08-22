@@ -4,7 +4,7 @@
   </button>
   <input  [matDatepicker]="picker" (click)="picker.open()"
           [formControl]="date" readonly>
-  <mat-datepicker  #picker [calendarHeaderComponent]="exampleHeader"></mat-datepicker>
+  <mat-datepicker  #picker [calendarHeaderComponent]="customHeader"></mat-datepicker>
   <button mat-icon-button startView="year" (click)="incrementDate()" matTooltip="Next day">
     <mat-icon>keyboard_arrow_right</mat-icon>
   </button>
