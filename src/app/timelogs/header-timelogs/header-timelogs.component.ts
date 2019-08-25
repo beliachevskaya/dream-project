@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {DatepickerComponent} from '../datepicker/datepicker.component';
 
 @Component({
   selector: 'app-header-timelogs',
@@ -7,13 +8,17 @@ import { Component, OnInit } from '@angular/core';
   })
 export class HeaderTimelogsComponent implements OnInit {
 
+  @ViewChild(DatepickerComponent, {static: false})
+  public datepicker: DatepickerComponent;
+
   constructor() {
   }
 
   ngOnInit() {
   }
 
-  dat(): void {
+  save(): void {
+    console.log(typeof this.datepicker.date.value._d);
   }
 
 }
