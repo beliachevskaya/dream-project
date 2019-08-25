@@ -7,10 +7,11 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TimelogSelectComponent } from './timelog-select/timelog-select.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DatepickerComponent, HeaderComponent } from './datepicker/datepicker.component';
+import { DatepickerComponent } from './datepicker/datepicker.component';
 import { TimelogWeekComponent } from './timelog-week/timelog-week.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DataService } from './data.service';
+import { CustomHeaderComponent } from './datepicker/custom-header/custom-header.component';
 
 @NgModule({
   declarations: [
@@ -18,8 +19,8 @@ import { DataService } from './data.service';
     HeaderTimelogsComponent,
     TimelogSelectComponent,
     DatepickerComponent,
-    HeaderComponent,
-    TimelogWeekComponent
+    TimelogWeekComponent,
+    CustomHeaderComponent
   ],
   imports: [
     RouterModule,
@@ -31,7 +32,7 @@ import { DataService } from './data.service';
   ],
   entryComponents: [
     DatepickerComponent,
-    HeaderComponent
+    CustomHeaderComponent
   ],
   exports: [
     TimelogDayComponent
