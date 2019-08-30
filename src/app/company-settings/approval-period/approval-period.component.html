@@ -3,11 +3,11 @@
     <p>Approval Period:</p>
     <mat-form-field class="select-period">
       <mat-select
-        [(ngModel)]="company.approvalPeriod[1][0]"
+        [(ngModel)]="company.approvalPeriod.selectedPeriod"
         (ngModelChange)="onChange($event)"
       >
         <mat-option
-          *ngFor="let item of company.approvalPeriod[0]"
+          *ngFor="let item of company.approvalPeriod.periods"
           [value]="item"
         >
           {{ item }}
@@ -23,20 +23,52 @@
   <div class="approval-block">
     <p>Notify about difference between expected and actual time:</p>
 
-    <div class="notify-block" *ngFor="let notify of company.notDifTime">
+    <div class="notify-block">
       <mat-checkbox
-        [(ngModel)]="notify.notification"
+        [(ngModel)]="company.notDifTime.notificationRule1.notification"
         [disabled]="approvDis"
       ></mat-checkbox>
       <p class="notifi-sign">≤</p>
-      <input type="number" [(value)]="notify.time" [disabled]="approvDis" />
+      <input
+        type="number"
+        [(value)]="company.notDifTime.notificationRule1.time"
+        [disabled]="approvDis"
+      />
       <p class="notifi-sign">%</p>
       <mat-select
         class="select-notify"
-        [(value)]="notify.imp"
+        [(value)]="company.notDifTime.notificationRule1.implementation"
         [disabled]="approvDis"
       >
-        <mat-option *ngFor="let item of arr" [value]="item">
+        <mat-option
+          *ngFor="let item of company.notDifTime.defaultImplementation"
+          [value]="item"
+        >
+          {{ item }}
+        </mat-option>
+      </mat-select>
+    </div>
+    <div class="notify-block">
+      <mat-checkbox
+        [(ngModel)]="company.notDifTime.notificationRule2.notification"
+        [disabled]="approvDis"
+      ></mat-checkbox>
+      <p class="notifi-sign">≤</p>
+      <input
+        type="number"
+        [(value)]="company.notDifTime.notificationRule2.time"
+        [disabled]="approvDis"
+      />
+      <p class="notifi-sign">%</p>
+      <mat-select
+        class="select-notify"
+        [(value)]="company.notDifTime.notificationRule2.implementation"
+        [disabled]="approvDis"
+      >
+        <mat-option
+          *ngFor="let item of company.notDifTime.defaultImplementation"
+          [value]="item"
+        >
           {{ item }}
         </mat-option>
       </mat-select>

@@ -3,8 +3,13 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+// import { AngularFireAuthModule } from 'angularfire2/auth';
+// import { AngularFireModule } from 'angularfire2';
+// import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
@@ -27,6 +32,7 @@ import { environment } from '../environments/environment';
 // max test
 import { MyUserService } from './myTest/user.service';
 import { CompanyService } from './myTest/company.service';
+import { EmployeesService } from './employees/employees.service';
 import { MyComponent } from './myTest/my.component';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -57,9 +63,12 @@ import { TimelogsModule } from './timelogs/timelogs.module';
     TimelogsModule,
     HttpClientModule,
     ProfilePageModule,
-    EmployeesModule
+    EmployeesModule,
+    // AngularFireDatabaseModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule
   ],
-  providers: [AuthService, MyUserService, CompanyService],
+  providers: [AuthService, MyUserService, CompanyService, EmployeesService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

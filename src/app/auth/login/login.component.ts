@@ -8,22 +8,20 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./login.component.sass']
 })
 export class LoginComponent implements OnInit {
-  hide = false;
+  hide = true;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onSubmit(form: NgForm) {
-   this.authService.login({
-     email: form.value.email,
-     password: form.value.password
-   });
+    this.authService.login({
+      email: form.value.email,
+      password: form.value.password
+    });
   }
 
   socialSignIn() {
-  this.authService.googleSignIn();
+    this.authService.googleSignIn();
   }
 }
-

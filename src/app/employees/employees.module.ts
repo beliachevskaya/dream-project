@@ -1,7 +1,11 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+
 // import { EmployeeInformationComponent } from './employee-information/employee-information.component';
 // import { AddEmployeePopUpComponent } from './add-employee-pop-up/add-employee-pop-up.component';
+import { EmployeesPageComponent } from './employees-page/employees-page.component';
 import { EmployeesComponent } from './employees.component';
 // import { AddEmployeeComponent } from './add-employee/add-employee.component';
 import { MaterialModule } from '../material.module';
@@ -14,6 +18,7 @@ import { RouterModule } from '@angular/router';
   declarations: [
     // EmployeeInformationComponent,
     // AddEmployeePopUpComponent,
+    EmployeesPageComponent,
     EmployeesComponent
     // AddEmployeeComponent,
   ],
@@ -22,17 +27,11 @@ import { RouterModule } from '@angular/router';
     MaterialModule,
     CoreModule,
     // ComponentsModule,
-    CommonModule
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  entryComponents: [
-    // AddEmployeePopUpComponent
-  ],
-  exports: [
-    // EmployeeInformationComponent,
-    // AddEmployeePopUpComponent,
-    EmployeesComponent
-    // AddEmployeeComponent,
-  ],
+  exports: [EmployeesComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class EmployeesModule {}
+export class EmployeesModule { }

@@ -11,6 +11,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { CompanySettingsComponent } from './company-settings/company-settings.component';
 import { PageComponent } from './core/page/page.component';
 import { ProfileComponent } from './profile-page/profile.component';
+import { EmployeesComponent } from './employees/employees.component';
 import { TimelogDayComponent } from './timelogs/timelog-day/timelog-day.component';
 import { TimelogWeekComponent } from './timelogs/timelog-week/timelog-week.component';
 
@@ -20,15 +21,16 @@ const itemMenu: Routes = [
   { path: 'company-settings', component: CompanySettingsComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'timelog-day', component: TimelogDayComponent },
-  { path: 'timelog-week', component: TimelogWeekComponent }
+  { path: 'timelog-week', component: TimelogWeekComponent },
+  { path: 'employees', component: EmployeesComponent }
 ];
 
 const routes: Routes = [
   {
     path: '',
     component: PageComponent,
-    children: itemMenu
-    // canActivate: [AuthGuard]
+    children: itemMenu,
+    canActivate: [AuthGuard]
   },
   { path: 'test', component: MyComponent },
   { path: 'signup', component: SignupComponent },
@@ -42,4 +44,4 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [AuthGuard]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

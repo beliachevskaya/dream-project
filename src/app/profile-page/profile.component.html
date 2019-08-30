@@ -1,7 +1,7 @@
 <div class="profile-container">
   <app-container class="profile__info">
     <app-profile-info
-      [user]="User"
+      [user]="user"
       [currentUser]="currentUser"
     ></app-profile-info>
   </app-container>
@@ -19,12 +19,12 @@
       </div>
   </app-container> -->
 
-  <!-- <app-container
+  <app-container
     *ngIf="currentUser.registered"
     class="profile__notification-preferences"
   >
-    <app-notification-preferences></app-notification-preferences>
-  </app-container> -->
+    <app-notification-preferences [user]="user"></app-notification-preferences>
+  </app-container>
 
   <div *ngIf="!currentUser.registered" class="profile__first-login">
     <app-container class="profile__send-email">

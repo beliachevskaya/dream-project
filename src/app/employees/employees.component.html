@@ -1,5 +1,28 @@
 <div class="employees-container">
-  <app-container class="profile__info"> </app-container>
+  <div class="employees-container__header">
+    <mat-button-toggle-group name="group" aria-label="Font Style">
+      <mat-button-toggle value="active" (change)="getEmployees($event)">Active</mat-button-toggle>
+      <mat-button-toggle value="deactivated" (change)="getEmployees($event)">Deactivated</mat-button-toggle>
+      <mat-button-toggle value="pending" (change)="getEmployees($event)">Pending</mat-button-toggle>
+    </mat-button-toggle-group>
+
+    <form class="employees-container__mail-sender">
+      <p>Invite user:</p>
+      <mat-form-field>
+        <input matInput placeholder="alex@timesheet.com" />
+      </mat-form-field>
+      <button mat-raised-button class="save-button" color="primary">
+        <mat-select placeholder="Select">
+          <mat-option value="option">Option</mat-option>
+        </mat-select>
+      </button>
+    </form>
+  </div>
+
+
+  <app-container class="employees__list">
+    <app-employees-page [employees]="employees"></app-employees-page>
+  </app-container>
 </div>
 
 <!-- <app-block>

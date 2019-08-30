@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { ProfileComponent } from './profile.component';
 import { ProfileInfoComponent } from './profile-info/profile-info.component';
 import { SendEmailComponent } from './send-email/send-email.component';
+import { NotificationPreferencesComponent } from './notification-preferences/notification-preferences.component';
 import { CreateCompanyComponent } from './create-company/create-company.component';
 
 @NgModule({
@@ -15,7 +16,8 @@ import { CreateCompanyComponent } from './create-company/create-company.componen
     ProfileComponent,
     ProfileInfoComponent,
     SendEmailComponent,
-    CreateCompanyComponent
+    CreateCompanyComponent,
+    NotificationPreferencesComponent
   ],
   imports: [
     RouterModule,

@@ -8,6 +8,7 @@ import { MaterialModule } from '../material.module';
 
 // import {BlockComponent} from "./block/block.component";
 import { ContainerComponent } from './container/container.component';
+import { TableComponent } from './table/table.component';
 import { HeaderComponent } from './header/header.component';
 import { LogoUserCompanyComponent } from './logo-user-company/logo-user-company.component';
 import { MenuComponent } from './menu/menu.component';
@@ -21,7 +22,8 @@ import { CommonModule } from '@angular/common';
     HeaderComponent,
     LogoUserCompanyComponent,
     MenuComponent,
-    PageComponent
+    PageComponent,
+    TableComponent
   ],
   imports: [
     RouterModule,
@@ -38,7 +40,8 @@ import { CommonModule } from '@angular/common';
     HeaderComponent,
     LogoUserCompanyComponent,
     MenuComponent,
-    PageComponent
+    PageComponent,
+    TableComponent
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
