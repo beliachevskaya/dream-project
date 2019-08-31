@@ -2,6 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { MaterialModule } from '../material.module';
 import { CoreModule } from '../core/core.module';
+import { EmployeesModule } from '../employees/employees.module';
 // import {ComponentsModule} from '../components/components.module';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -23,11 +24,11 @@ import { CreateCompanyComponent } from './create-company/create-company.componen
     RouterModule,
     MaterialModule,
     CoreModule,
-    // ComponentsModule,
+    EmployeesModule,
     CommonModule
   ],
   entryComponents: [],
   exports: [ProfileComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ProfilePageModule {}
+export class ProfilePageModule { }

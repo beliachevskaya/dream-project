@@ -9,7 +9,8 @@ import { Component, Input, OnInit, OnChanges, ChangeDetectionStrategy } from '@a
 export class EmployeesPageComponent implements OnInit, OnChanges {
   @Input() employees: any;
   public data: any;
-  public column: string[] = ['Name', 'Role', 'Planned / Actual (hours per week)', 'Pending Approval'];
+  public filter = true;
+  public column: string[] = ['Avatar', 'Name', 'Role', 'Planned / Actual (hours per week)', 'Pending Approval'];
 
   ngOnInit() {
     this.data = this.employees;
@@ -17,4 +18,5 @@ export class EmployeesPageComponent implements OnInit, OnChanges {
   ngOnChanges() {
     this.data = this.employees;
   }
+
 }

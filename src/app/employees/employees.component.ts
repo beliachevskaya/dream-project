@@ -14,14 +14,20 @@ export class EmployeesComponent implements OnInit {
   public employees: any[];
   public objEmployees: any[];
   public groupEmployee = { value: 'active' };
+  public emailValue: string;
+  public emailRole = 'Employee';
   constructor(private employeesService: EmployeesService, private companyService: CompanyService, private userService: MyUserService) {
     this.employeesService.setEmployeeList(this.companyService.getCurrentCompany().employeeList);
     this.employeesService.setUserList(this.userService.userList);
   }
-  unsubscriber = this.companyService.currentCompanyPage.subscribe(() => {
+  private unsubscriber = this.companyService.currentCompanyPage.subscribe(() => {
     this.employeesService.setEmployeeList(this.companyService.getCurrentCompany().employeeList);
     this.employeesService.setUserList(this.userService.userList);
     this.getEmployees(this.groupEmployee);
+  });
+
+  private unsubscriber2 = this.userService.currentUserName.subscribe(() => {
+    console.log('employ user chnage');
   });
 
   ngOnInit() {
@@ -29,14 +35,18 @@ export class EmployeesComponent implements OnInit {
 
   }
 
-  getEmployees(event = this.groupEmployee) {
+  getEmployees(event = this.groupEmployee): void {
     this.groupEmployee.value = event.value;
-    this.employees = (this.employeesService.getEmployees(event.value)).map(item => this.getTableTemplate(item));
+    this.objEmployees = this.employeesService.getEmployees(event.value);
+    this.employees = this.objEmployees.map(item => this.getTableTemplate(item));
   }
 
-  getTableTemplate(item) {
-    return { 'Name': item.name, 'Role': item.role, 'Planned / Actual (hours per week)': '44444', 'Pending Approval': 'bbbbbb' };
+  getTableTemplate(item: IUser): object {
+    // tslint:disable-next-line: max-line-length
+    return { Avatar: item.avatar, Name: item.name, Role: item.role, 'Planned / Actual (hours per week)': item.workload, 'Pending Approval': '12' };
   }
+
+
 
   ngOnDestroy(): void {
     this.unsubscriber.unsubscribe();

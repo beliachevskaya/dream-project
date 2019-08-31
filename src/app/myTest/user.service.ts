@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
-import { user2 } from './users';
+
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { AngularFirestore } from '@angular/fire/firestore';
 import 'rxjs/add/operator/map';
@@ -16,6 +17,8 @@ export interface IUser {
   avatar?: string;
   companyList?: string[];
   role?: string;
+  tel?: string;
+  workload?: [number, string];
   registered?: boolean;
 }
 
@@ -26,6 +29,14 @@ export class MyUserService {
   public userList: any;
   error: any;
   users: Observable<IUser[]>;
+
+  private userName = new BehaviorSubject('');
+  currentUserName = this.userName.asObservable();
+  usersСhanged(name: string) {
+    console.log('usersСhanged');
+    console.log(name);
+    this.userName.next(name);
+  }
 
   constructor(private http: HttpClient, private db: AngularFirestore) {
     // this.currentUser = {
@@ -54,7 +65,7 @@ export class MyUserService {
     this.currentUser.registered = true;
   }
 
-  get() {
+  getCurrentUser() {
     return this.currentUser;
   }
 
@@ -87,7 +98,8 @@ export class MyUserService {
       .collection('users')
       .doc(user.id)
       .set(user)
-      .then(() => this.getAllUsers());
+      .then(() => this.getAllUsers())
+      .then(() => this.usersСhanged(user.name));
   }
 
   getAllUsers() {
@@ -103,6 +115,8 @@ export class MyUserService {
         }
       );
   }
+
+
 
   //!my back-end DON'T TOUCH IT!!!!!
   regUser(user: IUser) {

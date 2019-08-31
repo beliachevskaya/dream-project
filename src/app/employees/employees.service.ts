@@ -1,13 +1,6 @@
 import { Injectable } from '@angular/core';
+import { MyUserService, IUser } from '../myTest/user.service';
 
-import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-
-import { Observable, of, from, } from 'rxjs';
-// import 'rxjs/add/operator/map';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { CompanyService } from '../myTest/company.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +8,13 @@ import { CompanyService } from '../myTest/company.service';
 export class EmployeesService {
   public employeeList: any[];
   public userList: any[];
+  public currentImployee: IUser;
 
-  constructor(private db: AngularFirestore) {
-
-  }
+  constructor() { }
 
   setEmployeeList = employees => this.employeeList = employees;
+  setCurrentImployees = employeeName => this.currentImployee = this.userList.filter(user => user.name === employeeName)[0];
+  getCurrentImployees = () => this.currentImployee;
   setUserList = users => this.userList = users;
   getEmployees(type) {
     return this.employeeList[type].map(user => this.userList.filter(obj => obj.name === user)).flat();

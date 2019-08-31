@@ -24,19 +24,20 @@ export class PageComponent implements OnInit {
     } else {
       this.currentCompany = this.companyService.getCompany(company);
       this.firstCompany = this.currentCompany;
-
       this.companyService.changeCompanyName(company);
     }
   }
 
   ngOnInit() {
-    this.currentUser = this.userService.get();
+    this.currentUser = this.userService.getCurrentUser();
     if (this.currentUser.role === 'Owner') {
       this.companyService.getCompany(
         this.currentUser.companyList[this.DEFAULT_COMPANY]
       );
     }
-
+    this.userService.currentUserName.subscribe(() => {
+      console.log('page user chnage');
+    });
     this.companyService.currentCompanyName.subscribe(company => {
       this.firstCompany = company;
     });

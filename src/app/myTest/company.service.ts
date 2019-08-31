@@ -13,7 +13,7 @@ export interface ICompany {
   activities?: [{ label: string; checked: boolean }];
   defaultProject?: { projects: string[]; selectedProject: string[] };
   startWeekDay?: { days: string[]; selectedDay: string };
-  workload?: any[];
+  workload?: [number, string];
   approvalPeriod?: { periods: string[]; selectedPeriod: string };
   autoSubmit?: boolean;
   notDifTime?: {
@@ -31,6 +31,7 @@ export interface ICompany {
   };
   abilityForget?: boolean;
   date?: string;
+  employeeList: { active: string[], deactivated: string[], pending: string[] };
 }
 @Injectable({
   providedIn: 'root'

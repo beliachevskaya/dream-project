@@ -11,6 +11,7 @@ import { MatTableDataSource } from '@angular/material/table';
 export class TableComponent implements OnInit {
   @Input() tableColumn: any;
   @Input() tableData: any;
+  @Input() filter: any;
   displayedColumns: string[];
   columnsToDisplay: string[];
   dataSource: any;
@@ -40,12 +41,7 @@ export class TableComponent implements OnInit {
     }
     this.value = '';
   }
-  test(event) {
-    console.log(event);
-    console.log(event.srcElement.innerHTML);
-    console.log(event.innerHTML);
 
-  }
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();

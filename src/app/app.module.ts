@@ -33,11 +33,13 @@ import { environment } from '../environments/environment';
 import { MyUserService } from './myTest/user.service';
 import { CompanyService } from './myTest/company.service';
 import { EmployeesService } from './employees/employees.service';
+import { TestService } from './employees/test.service';
 import { MyComponent } from './myTest/my.component';
 import { HttpClientModule } from '@angular/common/http';
 
 import { TimelogsModule } from './timelogs/timelogs.module';
 
+import { ChartsModule } from 'ng2-charts';
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,9 +68,10 @@ import { TimelogsModule } from './timelogs/timelogs.module';
     EmployeesModule,
     // AngularFireDatabaseModule,
     AngularFirestoreModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    ChartsModule
   ],
-  providers: [AuthService, MyUserService, CompanyService, EmployeesService],
+  providers: [AuthService, MyUserService, CompanyService, EmployeesService, TestService],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

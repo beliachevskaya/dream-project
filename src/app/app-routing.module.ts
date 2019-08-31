@@ -12,6 +12,7 @@ import { CompanySettingsComponent } from './company-settings/company-settings.co
 import { PageComponent } from './core/page/page.component';
 import { ProfileComponent } from './profile-page/profile.component';
 import { EmployeesComponent } from './employees/employees.component';
+import { EmployeeInformationComponent } from './employees/employee-information/employee-information.component';
 import { TimelogDayComponent } from './timelogs/timelog-day/timelog-day.component';
 import { TimelogWeekComponent } from './timelogs/timelog-week/timelog-week.component';
 
@@ -22,7 +23,8 @@ const itemMenu: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'timelog-day', component: TimelogDayComponent },
   { path: 'timelog-week', component: TimelogWeekComponent },
-  { path: 'employees', component: EmployeesComponent }
+  { path: 'employees', component: EmployeesComponent },
+  { path: 'employees/:name', component: EmployeeInformationComponent }
 ];
 
 const routes: Routes = [
