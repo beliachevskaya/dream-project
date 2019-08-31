@@ -38,8 +38,7 @@ export class ProjectsCreateComponent implements OnInit {
     this.project.status = 'in progress';
     this.project.totalWorkload = 0;
     this.project.endDate = '';
-    this.db.collection('users').valueChanges().subscribe(name => {console.log(name); });
-    // this.projectSubscroption = this.projectsService.projectCreated.subscribe();
+    // this.db.collection('projects').valueChanges().subscribe(result => {console.log(result); });
   }
 
   changeControl() {
