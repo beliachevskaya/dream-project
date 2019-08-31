@@ -11,17 +11,23 @@ import { CompanySettingsComponent } from './company-settings/company-settings.co
 import { PageComponent } from './core/page/page.component';
 import { ProfileComponent } from './profile-page/profile.component';
 import { ProjectsComponent } from './projects/projects.component';
+import { ProjectsCreateComponent } from './projects/projects-create/projects-create.component';
 
 import { MyComponent } from './myTest/my.component';
 
 const itemMenu: Routes = [
   { path: 'company-settings', component: CompanySettingsComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'projects', component: ProjectsComponent }
+  { path: 'projects', component: ProjectsComponent },
+  { path: 'projects/project', component: ProjectsCreateComponent }
 ];
 
 const routes: Routes = [
-  { path: '', component: PageComponent, children: itemMenu, canActivate: [AuthGuard] },
+  { path: '', component:
+  PageComponent,
+  children: itemMenu,
+  // canActivate: [AuthGuard]
+},
 
   { path: 'test', component: MyComponent },
   { path: 'signup', component: SignupComponent },

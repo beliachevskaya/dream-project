@@ -20,6 +20,8 @@ import {
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   imports: [
@@ -39,7 +41,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatSliderModule,
     MatDialogModule,
     MatButtonModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatButtonToggleModule,
+    MatExpansionModule
   ],
   exports: [
     MatSidenavModule,
@@ -58,7 +62,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatSliderModule,
     MatDialogModule,
     MatButtonModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatButtonToggleModule,
+    MatExpansionModule
   ]
 })
 export class MaterialModule {}

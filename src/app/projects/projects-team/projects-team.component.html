@@ -1,0 +1,120 @@
+<div class="team-container">
+  <div class="row" *ngFor="let teamMember of team; index as i">
+    <div class="name-column">
+      <mat-form-field>
+        <select matNativeControl
+        [(ngModel)]="team[i].name"
+        (ngModelChange)="onChangeName($event, i)">
+          <option *ngFor="let _member of allMembers" [value]="_member">
+            {{_member}}
+          </option>
+        </select>
+      </mat-form-field>
+    </div>
+    <div class="role-column">
+      <mat-form-field>
+        <select matNativeControl
+        [(ngModel)]="team[i].role"
+        (ngModelChange)="onChangeRole($event, i)">
+          <option *ngFor="let _role of roles" [value]="_role">
+            {{_role}}
+          </option>
+        </select>
+      </mat-form-field>
+    </div>
+    <div class="hours-column">
+      <mat-form-field class="input">
+        <input matInput
+        type="number"
+        [(ngModel)]="team[i].workload"
+        (ngModelChange)="onChangeWorkload($event, i)">
+      </mat-form-field>
+    </div>
+    <div class="hour-column">
+      <p>h/week</p>
+    </div>
+    <div class="delete-column">
+        <button mat-icon-button (click)="onDeleteMember(i)">
+          <mat-icon>clear</mat-icon>
+        </button>
+    </div>
+  </div>
+
+  <div class="row-default">
+    <div class="name-column-default">
+      <mat-form-field>
+        <select matNativeControl
+        #select
+        ngModel
+        [(ngModel)]="inputNameDefault"
+        (ngModelChange)="addMemberName($event, select)">
+          <option label="Choose Employee"></option>
+          <option *ngFor="let _member of allMembers" [value]="_member">
+            {{_member}}
+          </option>
+        </select>
+      </mat-form-field>
+    </div>
+    <div class="role-column-default">
+      <mat-form-field>
+        <select matNativeControl
+        #select
+        ngModel
+        [(ngModel)]="inputRoleDefault"
+        (ngModelChange)="addMemberRole($event, select)">
+          <option label="Choose Role"></option>
+          <option *ngFor="let _role of roles" [value]="_role">
+            {{_role}}
+          </option>
+        </select>
+      </mat-form-field>
+    </div>
+    <div class="time-column-default">
+      <mat-form-field class="input">
+        <input matInput
+        #wInput
+        type="number"
+        ngModel
+        [(ngModel)]="inputWorkloadDefault"
+        (ngModelChange)="addMemberWorkload($event, wInput)">
+      </mat-form-field>
+    </div>
+    <div class="hour-column-default">
+      <p>h/week</p>
+    </div>
+    <div class="delete-column-default">
+      <button mat-icon-button>
+        <mat-icon>clear</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="row-total">
+    <div class="total-1">
+      <p>Total expected time</p>
+    </div>
+    <div class="role-column-hide">
+        <mat-form-field>
+          <select matNativeControl>
+            <option></option>
+          </select>
+        </mat-form-field>
+      </div>
+    <div class="total-1">
+        <mat-form-field class="input">
+          <input matInput
+            value=0
+            disabled
+            ngModel
+            [(ngModel)]="total">
+          </mat-form-field>
+    </div>
+    <div class="total-2">
+      <p>h/week</p>
+    </div>
+    <div class="delete-column-hide">
+      <button mat-icon-button>
+        <mat-icon>clear</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

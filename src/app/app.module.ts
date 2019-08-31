@@ -3,8 +3,9 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
@@ -21,6 +22,7 @@ import { SetNewPasswordComponent } from './auth/set-new-password/set-new-passwor
 import { LinkExpiredComponent } from './auth/link-expired/link-expired.component';
 import { AuthService } from './auth/auth.service';
 import { environment } from '../environments/environment';
+import { ProjectsService } from './projects/projects.service';
 
 
 //max test
@@ -50,13 +52,14 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    AngularFirestoreModule,
     CoreModule,
     CompanySettingModule,
     HttpClientModule,
     ProfilePageModule,
     ProjectsModule
   ],
-  providers: [AuthService, MyUserService],
+  providers: [AuthService, MyUserService, ProjectsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
