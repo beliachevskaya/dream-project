@@ -14,19 +14,78 @@ export class ProjectsListComponent implements OnInit, OnDestroy {
   dataSource = new MatTableDataSource<Project>();
   displayedColumns: string[] = ['color', 'name', 'code', 'team', 'start', 'progress', 'end', 'play', 'stop' ];
   projects: Project[];
+  allProjects: any[];
+  currentCompanyProjectsList: Project[];
+  currentCompanyProjectsListArch: Project[];
+  currentCompanyProjectsListAct: Project[];
+  status: string = 'in progress';
+  // tslint:disable-next-line: no-inferrable-types
+  currentCompany: string = 'MTS';
   private exChangedSubscription: Subscription;
+
 
   constructor(private projectsService: ProjectsService, private db: AngularFirestore) {}
 
   ngOnInit() {
+    this.projectsService.fetchProjectsChanged();
     this.exChangedSubscription = this.projectsService.projectsChanged.subscribe(
       (projects: Project[]) => {
-        this.dataSource.data = projects;
+        this.currentCompanyProjectsList = projects.filter(project => {
+          if ((project.company === this.currentCompany) && (project.status !== 'archived')) {
+            return project;
+          }
+        });
+        console.log(this.currentCompanyProjectsList);
+        this.dataSource.data = this.currentCompanyProjectsList;
       }
     );
-    this.projectsService.fetchProjectsChanged();
   }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  onSaved(newStatus: string) {
+    this.status = newStatus;
+    console.log(this.status);
+    this.projectsService.fetchProjectsChanged();
+    this.exChangedSubscription = this.projectsService.projectsChanged.subscribe(
+      (projects: Project[]) => {
+        if (this.status !== 'archived') {
+          this.currentCompanyProjectsList = projects.filter(project => {
+            if ((project.company === this.currentCompany) && (project.status !== 'archived')) {
+              return project;
+            }
+          });
+        } else if (this.status === 'archived') {
+          this.currentCompanyProjectsList = projects.filter(project => {
+            if ((project.company === this.currentCompany) && (project.status === 'archived')) {
+              return project;
+            }
+          });
+        }
+        console.log(this.currentCompanyProjectsList);
+        this.dataSource.data = this.currentCompanyProjectsList;
+      }
+    );
+  }
+
+  changeStatus(project, newStatus) {
+    this.status = newStatus;
+    // this.projectsService.fetchProjectsChanged();
+    // this.exChangedSubscription1 = this.projectsService.projectsChanged.subscribe(
+    //   if ((project.company === this.currentCompany) {
+    //   this.project = project;
+    //         }
+    //       });
+    //     }
+    //   });
+  }
+
   ngOnDestroy() {
-    this.exChangedSubscription.unsubscribe();
+    if (this.exChangedSubscription) {
+      this.exChangedSubscription.unsubscribe();
+      this.exChangedSubscription = null;
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-projects-header',
@@ -6,10 +6,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./projects-header.component.sass']
 })
 export class ProjectsHeaderComponent implements OnInit {
+  status: string = 'in progress';
+
+  @Output() onSaved = new EventEmitter<string>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  onChangeStatus(newStatus: string) {
+    this.status = newStatus;
+    this.onSaved.emit(this.status);
+  }
 }

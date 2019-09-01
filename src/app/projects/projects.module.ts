@@ -8,8 +8,9 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ProjectsListComponent } from './projects-list/projects-list.component';
 import { ProjectsCreateComponent } from './projects-create/projects-create.component';
-import { ProjectsHeaderComponent } from './projects-header/projects-header.component';
 import { ProjectsTeamComponent } from './projects-team/projects-team.component';
+import { ProjectsHeaderComponent } from './projects-header/projects-header.component';
+import { ProjectEditComponent } from './project-edit/project-edit.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ProjectsTeamComponent } from './projects-team/projects-team.component';
     ProjectsListComponent,
     ProjectsCreateComponent,
     ProjectsHeaderComponent,
-    ProjectsTeamComponent
+    ProjectsTeamComponent,
+    ProjectEditComponent
   ],
   imports: [
     RouterModule,

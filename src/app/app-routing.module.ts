@@ -12,6 +12,8 @@ import { PageComponent } from './core/page/page.component';
 import { ProfileComponent } from './profile-page/profile.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { ProjectsCreateComponent } from './projects/projects-create/projects-create.component';
+import { ProjectEditComponent } from './projects/project-edit/project-edit.component';
+
 
 import { MyComponent } from './myTest/my.component';
 
@@ -19,7 +21,8 @@ const itemMenu: Routes = [
   { path: 'company-settings', component: CompanySettingsComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'projects', component: ProjectsComponent },
-  { path: 'projects/project', component: ProjectsCreateComponent }
+  { path: 'projects/project', component: ProjectsCreateComponent },
+  { path: 'projects/edit/:name', component: ProjectEditComponent }
 ];
 
 const routes: Routes = [

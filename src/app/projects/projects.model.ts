@@ -8,6 +8,7 @@ export class Project {
   endDate?: string;
   totalWorkload?: number;
   team?: Team;
+  company: string;
 }
 
 export class TeamMember {

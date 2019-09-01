@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ProjectsService } from '../projects.service';
 import { Project, Team, TeamMember } from '../projects.model';
 import { Subscription } from 'rxjs/Subscription';
+// import { CompanyService } from '../../myTest/company.service';
 
 @Component({
   selector: 'app-projects-create',
@@ -10,7 +11,7 @@ import { Subscription } from 'rxjs/Subscription';
   styleUrls: ['./projects-create.component.sass']
 })
 
-export class ProjectsCreateComponent implements OnInit {
+export class ProjectsCreateComponent implements OnInit, OnDestroy {
   typeProject = ['Fixed resources', 'Time & Material'];
   colors: string[] = ['#FF0000', '#FF9900', '#FFD600', '#00C537', '#109CF1', '#0047FF', '#9E00FF',
   '#000000', '#FF007A', '#AD5300', '#FFF500', 'rgba(0, 224, 22, 0.6)', '#2CD9FF', '#5438FF',
@@ -25,20 +26,27 @@ export class ProjectsCreateComponent implements OnInit {
   endDate: string;
   totalWorkload: number;
   team: Team;
+  company: string;
+  currentCompany: any;
   project: Project = new Project();
   hasControl = false;
   teamMember: TeamMember;
-  projectSubscroption: Subscription;
+  unSubscriptionCurrentCompany: Subscription;
 
-  constructor(private db: AngularFirestore, private projectsService: ProjectsService) {
-    // this.project = this.db.collection('projects');
-  }
+  constructor(
+    private db: AngularFirestore,
+    private projectsService: ProjectsService,
+    // private companyService: CompanyService
+    ) { }
 
   ngOnInit() {
+    // this.unSubscriptionCurrentCompany = this.companyService.currentCompanyPage.subscribe(() => {
+    //   this.currentCompany = this.companyService.getCurrentCompany();
+    // });
     this.project.status = 'in progress';
     this.project.totalWorkload = 0;
     this.project.endDate = '';
-    // this.db.collection('projects').valueChanges().subscribe(result => {console.log(result); });
+    this.project.company = 'MTS';
   }
 
   changeControl() {
@@ -71,5 +79,9 @@ export class ProjectsCreateComponent implements OnInit {
   onSaved(team) {
     this.project.team = team;
     console.log(this.team);
+  }
+
+  ngOnDestroy() {
+    // this.unSubscriptionCurrentCompany.unsubscribe();
   }
 }
