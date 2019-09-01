@@ -1,24 +1,31 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
 import {DatepickerComponent} from '../datepicker/datepicker.component';
 
 @Component({
   selector: 'app-header-timelogs',
   templateUrl: './header-timelogs.component.html',
   styleUrls: ['./header-timelogs.component.sass'],
+  changeDetection: ChangeDetectionStrategy.OnPush
   })
-export class HeaderTimelogsComponent implements OnInit {
+export class HeaderTimelogsComponent {
+
+  @Input()
+  status: string;
+
+  @Input()
+  isDisabled: boolean;
 
   @ViewChild(DatepickerComponent, {static: false})
   public datepicker: DatepickerComponent;
 
-  constructor() {
+  @Output() setData = new EventEmitter<boolean>();
+  setTimeheets() {
+    this.setData.emit();
   }
 
-  ngOnInit() {
-  }
-
-  save(): void {
-    console.log(typeof this.datepicker.date.value._d);
+  @Output() changeDate = new EventEmitter<boolean>();
+  setDate() {
+    this.changeDate.emit();
   }
 
 }

@@ -1,6 +1,6 @@
 import {
   ChangeDetectionStrategy,
-  Component
+  Component, EventEmitter, Output
 } from '@angular/core';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {FormControl} from '@angular/forms';
@@ -40,6 +40,11 @@ export class DatepickerComponent {
   date = new FormControl(moment());
 
   customHeader = CustomHeaderComponent;
+
+  @Output() changeDate = new EventEmitter<boolean>();
+  setDate() {
+    this.changeDate.emit();
+  }
 
   incrementDate() {
     const date = this.date;

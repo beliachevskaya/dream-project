@@ -1,12 +1,12 @@
 <div class="employees-header">
   <div class="data">
-    <app-datepicker></app-datepicker>
+    <app-datepicker (changeDate)="setDate()"></app-datepicker>
   </div>
   <div class="toggle">
     <button routerLink="/timelog-day">Day</button>
     <button routerLink="/timelog-week">Week</button>
   </div>
   <div>
-    <button class="button-save" (click)="save()">Save</button>
+    <button class="button-save" [ngClass]="{disabled: isDisabled}" [disabled]="isDisabled" (click)="setTimeheets()">{{status}}</button>
   </div>
 </div>

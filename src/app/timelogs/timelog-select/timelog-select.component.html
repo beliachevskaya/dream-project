@@ -2,10 +2,10 @@
   <mat-label>
     <div class="round"></div>&nbsp;&nbsp;<span>Choose Project</span>
   </mat-label>
-  <mat-select [(value)]="project">
-    <mat-select-trigger *ngIf="project" class="project">
-      <mat-icon class="md-24" [ngStyle]="{'color': project.color}">brightness_1</mat-icon>
-      <span>{{project.name}}</span>
+  <mat-select [(value)]="project[0]">
+    <mat-select-trigger *ngIf="project[0]" class="project">
+      <mat-icon class="md-24" [ngStyle]="{'color': project[0].color}">brightness_1</mat-icon>
+      <span>{{project[0].name}}</span>
     </mat-select-trigger>
     <mat-option *ngFor="let project of projects" [value]="project">
       <mat-icon class="md-24" [ngStyle]="{'color': project.color}">brightness_1</mat-icon>
@@ -13,3 +13,4 @@
     </mat-option>
   </mat-select>
 </mat-form-field>
+<p>{{project | json}}</p>

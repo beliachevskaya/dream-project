@@ -2,23 +2,44 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {Data, Timesheet} from './timelog-day/timelog-day.component';
+import {Observable} from 'rxjs';
+import {FormArray} from '@angular/forms';
+import {TimesheetGroup} from './timelog-day/timesheet.model';
+
 
 const data2 = {
   timesheets: [
     {
-      date: '08/25/2019',
+      date: '09/01/2019',
       saveTime: '11:22 PM',
       timesheet: [
         {project: 'Windows', time: 2.25, comment: '#435: added localization on landing page'},
         {project: 'Microsoft', time: 4.5, comment: 'never work'}
-      ]}
+      ]
+    },
+    {
+      date: '09/02/2019',
+      saveTime: '11:22 PM',
+      timesheet: [
+        {project: 'Windows', time: 4.25, comment: '#435: added localization on landing page'},
+        {project: 'Microsoft', time: 2.5, comment: 'never work'}
+      ]
+    },
+    {
+      date: '09/03/2019',
+      saveTime: '11:22 PM',
+      timesheet: [
+        {project: 'Windows', time: 1.25, comment: '#435: added localization on landing page'},
+        {project: 'Microsoft', time: 3.5, comment: 'never work'}
+      ]
+    },
   ]
   ,
   projects: [
-    {name: 'Windows', color: 'red'},
-    {name: 'Skype', color: 'yellow'},
-    {name: 'Mifot', color: 'blue'},
-    {name: 'Microsoft', color: 'green'}
+    'Windows',
+    'Skype',
+    'Mifort',
+    'Microsoft',
   ]
 };
 
@@ -46,15 +67,15 @@ export class DataService {
 
 
 
-    // this.http
-    //   .post('https://fe.it-academy.by/AjaxStringStorage2.php', lock)
-    //   .subscribe((requestValue) => {
-    //     this.http
-    //       .post('https://fe.it-academy.by/AjaxStringStorage2.php', update)
-    //       .subscribe((requestValue2) => {
-    //         console.log(requestValue2);
-    //       });
-    //   });
+    this.http
+      .post('https://fe.it-academy.by/AjaxStringStorage2.php', lock)
+      .subscribe((requestValue) => {
+        this.http
+          .post('https://fe.it-academy.by/AjaxStringStorage2.php', update)
+          .subscribe((requestValue2) => {
+            console.log(requestValue2);
+          });
+      });
   }
 
   setTimesheetData(timesheet: Timesheet[], date, saveTime): void {
@@ -97,7 +118,28 @@ export class DataService {
       });
   }
 
-  getData() {
+  getTimesheetFormArray(date): Observable<FormArray> {
+    return this.getData()
+      .pipe(map((data: Data) => {
+        const [timesheetObject] = data.timesheets.filter((timesheet) => timesheet.date === date);
+        let fgs = [];
+        if (timesheetObject) {
+          fgs = timesheetObject.timesheet.map(TimesheetGroup.asFormGroup);
+        }
+        return new FormArray(fgs);
+      })
+  );
+  }
+
+  getProjects(): Observable<string[]> {
+    return this.getData()
+      .pipe(map((data: Data) =>  {
+          console.log(data.projects);
+          return data.projects;
+      }));
+  }
+
+  getData(): Observable<Data> {
     const read = new HttpParams()
       .append('f', 'READ')
       .append('n', 'GLEB_TIMESHEET');

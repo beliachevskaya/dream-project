@@ -1,14 +1,16 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormArray, FormControl, FormGroup, FormBuilder} from '@angular/forms';
 import {DataService} from '../data.service';
 import {HeaderTimelogsComponent} from '../header-timelogs/header-timelogs.component';
 import * as moment from 'moment';
 import {Moment} from 'moment';
-import {auditTime, debounceTime} from 'rxjs/operators';
+import {auditTime, debounce, debounceTime, takeWhile} from 'rxjs/operators';
+import {TimesheetGroup} from './timesheet.model';
+import {timer} from 'rxjs';
 
 export interface Timesheet {
   project: string;
-  time: number;
+  time: string;
   comment: string;
 }
 
@@ -25,20 +27,17 @@ export interface Timesheets {
 
 export interface Data {
   timesheets: Timesheets[];
-  projects: Project[];
+  projects: string[];
 }
 
-const currentDate = moment().format('L');
-
-const  saveTimeout = 2000;
-
-const minLength = 1;
+const  saveTimeout = 300;
+const timeout  = 15000;
 
 @Component({
   selector: 'app-timelog-day',
   templateUrl: './timelog-day.component.html',
   styleUrls: ['./timelog-day.component.sass'],
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
 
 })
 export class TimelogDayComponent implements OnInit, OnDestroy {
@@ -47,33 +46,67 @@ export class TimelogDayComponent implements OnInit, OnDestroy {
   private header: HeaderTimelogsComponent;
 
   timesheetForm: FormGroup;
-  data: Data = null;
-  project: Project = null;
+  timesheetsForm: FormGroup;
   displayedColumns: string[] = ['project', 'time', 'comment'];
   date: string = moment().format('L');
   time: string = null;
-  projects: Project[] = [];
-  timesheets: Timesheet[] = [];
-  valueChangesSubscription;
+  projects: string[] = [];
+  valueChangesTimesheet$;
+  valueChangesTimesheets$;
+  saveStatus = 'Save';
+  isDisabled: boolean;
+
+  get timesheetsControls(): FormArray {
+    return this.timesheetsForm.get('timesheets') as FormArray;
+  }
 
   constructor(
     private dataService: DataService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private formBuilder: FormBuilder
   ) {
-    this.timesheetForm = new FormGroup({
-      project: new FormControl(null),
-      time: new FormControl(''),
-      comment: new FormControl('')
-    });
-    this.valueChangesSubscription  = this.timesheetForm.valueChanges.pipe(debounceTime(saveTimeout))
-      .subscribe(formData => {
-        // console.log(formData);
-        this.saveData();
+  }
+
+  subscribeTimesheetsForm(): void {
+    this.valueChangesTimesheets$  = this.timesheetsForm.valueChanges.pipe(
+      debounce(() => {
+        this.isDisabled = true;
+        this.saveStatus = 'Saving...';
+        return timer(timeout);
+      }))
+      .subscribe(() => {
+        this.setData();
       });
   }
 
-  test() {
-    console.log(this.header.datepicker.date.value.format('L'));
+  subscribeTimesheetForm(): void {
+    this.valueChangesTimesheet$  = this.timesheetForm.valueChanges.pipe(
+      debounceTime(saveTimeout))
+      .subscribe(formData => {
+        const { project, time, comment } = formData;
+        if (project !== null || time !== '' || comment !== '') {
+          this.addTimesheetForm(formData);
+          this.resetTimesheet();
+        }
+      });
+  }
+
+  addTimesheetForm(data): void {
+    const key = 'timesheets';
+    const emptyForm: Timesheet = data;
+    const timesheets: FormGroup = TimesheetGroup.asFormGroup(emptyForm);
+    this.timesheetsControls.controls.push(
+      timesheets
+    );
+    const newControl = new FormArray ([...this.timesheetsControls.controls]);
+    this.timesheetsForm.setControl(key, newControl);
+  }
+
+  deleteTimesheetForm(index: number): void {
+    const key = 'timesheets';
+    this.timesheetsControls.controls = this.timesheetsControls.controls.filter((elem, i ) => i !== index);
+    const newControl = new FormArray ([...this.timesheetsControls.controls]);
+    this.setData();
   }
 
   resetTimesheet(): void {
@@ -84,66 +117,64 @@ export class TimelogDayComponent implements OnInit, OnDestroy {
     });
   }
 
-  deleteTimesheet(index: number): void {
-    this.timesheets = this.timesheets.filter((elem, i ) => i !== index);
-    this.date = this.header.datepicker.date.value.format('L');
-    this.time = moment().format('LT');
-    this.dataService.setTimesheetData(this.timesheets, this.date, this.time);
-  }
-
   getTotalCost(): number {
-    return this.timesheets
-      .map(timesheet => timesheet.time)
+    const time = 'time';
+    return (this.timesheetsForm.get('timesheets') as FormArray).controls
+      .map(timesheet => {
+        const hours = (timesheet as FormGroup).controls[time].value;
+        return parseFloat(hours);
+      })
       .reduce((acc, hours) => acc + hours, 0);
   }
 
-  saveData(): void {
-    const {comment} = this.timesheetForm.value;
-    let {time, project} = this.timesheetForm.value;
-    project = project === null ? null : project.name;
-    time = isNaN(parseFloat(time)) ? 0 : time;
-    const validTime = !isNaN(parseFloat(time)) && parseFloat(time) !== 0;
-    const validComment = comment.length >= minLength;
-    if (validTime || validComment) {
-      const newTimesheet = {
-        project,
-        time: parseFloat(time),
-        comment
-      };
-      this.timesheets.push(newTimesheet);
-      this.timesheets = [...this.timesheets];
-      this.date = this.header.datepicker.date.value.format('L');
-      this.time = moment().format('LT');
-      this.dataService.setTimesheetData(this.timesheets, this.date, this.time);
-      this.resetTimesheet();
+  setDate() {
+    this.date = this.header.datepicker.date.value.format('L');
+    this.setDataInForm(this.date);
+  }
+
+  setData(): void {
+    this.date = this.header.datepicker.date.value.format('L');
+    this.time = moment().format('LT');
+    if (this.timesheetsForm.valid) {
+      const {timesheets} = this.timesheetsForm.value;
+      this.saveStatus = `Saved at ${this.time}`;
+      this.dataService.setTimesheetData(timesheets, this.date, this.time);
+      this.isDisabled = true;
+      this.cdr.detectChanges();
     }
   }
 
-  setData(data, timesheets: Timesheets): void {
-    const {date, saveTime, timesheet} = timesheets ? timesheets : {date: currentDate, saveTime: null, timesheet: []};
-    this.date = date;
-    this.time = saveTime;
-    this.timesheets = timesheet;
-    this.data = data || null;
-    this.projects = data.projects || [];
+  ngOnInit(): void {
+    this.timesheetsForm = this.formBuilder.group({
+      timesheets: this.formBuilder.array([])
+    });
+    this.subscribeTimesheetsForm();
+    const date = moment().format('L');
+    this.setDataInForm(date);
+    this.timesheetForm = new FormGroup({
+      project: new FormControl(null),
+      time: new FormControl(''),
+      comment: new FormControl('')
+    });
+    this.subscribeTimesheetForm();
   }
 
-  ngOnInit(): void {
-    this.dataService.getData()
-      .subscribe((data: Data) => {
-        if (data) {
-        const firstElement = 0;
-        const currentTimesheet = data.timesheets.filter((timesheet) => {
-          if (currentDate === timesheet.date) {
-            return timesheet;
-          }
-        });
-        this.setData(data, currentTimesheet[firstElement]);
-        }
-      });
+  setDataInForm(date) {
+    this.dataService.getTimesheetFormArray(date).subscribe(timesheets => {
+      this.valueChangesTimesheets$.unsubscribe();
+      this.timesheetsForm.setControl('timesheets', timesheets);
+      this.isDisabled = !this.timesheetsForm.valid;
+      this.subscribeTimesheetsForm();
+      this.cdr.detectChanges();
+    });
+    this.dataService.getProjects().subscribe(projects => {
+      this.projects = projects;
+      this.cdr.detectChanges();
+    });
   }
 
   ngOnDestroy(): void {
-    this.valueChangesSubscription.unsubscribe();
+    this.valueChangesTimesheet$.unsubscribe();
+    this.valueChangesTimesheets$.unsubscribe();
   }
 }
