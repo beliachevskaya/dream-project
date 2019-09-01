@@ -1,5 +1,5 @@
 import {
-  ChangeDetectionStrategy,
+  ChangeDetectionStrategy, ChangeDetectorRef,
   Component, EventEmitter, Output
 } from '@angular/core';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
@@ -10,6 +10,7 @@ import * as _moment from 'moment';
 import {default as _rollupMoment} from 'moment';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {CustomHeaderComponent} from './custom-header/custom-header.component';
+import {MatDatepickerInputEvent} from "@angular/material/datepicker";
 
 const moment = _rollupMoment || _moment;
 
@@ -37,6 +38,10 @@ export const MY_FORMATS = {
 })
 export class DatepickerComponent {
 
+  constructor(
+    private cdr: ChangeDetectorRef
+  ) {}
+
   date = new FormControl(moment());
 
   customHeader = CustomHeaderComponent;
@@ -46,13 +51,17 @@ export class DatepickerComponent {
     this.changeDate.emit();
   }
 
-  incrementDate() {
-    const date = this.date;
-    date.setValue(moment(date.value).add(1, 'days'));
+  incrementDate(): void {
+    this.date.setValue(moment(this.date.value).add(1, 'days'));
+    this.setDate();
   }
 
-  decrementDate() {
-    const date = this.date;
-    date.setValue(moment(date.value).add(-1, 'days'));
+  decrementDate(): void {
+    this.date.setValue(moment(this.date.value).add(-1, 'days'));
+    this.setDate();
+  }
+
+  addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
+    this.setDate();
   }
 }

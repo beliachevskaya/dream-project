@@ -1,4 +1,12 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild
+} from '@angular/core';
 import {DatepickerComponent} from '../datepicker/datepicker.component';
 
 @Component({
@@ -8,6 +16,10 @@ import {DatepickerComponent} from '../datepicker/datepicker.component';
   changeDetection: ChangeDetectionStrategy.OnPush
   })
 export class HeaderTimelogsComponent {
+
+  constructor(
+    private cdr: ChangeDetectorRef
+  ) {}
 
   @Input()
   status: string;

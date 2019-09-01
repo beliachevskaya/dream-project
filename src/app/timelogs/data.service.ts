@@ -51,32 +51,31 @@ export class DataService {
     private http: HttpClient
   ) {
   }
-
-  setTestData() {
-    console.log(dataSourse);
-    const lock = new HttpParams()
-      .append('f', 'LOCKGET')
-      .append('n', 'GLEB_TIMESHEET')
-      .append('p', '12345');
-
-    const update = new HttpParams()
-      .append('f', 'UPDATE')
-      .append('n', 'GLEB_TIMESHEET')
-      .append('p', '12345')
-      .append('v', JSON.stringify(data2));
-
-
-
-    this.http
-      .post('https://fe.it-academy.by/AjaxStringStorage2.php', lock)
-      .subscribe((requestValue) => {
-        this.http
-          .post('https://fe.it-academy.by/AjaxStringStorage2.php', update)
-          .subscribe((requestValue2) => {
-            console.log(requestValue2);
-          });
-      });
-  }
+  //
+  // setTestData() {
+  //   const lock = new HttpParams()
+  //     .append('f', 'LOCKGET')
+  //     .append('n', 'GLEB_TIMESHEET')
+  //     .append('p', '12345');
+  //
+  //   const update = new HttpParams()
+  //     .append('f', 'UPDATE')
+  //     .append('n', 'GLEB_TIMESHEET')
+  //     .append('p', '12345')
+  //     .append('v', JSON.stringify(data2));
+  //
+  //
+  //
+  //   this.http
+  //     .post('https://fe.it-academy.by/AjaxStringStorage2.php', lock)
+  //     .subscribe((requestValue) => {
+  //       this.http
+  //         .post('https://fe.it-academy.by/AjaxStringStorage2.php', update)
+  //         .subscribe((requestValue2) => {
+  //           console.log(requestValue2);
+  //         });
+  //     });
+  // }
 
   setTimesheetData(timesheet: Timesheet[], date, saveTime): void {
     const newTimesheet = {date, saveTime, timesheet};
@@ -134,7 +133,6 @@ export class DataService {
   getProjects(): Observable<string[]> {
     return this.getData()
       .pipe(map((data: Data) =>  {
-          console.log(data.projects);
           return data.projects;
       }));
   }
