@@ -1,54 +1,36 @@
 import { Component, OnInit } from '@angular/core';
-import { MyUserService, Iuser } from './my.service';
+import { MyUserService, IUser } from './user.service';
 import { Router } from '@angular/router';
-// import { HttpClient } from '@angular/common/http';
 
 import { user1, user2, user3 } from './users';
 
 @Component({
   selector: 'app-my',
   templateUrl: './my.component.html',
-  styleUrls: ['./my.component.sass'],
-  providers: [MyUserService]
+  styleUrls: ['./my.component.sass']
 })
 export class MyComponent implements OnInit {
-  currentUser: Iuser;
-
-  constructor(private newService: MyUserService, private router: Router) {
-    this.currentUser = { email: '' };
-  }
+  constructor(private newService: MyUserService, private router: Router) { }
 
   ngOnInit() {
-    // this.newService.inserUser(this.user)
-    // this.onSave();
+    // this.newService.getUser(user2.email);
   }
 
   onGet = () => {
-    console.log('click');
-    this.currentUser = this.newService.getUser(user1);
-    console.log('my comp');
-    console.log(this.currentUser);
-    this.directHome();
+    this.newService.getUser('mlalx@tut.by');
+    // this.newService.get();
+    // console.log('get user');
+    // console.log(this.newService.get());
   };
 
   onSave = () => {
-    console.log('click');
-    this.newService.regUser(user2).subscribe(user => (this.currentUser = user));
-    console.log(this.currentUser);
-    this.directHome();
+    this.newService.regUser(user2);
+    // console.log('User registered');
+    // console.log(this.newService.get());
   };
 
-  // onGet = () => {
-  //   console.log('click');
-  //   this.newService
-  //     .getUser(user1)
-  //     .subscribe(async user => (this.currentUser = user));
-  //   console.log(this.currentUser);
-  //   this.directHome();
-  // };
-
   directHome = () => {
-    if (this.currentUser.email) this.router.navigate(['/']);
-    else console.log('error');
+    console.log('run home');
+    this.router.navigate(['/']);
   };
 }

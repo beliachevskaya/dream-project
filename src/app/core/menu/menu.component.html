@@ -1,29 +1,35 @@
-<div class="menu-link company-link">
+<div *ngIf="currentUser.role === 'Owner' && currentUser.registered == true" class="menu-link company-link"
+  routerLinkActive="active">
   <a routerLink="/company-settings">
     <i class="material-icons-round">business</i>
     <span>Company settings</span>
   </a>
 </div>
-<div class="menu-link">
+
+<div class="menu-link" routerLinkActive="active">
   <a routerLink="/profile">
     <i class="material-icons-round">perm_identity</i>
     <span>Profile</span>
   </a>
 </div>
-<div class="menu-link">
+
+<div *ngIf="currentUser.role === 'Owner' || currentUser.role === 'Project Manager' || currentUser.role === 'HR Manager'"
+  class="menu-link" routerLinkActive="active">
   <a routerLink="/projects">
     <i class="material-icons-round">work_outline</i>
     <span>Projects</span>
   </a>
 </div>
-<div class="menu-link">
-  <a routerLink="/employees">
+
+<div *ngIf="currentUser.registered && currentUser.role !== 'Employee'" class="menu-link" routerLinkActive="active">
+  <a routerLink="/employees" routerLinkActive="active">
     <i class="material-icons-round">supervisor_account</i>
     <span>Employees</span>
   </a>
 </div>
-<div class="menu-link">
-  <a routerLink="/timelog-day">
+
+<div *ngIf="currentUser.registered" class="menu-link" routerLinkActive="active">
+  <a routerLink="/timelog-day" routerLinkActive="active">
     <i class="material-icons-round">schedule</i>
     <span>Time Logs</span>
   </a>

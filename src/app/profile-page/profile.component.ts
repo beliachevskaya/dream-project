@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MyUserService, IUser } from '../myTest/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -6,8 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.sass']
 })
 export class ProfileComponent implements OnInit {
+  currentUser: IUser;
   name = 'Profile One';
-  public User = {
+  public user = {
     registered: true,
     name: 'Profile One',
     role: 'Employee',
@@ -39,9 +41,57 @@ export class ProfileComponent implements OnInit {
         color: '#0047FF',
         proWorkload: 2
       }
-    ]
-  };
-  constructor() {}
+    ],
 
-  ngOnInit() {}
+    notificationPreference: {
+      notificationSender: ['System', 'Email', 'Push', 'Slack'],
+      notificationOptions: [
+        {
+          label: 'Timelogs are not filled for more then 24 hours',
+          checked: true,
+          sendTo: ['System']
+        },
+        {
+          label: '1 week before deadline',
+          checked: true,
+          sendTo: ['Email']
+        },
+        {
+          label: 'Status of a project you’re assigned to has been changed',
+          checked: true,
+          sendTo: ['Slack']
+        },
+        {
+          label: 'Submitted timesheet was rejected',
+          checked: true,
+          sendTo: ['System', 'Push']
+        },
+        {
+          label: 'Submitted timesheet was approved',
+          checked: false,
+          sendTo: ['System']
+        },
+        {
+          label: 'Your workload has been changed',
+          checked: false,
+          sendTo: ['System']
+        },
+        {
+          label: 'Your role has been changed',
+          checked: false,
+          sendTo: ['System']
+        },
+        {
+          label: 'User, invited by you, has joined your company',
+          checked: false,
+          sendTo: ['System']
+        }
+      ]
+    }
+  };
+  constructor(private userService: MyUserService) { }
+
+  ngOnInit() {
+    this.currentUser = this.userService.getCurrentUser();
+  }
 }

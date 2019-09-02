@@ -1,0 +1,81 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.table {
+  width: 744px;
+  padding: 20px;
+}
+.table table {
+  width: 100%;
+}
+.table table mat-label {
+  display: flex;
+  align-items: center;
+}
+.table table mat-label div {
+  display: inline-block;
+}
+.table table tr.mat-form-field-infix {
+  height: 20px;
+}
+.table table tr.mat-footer-row {
+  font-weight: bold;
+}
+.table table tr.mat-footer-row .bottom-border-none {
+  border-bottom: none;
+}
+.table table tr.mat-footer-row .text-align-right {
+  text-align: right;
+}
+.table table tr.mat-header-row {
+  height: 48px;
+}
+.table table tr.mat-footer-row, .table table tr.mat-row {
+  height: 64px;
+}
+.table table .comment-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.table table .label {
+  display: flex;
+  align-items: center;
+}
+
+::ng-deep .mat-form-field-underline {
+  display: none;
+}
+
+::ng-deep .mat-form-field-infix {
+  height: 20px;
+}
+
+.round {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background: white;
+  border-radius: 50%;
+  border: 4px solid #C4C4C4;
+  box-sizing: border-box;
+}
+
+.mark mat-icon {
+  position: absolute;
+  bottom: -3px;
+  font-size: 24px;
+}
+.mark span {
+  margin-left: 28px;
+}
+
+.timesheetForm {
+  font-weight: normal;
+  color: #707683;
+}
+
+/*# sourceMappingURL=timelog-day.component.css.map */

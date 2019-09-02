@@ -1,12 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
-interface IcompanyProperties {
-  name: string;
-  activities: any[];
-  defaultProjects: any[];
-  startWeekDay: string;
-  workload: any[];
-}
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ICompany } from '../../myTest/company.service';
 
 @Component({
   selector: 'app-company-properties',
@@ -14,35 +7,39 @@ interface IcompanyProperties {
   styleUrls: ['./company-properties.component.sass']
 })
 export class CompanyPropertiesComponent implements OnInit {
-  private cp: IcompanyProperties = {
-    name: 'Microsoft inc.',
-    activities: [
-      { label: 'Vacation', checked: true },
-      { label: 'Sick Leave', checked: false },
-      { label: 'Business Trip', checked: true }
-    ],
-    defaultProjects: [
-      { project: 'Adaptation', checked: true },
-      { project: 'Adaptation2', checked: true },
-      { project: 'Adaptation3', checked: false }
-    ],
-    startWeekDay: 'Sunday',
-    workload: [35, 'week']
-  };
+  _company: ICompany;
+  public checked: boolean;
+  public buttonDisabled = true;
 
-  public name: string;
-  public activities: any[];
-  public defaultProjects: any[] = [];
-  public startWeekDay: any[] = [['Sunday', 'Monday'], 'Monday'];
-  public workload: any[] = [40, 'week'];
-
-  constructor() {
-    this.name = this.cp.name;
-    this.activities = this.cp.activities;
-    this.defaultProjects = this.cp.defaultProjects;
-    this.startWeekDay[1] = this.cp.startWeekDay;
-    this.workload = this.cp.workload;
+  @Input()
+  set company(Company: ICompany) {
+    this._company = Company;
   }
 
+  @Output() onSaved = new EventEmitter<ICompany>();
+  onSave(data: ICompany) {
+    this.onSaved.emit(data);
+  }
+
+  onToggle(checked) {
+    checked = !checked;
+    this.onChangeAll();
+  }
+
+  constructor() {}
+
   ngOnInit() {}
+
+  onChange(project, select) {
+    this._company.defaultProject.selectedProject.push(project);
+    select.value = '';
+    this.onChangeAll();
+  }
+  onChangeAll() {
+    this.buttonDisabled = false;
+  }
+  onChangeProject(event, i) {
+    this._company.defaultProject.selectedProject[i] = event;
+    this.onChangeAll();
+  }
 }

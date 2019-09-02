@@ -1,20 +1,24 @@
 <div class="company-container">
   <app-container class="company-card">
-    <app-company-properties></app-company-properties>
+    <app-company-properties
+      [company]="company"
+      (onSaved)="onSaved($event)"
+    ></app-company-properties>
   </app-container>
 
   <app-container class="approval-card">
     <mat-card-title>Approval Period:</mat-card-title>
-    <app-approval-period></app-approval-period>
+    <app-approval-period [company]="company"></app-approval-period>
   </app-container>
 
   <div class="last-row">
     <app-container class="comments-card">
       <mat-card-title>Comments:</mat-card-title>
+      <app-comments></app-comments>
     </app-container>
 
     <app-container class="integration-card">
-      <mat-card-title>Connected Integrations:</mat-card-title>
+      <app-company-integration [user]="user"></app-company-integration>
     </app-container>
   </div>
 </div>

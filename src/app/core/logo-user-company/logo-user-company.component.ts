@@ -1,40 +1,52 @@
-import { Component, OnInit } from '@angular/core';
-
-import { MyUserService, Iuser } from '../../../app/myTest/my.service';
-
-
-// interface IuserProfile {
-//   id: number;
-//   name: string;
-//   companyList: any[];
-// }
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges
+} from '@angular/core';
+import { Router } from '@angular/router';
+import { CompanyService } from '../../myTest/company.service';
+import { IUser } from '../../myTest/user.service';
 
 @Component({
   selector: 'app-logo-user-company',
   templateUrl: './logo-user-company.component.html',
 
-  styleUrls: ['./logo-user-company.component.sass'],
-  providers: [MyUserService]
+  styleUrls: ['./logo-user-company.component.sass']
 })
-export class LogoUserCompanyComponent implements OnInit {
-  private cp: Iuser = {
-    name: 'Profile 1',
-    email: 'dgfdgdf',
-    companyList: ['Company1', 'Company2']
-  };
-  // public id: number;
-  public currentUser: Iuser;
-  public name: any;
-  public companyList: any[];
-  constructor(private newService: MyUserService) {
-    // this.newService.getU().subscribe(async user => (this.currentUser = user));
-    // this.name = this.newService.getU();
-    // console.log('main');
-    // console.log(this.name);
-    this.name = this.cp.name;
-    this.companyList = this.cp.companyList;
-    this.companyList.push('+ Create company');
+export class LogoUserCompanyComponent implements OnInit, OnChanges {
+  @Input() currentUser: IUser;
+  @Input() firstCompany: string;
+  selectedCompany: any;
+
+  constructor(private router: Router, private companyService: CompanyService) { }
+  isHide = () => this.currentUser.companyList.length < 2;
+  ngOnInit() {
+    this.router.navigate(['profile']);
+    this.selectedCompany = this.currentUser.companyList[0];
+    this.currentUser.companyList.push('+ Create company');
   }
-  isHide = () => this.companyList.length === 0;
-  ngOnInit() {}
+
+  @Output() onChanged = new EventEmitter<string>();
+
+  onChange(company) {
+    this.onChanged.emit(company);
+  }
+  ngOnChanges() {
+    if (this.firstCompany) {
+      if (
+        this.currentUser.companyList.some(item => item === this.firstCompany)
+      ) {
+        this.selectedCompany = this.firstCompany;
+      } else {
+        this.selectedCompany = this.firstCompany;
+        this.currentUser.companyList.unshift(this.selectedCompany);
+      }
+    }
+  }
+  onKlick() {
+    this.companyService.createCompany();
+  }
 }

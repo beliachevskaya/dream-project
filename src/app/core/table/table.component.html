@@ -1,0 +1,31 @@
+<mat-form-field *ngIf='filter'>
+  <i class="material-icons md-16" matPrefix>search</i>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search for an employee" [(ngModel)]="value">
+</mat-form-field>
+
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" multiTemplateDataRows>
+
+  <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      <p *ngIf='column !== "Avatar"'>{{ column }}</p>
+    </th>
+    <td mat-cell *matCellDef="let element" [ngSwitch]="column">
+      <ng-template ngSwitchCase="Avatar">
+        <div class='image' [ngStyle]="{background: 'url(' + element.Avatar + ') no-repeat ','background-size': '100%'}">
+        </div>
+      </ng-template>
+      <ng-template ngSwitchCase="Name">
+        <a class='link-name' [routerLink]="[element[column]]">{{ element[column] }}</a>
+      </ng-template>
+      <ng-template ngSwitchCase="Pending Approval">
+        <a class='link-approval' routerLink="/profile">{{ element[column] }}</a>
+      </ng-template>
+      <ng-template ngSwitchDefault>
+        <p class='text'>{{element[column]}}</p>
+      </ng-template>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let row; columns: columnsToDisplay"></tr>>
+</table>

@@ -2,14 +2,20 @@
   <div class="approval-block">
     <p>Approval Period:</p>
     <mat-form-field class="select-period">
-      <mat-select [(value)]="approvalPeriod">
-        <mat-option *ngFor="let item of approvalPeriodItems" [value]="item">
+      <mat-select
+        [(ngModel)]="company.approvalPeriod.selectedPeriod"
+        (ngModelChange)="onChange($event)"
+      >
+        <mat-option
+          *ngFor="let item of company.approvalPeriod.periods"
+          [value]="item"
+        >
           {{ item }}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
-    <mat-slide-toggle [color]="accent" [(checked)]="autoSubmit">
+    <mat-slide-toggle [(checked)]="company.autoSubmit" [disabled]="approvDis">
       Submit Time Logs automatically in the end of period
     </mat-slide-toggle>
   </div>
@@ -18,30 +24,62 @@
     <p>Notify about difference between expected and actual time:</p>
 
     <div class="notify-block">
-      <mat-checkbox [(ngModel)]="notDifTime[0].notification"></mat-checkbox>
+      <mat-checkbox
+        [(ngModel)]="company.notDifTime.notificationRule1.notification"
+        [disabled]="approvDis"
+      ></mat-checkbox>
       <p class="notifi-sign">≤</p>
-      <input type="number" [(value)]="notDifTime[0].time" />
+      <input
+        type="number"
+        [(value)]="company.notDifTime.notificationRule1.time"
+        [disabled]="approvDis"
+      />
       <p class="notifi-sign">%</p>
-      <mat-select class="select-notify" [(value)]="notDifTime[1].caution">
-        <mat-option value="error">error</mat-option>
-        <mat-option value="warn">warn</mat-option>
+      <mat-select
+        class="select-notify"
+        [(value)]="company.notDifTime.notificationRule1.implementation"
+        [disabled]="approvDis"
+      >
+        <mat-option
+          *ngFor="let item of company.notDifTime.defaultImplementation"
+          [value]="item"
+        >
+          {{ item }}
+        </mat-option>
       </mat-select>
     </div>
-
     <div class="notify-block">
-      <mat-checkbox [(ngModel)]="notDifTime[1].notification"></mat-checkbox>
-      <p class="notifi-sign">≥</p>
-      <input type="number" [(value)]="notDifTime[1].time" />
+      <mat-checkbox
+        [(ngModel)]="company.notDifTime.notificationRule2.notification"
+        [disabled]="approvDis"
+      ></mat-checkbox>
+      <p class="notifi-sign">≤</p>
+      <input
+        type="number"
+        [(value)]="company.notDifTime.notificationRule2.time"
+        [disabled]="approvDis"
+      />
       <p class="notifi-sign">%</p>
-      <mat-select class="select-notify" [(value)]="notDifTime[1].caution">
-        <mat-option value="error">error</mat-option>
-        <mat-option value="warn">warn</mat-option>
+      <mat-select
+        class="select-notify"
+        [(value)]="company.notDifTime.notificationRule2.implementation"
+        [disabled]="approvDis"
+      >
+        <mat-option
+          *ngFor="let item of company.notDifTime.defaultImplementation"
+          [value]="item"
+        >
+          {{ item }}
+        </mat-option>
       </mat-select>
     </div>
   </div>
 
   <div class="approval-block">
-    <mat-slide-toggle [(checked)]="abilityForget">
+    <mat-slide-toggle
+      [(checked)]="company.abilityForget"
+      [disabled]="approvDis"
+    >
       Ability to forget timesheets
     </mat-slide-toggle>
   </div>
