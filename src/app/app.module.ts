@@ -4,17 +4,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
-<<<<<<< HEAD
-import { AngularFireAuthModule } from '@angular/fire/auth';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-=======
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 // import { AngularFireAuthModule } from 'angularfire2/auth';
 // import { AngularFireModule } from 'angularfire2';
 // import { AngularFireDatabaseModule } from 'angularfire2/database';
->>>>>>> b1b96a80bbbc8fedd782e5d94e6aff4b28bcedfd
 
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
@@ -45,11 +40,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { TimelogsModule } from './timelogs/timelogs.module';
 
-<<<<<<< HEAD
 
-=======
 import { ChartsModule } from 'ng2-charts';
->>>>>>> b1b96a80bbbc8fedd782e5d94e6aff4b28bcedfd
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,19 +68,14 @@ import { ChartsModule } from 'ng2-charts';
     TimelogsModule,
     HttpClientModule,
     ProfilePageModule,
-<<<<<<< HEAD
-    ProjectsModule
-  ],
-  providers: [AuthService, MyUserService, ProjectsService],
-=======
+    ProjectsModule,
     EmployeesModule,
     // AngularFireDatabaseModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
     ChartsModule
   ],
-  providers: [AuthService, MyUserService, CompanyService, EmployeesService, TestService],
->>>>>>> b1b96a80bbbc8fedd782e5d94e6aff4b28bcedfd
+  providers: [AuthService, MyUserService, CompanyService, ProjectsService, EmployeesService, TestService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
