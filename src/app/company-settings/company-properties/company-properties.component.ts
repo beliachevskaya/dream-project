@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { IcompanyProperties, WeekDay } from '../company-settings.component';
+import { ICompany } from '../../myTest/company.service';
 
 @Component({
   selector: 'app-company-properties',
@@ -7,18 +7,18 @@ import { IcompanyProperties, WeekDay } from '../company-settings.component';
   styleUrls: ['./company-properties.component.sass']
 })
 export class CompanyPropertiesComponent implements OnInit {
-  _company: IcompanyProperties;
+  @Input() company: ICompany;
   public checked: boolean;
   public buttonDisabled = true;
 
-  @Input()
-  set company(Company: IcompanyProperties) {
-    this._company = Company;
-  }
+  // @Input()
+  // set company(Company: ICompany) {
+  //   this._company = Company;
+  // }
 
-  @Output() onSaved = new EventEmitter<IcompanyProperties>();
-  onSave(data: IcompanyProperties) {
-    this.onSaved.emit(data);
+  @Output() onSaved = new EventEmitter<ICompany>();
+  onSave(company: ICompany) {
+    this.onSaved.emit(company);
   }
 
   onToggle(checked) {
@@ -26,14 +26,12 @@ export class CompanyPropertiesComponent implements OnInit {
     this.onChangeAll();
   }
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {
-    console.log(this._company);
-  }
+  ngOnInit() { }
 
-  onChange(event, select) {
-    this._company.defaultProject[1].push(event);
+  onChange(project, select) {
+    this.company.defaultProject.selectedProject.push(project);
     select.value = '';
     this.onChangeAll();
   }
@@ -41,7 +39,7 @@ export class CompanyPropertiesComponent implements OnInit {
     this.buttonDisabled = false;
   }
   onChangeProject(event, i) {
-    this._company.defaultProject[1][i] = event;
+    this.company.defaultProject.selectedProject[i] = event;
     this.onChangeAll();
   }
 }

@@ -1,52 +1,105 @@
-<div class="employee__information">
-  <div mat-card-avatar class = "employee__photo"></div>
-  <div class="employee__data">
-    <mat-card-title class="employee__name">{{employeeName}}</mat-card-title>
-    <div class="employee__contacts">
-      <span>daenerys@gmail.com</span>
-      <span>+375297564432</span>
+<app-container>
+  <div class="profile-info">
+    <div class="profile-info__avatar">
+      <div class="profile__photo" [ngStyle]="{
+            background: 'url(' + employee.avatar + ') no-repeat ',
+            'background-size': '100%'
+          }"></div>
     </div>
-    <div class="employee-time">
-      <p> Workload: select</p>
-      <input type="text" class="employee-time__input" placeholder="30">
-      <p>h/week </p>
-      <div >
-        <i (click)="open_information()" class="material-icons">help_outline</i>
-        <ng-template [ngIf]="toggleFlag">
-          <div  class="information_about_role">
-            <h3>Owner</h3>
-            <p>description</p>
-            <h3>Admin</h3>
-            <p>description</p>
-            <h3>Project Manager</h3>
-            <p>description</p>
-            <h3>HR Manager</h3>
-            <p>description</p>
-            <h3>Employee</h3>
-            <p>description</p>
+
+    <div class="profile-info__user">
+      <h2>{{ employee.name }}</h2>
+      <mat-form-field class="role-input">
+        <mat-select [(ngModel)]="employee.role" class="text">
+          <mat-option *ngFor="let role of roles" [value]="role.value">{{role.value}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <button mat-icon-button [matMenuTriggerFor]="infoRoles" matTooltip="Roles info">
+        <mat-icon>help_outline</mat-icon>
+      </button>
+      <mat-menu #infoRoles="matMenu">
+        <div class="information_about">
+          <div class="information_about_role" *ngFor="let role of roles" test>
+            <p class='role-name'>{{role.value}}</p>
+            <p class='role-description'>{{role.description}}</p>
           </div>
-        </ng-template>
-      </div>
+        </div>
+      </mat-menu>
+
+
+      <p class="text">
+        Workload:
+        <mat-form-field class="workload-input">
+          <input type="number" matInput [(ngModel)]="employee.workload[0]" />
+        </mat-form-field>
+        h/{{ employee.workload[1] }}
+      </p>
+      <p class="text gray">{{ employee.email }}</p>
+      <p *ngIf="employee.tel" class="text gray">{{ employee.tel }}</p>
+    </div>
+
+    <div class="profile-info__projects">
+      <h3>Projects:</h3>
+
+      <!-- <table mat-table [dataSource]="projectList" class="mat-elevation-z8">
+        <ng-container matColumnDef="name">
+          <td mat-cell *matCellDef="let projectList">
+            <div [style.backgroundColor]="projectList.color" class="color"></div>
+            {{ projectList.proName }}
+          </td>
+          <td mat-footer-cell *matFooterCellDef>Total time on projects:</td>
+        </ng-container>
+
+        <ng-container matColumnDef="role">
+          <td mat-cell *matCellDef="let projectList">
+            {{ projectList.proRole }}
+          </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+
+        <ng-container matColumnDef="workload">
+          <td mat-cell *matCellDef="let projectList">
+            {{ projectList.proWorkload }}{{ workloadStep }}
+          </td>
+          <td mat-footer-cell *matFooterCellDef>
+            {{ getTotalH() }}{{ workloadStep }}
+          </td>
+        </ng-container>
+
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+      </table> -->
 
     </div>
-    <mat-form-field class="select-company">
-      <mat-select [(value)]="employee__position">
-        <mat-option value="option1">Король Севера</mat-option>
-        <mat-option value="option2">Hockage</mat-option>
-        <mat-option value="option3">Killer</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <div class="employee__activate">
-      <p>Deactivate</p>
-      <label class="switch">
-        <input type="checkbox" checked>
-        <span class="slider round"></span>
-      </label>
-      <p>Activate</p>
+    <div class="profile-info__buttons">
+      <button mat-stroked-button (click)="openDeactivateMenu()" class="deactivate-button" color="primary">
+        Deactivate
+      </button>
+      <button mat-raised-button (click)="onSave(employee)" class="save-button" color="primary">
+        Save
+      </button>
     </div>
   </div>
+
+</app-container>
+
+<div class='deactivate-box' *ngIf='deactivateMenu'>
+  <mat-card class='deactivate-menu'>
+    <h4>Are you sure you want to deactivate {{employee.name}}?</h4>
+    <p>Deactivated users are not able to sign in to your organization. But you will be able to see all their logs,
+      charts
+      and export reports.</p>
+    <button mat-button color="primary" (click)="onDeactivate(employee)">Yes, deactivate</button>
+    <button mat-button color="primary" (click)="openDeactivateMenu()">No, cancel</button>
+  </mat-card>
 </div>
 
+<app-container>
+  <app-employee-periods></app-employee-periods>
+</app-container>
 
-
+<app-container *ngIf="currentUser.role === 'Owner' || currentUser.role === 'Project Manager'">
+  <app-employee-timesheets [abilityForget]='abilityForget'></app-employee-timesheets>
+</app-container>

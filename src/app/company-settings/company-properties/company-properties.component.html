@@ -1,16 +1,10 @@
 <div class="company-properties" (change)="onChangeAll()">
   <div class="company-properties__header">
     <mat-form-field class="company-width">
-      <input matInput [(ngModel)]="_company.name" placeholder="Company name" />
+      <input matInput [(ngModel)]="company.name" placeholder="Company name" (ngModelChange)="onChangeAll()" />
     </mat-form-field>
-    <button
-      mat-raised-button
-      (click)="onSave(_company)"
-      class="save-button"
-      color="primary"
-      type="submit"
-      [disabled]="buttonDisabled"
-    >
+    <button mat-raised-button (click)="onSave(company)" class="save-button" color="primary" type="submit"
+      [disabled]="buttonDisabled">
       Save
     </button>
   </div>
@@ -18,29 +12,22 @@
   <div class="company-properties__body">
     <div class="company-properties__box">
       <p>Activities:</p>
-      <div *ngFor="let item of _company.activities">
-        <mat-checkbox
-          [(ngModel)]="item.checked"
-          (change)="onToggle(item.checked)"
-          >{{ item.label }}</mat-checkbox
-        >
+      <div *ngFor="let item of company.activities">
+        <mat-checkbox [(ngModel)]="item.checked" (change)="onToggle(item.checked)">{{ item.label }}</mat-checkbox>
       </div>
     </div>
 
     <div class="company-properties__box">
       <p>Default Projects:</p>
-      <div *ngFor="let _project of _company.defaultProject[1]; index as i">
+      <div *ngFor="
+          let _project of company.defaultProject.selectedProject;
+          index as i
+        ">
         <mat-form-field>
           <mat-label>Choose project</mat-label>
-          <mat-select
-            [(ngModel)]="_project"
-            (ngModelChange)="onChangeProject($event, i)"
-          >
-            <mat-option
-              *ngFor="let project of _company.defaultProject[0]"
-              [value]="project"
-              >{{ project }}</mat-option
-            >
+          <mat-select [(ngModel)]="_project" (ngModelChange)="onChangeProject($event, i)">
+            <mat-option *ngFor="let project of company.defaultProject.projects" [value]="project">{{ project }}
+            </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -48,33 +35,21 @@
       <div>
         <mat-form-field>
           <mat-label>Choose project</mat-label>
-          <mat-select
-            #select
-            ngModel
-            (ngModelChange)="onChange($event, select)"
-          >
-            <mat-option
-              *ngFor="let project of _company.defaultProject[0]"
-              [value]="project"
-              >{{ project }}</mat-option
-            >
+          <mat-select #select ngModel (ngModelChange)="onChange($event, select)">
+            <mat-option *ngFor="let project of company.defaultProject.projects" [value]="project">{{ project }}
+            </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
     </div>
 
     <div class="company-properties__box">
-      <label id="example-radio-group-label"><p>Start week from:</p></label>
-      <mat-radio-group
-        class="week-day-radio-group"
-        [(ngModel)]="_company.startWeekDay[1][0]"
-        (change)="onChangeAll()"
-      >
-        <mat-radio-button
-          class="example-radio-button"
-          *ngFor="let day of _company.startWeekDay[0]"
-          [(value)]="day"
-        >
+      <label id="example-radio-group-label">
+        <p>Start week from:</p>
+      </label>
+      <mat-radio-group class="week-day-radio-group" [(ngModel)]="company.startWeekDay.selectedDay"
+        (change)="onChangeAll()">
+        <mat-radio-button class="example-radio-button" *ngFor="let day of company.startWeekDay.days" [(value)]="day">
           {{ day }}
         </mat-radio-button>
       </mat-radio-group>
@@ -84,14 +59,11 @@
       <p>Default Workload:</p>
       <div class="workload-form">
         <mat-form-field class="workload-width">
-          <input type="number" matInput [(ngModel)]="_company.workload[0]" />
+          <input type="number" matInput [(ngModel)]="company.workload[0]" />
         </mat-form-field>
-        <p>hours per</p>
+        <p class='hours-per' [ngStyle]='{"margin-top": "22px"}'>hours per</p>
         <mat-form-field class="time-measure-width">
-          <mat-select
-            [(ngModel)]="_company.workload[1]"
-            (ngModelChange)="onChangeAll()"
-          >
+          <mat-select [(ngModel)]="company.workload[1]" (ngModelChange)="onChangeAll()">
             <mat-option value="week">week</mat-option>
             <mat-option value="day">day</mat-option>
           </mat-select>

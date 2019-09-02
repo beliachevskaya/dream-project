@@ -5,34 +5,20 @@
   <h1 class="logo__name">Mifort Timesheet</h1>
 </div>
 <div class="profile">
-  <div
-    class="profile__photo"
-    [ngStyle]="{
+  <div class="profile__photo" [ngStyle]="{
       background: 'url(' + currentUser.avatar + ') no-repeat ',
       'background-size': '100%'
-    }"
-  ></div>
+    }"></div>
   <div class="profile__content">
     <h2 class="profile__name">{{ currentUser.name }}</h2>
     <div class="profile__selector">
-      <button
-        mat-button
-        [ngClass]="{ hide: !isHide() }"
-        color="primary"
-        (click)="onKlick()"
-      >
+      <button mat-button [ngClass]="{ hide: !isHide() }" color="primary" (click)="onKlick()">
         + Create company
       </button>
       <mat-form-field [ngClass]="{ hide: isHide() }">
         <mat-label>Select company</mat-label>
-        <mat-select
-          [(ngModel)]="selectedCompany"
-          (ngModelChange)="onChange($event)"
-        >
-          <mat-option
-            *ngFor="let company of currentUser.companyList"
-            [value]="company"
-          >
+        <mat-select [(ngModel)]="selectedCompany" (ngModelChange)="onChange($event)">
+          <mat-option *ngFor="let company of currentUser.companyList" [value]="company">
             {{ company }}
           </mat-option>
         </mat-select>

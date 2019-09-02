@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MyUserService, Iuser } from '../myTest/user.service';
+import { MyUserService, IUser } from '../myTest/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -7,15 +7,8 @@ import { MyUserService, Iuser } from '../myTest/user.service';
   styleUrls: ['./profile.component.sass']
 })
 export class ProfileComponent implements OnInit {
-  currentUser: Iuser;
-  name = 'Profile One';
-  public User = {
-    registered: true,
-    name: 'Profile One',
-    role: 'Employee',
-    workload: 40,
-    email: 'pro1@vn.ed',
-    tel: '+375 29 1111111',
+  currentUser: IUser;
+  public user = {
     projectList: [
       {
         proName: 'Office',
@@ -41,11 +34,57 @@ export class ProfileComponent implements OnInit {
         color: '#0047FF',
         proWorkload: 2
       }
-    ]
+    ],
+
+    notificationPreference: {
+      notificationSender: ['System', 'Email', 'Push', 'Slack'],
+      notificationOptions: [
+        {
+          label: 'Timelogs are not filled for more then 24 hours',
+          checked: true,
+          sendTo: ['System']
+        },
+        {
+          label: '1 week before deadline',
+          checked: true,
+          sendTo: ['Email', 'System', 'Push', 'Slack']
+        },
+        {
+          label: 'Status of a project you’re assigned to has been changed',
+          checked: true,
+          sendTo: ['Slack']
+        },
+        {
+          label: 'Submitted timesheet was rejected',
+          checked: true,
+          sendTo: ['System', 'Push']
+        },
+        {
+          label: 'Submitted timesheet was approved',
+          checked: false,
+          sendTo: ['System']
+        },
+        {
+          label: 'Your workload has been changed',
+          checked: false,
+          sendTo: ['System']
+        },
+        {
+          label: 'Your role has been changed',
+          checked: false,
+          sendTo: ['System']
+        },
+        {
+          label: 'User, invited by you, has joined your company',
+          checked: false,
+          sendTo: ['System']
+        }
+      ]
+    }
   };
-  constructor(private userService: MyUserService) {}
+  constructor(private userService: MyUserService) { }
 
   ngOnInit() {
-    this.currentUser = this.userService.get();
+    this.currentUser = this.userService.getCurrentUser();
   }
 }

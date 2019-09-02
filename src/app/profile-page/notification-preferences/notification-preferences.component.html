@@ -1,0 +1,21 @@
+<div class="notification-preferences">
+  <div class="notification-preferences__header">
+    <h3 class="notification-preferences__text">Notification Preferences:</h3>
+    <button mat-raised-button (click)="onSave($event)" class="save-button" color="primary" type="submit"
+      [disabled]="buttonDisabled">
+      Save
+    </button>
+  </div>
+
+  <div class="notification-preferences__content content-flex"
+    *ngFor="let option of user.notificationPreference.notificationOptions">
+    <mat-checkbox [(ngModel)]="option.checked">{{ option.label }}</mat-checkbox>
+
+    <mat-form-field>
+      <mat-select [formControl]="items" multiple [(ngModel)]="option.sendTo" [disabled]='!option.checked'>
+        <mat-option *ngFor="let item of user.notificationPreference.notificationSender" [(value)]="item">{{ item }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>

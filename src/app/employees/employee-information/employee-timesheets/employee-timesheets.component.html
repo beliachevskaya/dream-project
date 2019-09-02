@@ -1,0 +1,32 @@
+<div class='timesheet'>
+  <div class='timesheet__pending'>
+    <h3 class='timesheet__header'>Pending for Approval: 29 Dec 2018 - 4 Jan 2019</h3>
+    <app-table [tableData]="data" [tableColumn]='column'></app-table>
+  </div>
+
+  <div class='timesheet__workload'>
+    <div class='flex-top'>
+      <h3 class='timesheet__header'>Workload</h3>
+      <app-doughnut-chart></app-doughnut-chart>
+      <p class='chart-text-inner'>42/40</p>
+    </div>
+
+    <div class='flex-bottom'>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Leave your comment here" value="">
+      </mat-form-field>
+      <div class='button-box'>
+        <button mat-stroked-button (click)="onClick()" *ngIf='!abilityForget' class="button  button-forget"
+          color="basic">
+          Forget
+        </button>
+        <button mat-raised-button (click)="onClick()" class="button button-approve " color="accent">
+          Approve
+        </button>
+        <button mat-raised-button (click)="onClick()" class="button button-reject" color="warn">
+          Reject
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

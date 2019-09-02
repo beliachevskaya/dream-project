@@ -1,96 +1,173 @@
-.employee__information
-  margin-left: 50px
+.profile-info
   display: flex
-  padding-top: 40px
-.employee__photo
-  width: 126px
-  height: 126px
-  background: url('https://66.media.tumblr.com/ffed88e762c2bfcab576b7826bec96bb/tumblr_onfqddb22p1w1drrho3_250.png')
-.employee-time
-  display: flex
-  width: 300px
+  justify-content: space-between
+  align-items: flex-start
 
-.employee-time__input
-  width: 30px
-  border: none
-  border-bottom: 1px solid #000000
-  margin-left: 20px
-  outline: none
-.employee__data
-  margin-left: 30px
-.switch
-  position: relative
+  .profile-info__avatar
+    .profile__photo
+      width: 125px
+      height: 125px
+      border-radius: 50%
+      background: url('../../../assets/image/profile-1.jpg') no-repeat
+      background-size: 100%
+      margin-right: 20px
+
+  .profile-info__user
+    h2
+      margin: 0 0
+      font-family: Poppins
+      font-style: normal
+      font-weight: normal
+      font-size: 24px
+      line-height: 36px
+      letter-spacing: 0.01em
+
+  .profile-info__projects
+    h3
+      margin: 0 25px
+      font-family: Poppins
+      font-style: normal
+      font-weight: 500
+      font-size: 15px
+      line-height: 22px
+      letter-spacing: 0.01em
+
+  .profile-info__buttons
+    display: inline-block
+    .save-button
+      margin-left: 15px
+
+
+
+p.text
+  font-family: Poppins
+  font-style: normal
+  font-weight: normal
+  font-size: 12px
+  line-height: 18px
+  letter-spacing: 0.01em
+
+.gray
+  color: #8C8C8C
+
+table
+  width: 500px
+
+td
+  padding: 0 20px
+  border-color: #ffffff
+  font-family: Poppins
+  font-style: normal
+  font-weight: normal
+  font-size: 12px
+  line-height: 18px
+  letter-spacing: 0.01em
+  color: #323C47
+
+
+td.mat-footer-cell
+  font-weight: 500
+
+
+.mat-elevation-z8
+  box-shadow: none
+
+.color
   display: inline-block
-  width: 26px
-  height: 16px
-  margin: 11px
-.switch input
-  opacity: 0
-  width: 0
-  height: 0
-
-.slider
-  position: absolute
-  cursor: pointer
-  top: 0
-  left: 0
-  right: 0
-  bottom: 0
-  background-color: #ccc
-  -webkit-transition: .2s
-  transition: .2s
-
-.slider:before
-  position: absolute
-  content: ""
-  height: 13px
-  width: 13px
-  left: 0px
-  bottom: 2px
-  background-color: white
-  -webkit-transition: .2s
-  transition: .2s
-input:checked + .slider
-  background-color: #2196F3
-
-input:focus + .slider
-  box-shadow: 0 0 1px #2196F3
-
-input:checked + .slider:before
-  -webkit-transform: translateX(16px)
-  -ms-transform: translateX(16px)
-  transform: translateX(12px)
-
-.slider.round
-  border-radius: 34px
-
-.slider.round:before
+  width: 15px
+  height: 15px
   border-radius: 50%
-.employee__activate
+
+td.mat-cell, td.mat-footer-cell, th.mat-header-cell
+  border-bottom-width: 0px
+
+td
+  padding: 0
+
+
+.information_about
   display: flex
+  flex-direction: column
+  justify-content: space-around
+  width: 300px
+  height: 320px
+  overflow: auto
+  .information_about_role
+    .role-name
+      font-family: Poppins
+      font-weight: 600
+      font-size: 12px
+      line-height: 18px
+      margin: 0 5px
 
-.workload
-  margin-top: 250px
-  margin-left: 0px
-.bar-chart
-  margin-top: 30px
-  margin-left: -450px
-.employee__contacts
-  margin-top: -25px
-  margin-left: 180px
-  span
-    margin-right: 20px
-.employee__timesheet
-  margin-left: -950px
-  margin-top: 265px
+    .role-description
+      font-family: Poppins
+      width: auto
+      font-weight: normal
+      font-size: 12px
+      line-height: 18px
+      text-align: justify
+      margin: 0 5px
 
-.information_about_role
-  position: absolute
-  background: #FFFFFF
-  border-radius: 15px
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2)
-  z-index: 1
-h3, p
-  margin: 10px 20px
-i
-  cursor: pointer
+.mat-form-field
+  font-size: 12px
+
+.role-input
+  min-width: 130px
+
+.workload-input
+  min-width: auto
+  width: auto
+.save-button, .deactivate-button
+  padding: 0 10px
+  line-height: 20px
+  font-size: 11px
+  font-weight: 500
+  font-size: 13px
+  line-height: 19px
+
+// .mat-button
+//   padding: 0
+//   font-weight: 500
+//   font-size: 11px
+//   line-height: 16px
+//   letter-spacing: 0.01em
+//   color: #109CF1
+
+
+.deactivate-box
+  z-index: 500
+  position: fixed
+  background-color: rgba(0, 0, 0, 0.5)
+  width: 100vw
+  height: 100vh
+  left: 0
+  top: 0
+  .deactivate-menu
+    position: fixed
+    background-color: #fffff
+    left: 30vw
+    top: 30vh
+    width: 450px
+    height: 120px
+    z-index: 1000
+    text-align: center
+    h4
+      font-family: Poppins
+      font-style: normal
+      font-weight: 600
+      font-size: 12px
+      line-height: 18px
+      color: #323C47
+    p
+      font-family: Poppins
+      font-style: normal
+      font-weight: normal
+      font-size: 12px
+      line-height: 18px
+      color: #323C47
+    button
+      margin: 5px
+      font-weight: bold
+      font-size: 12px
+      line-height: 18px

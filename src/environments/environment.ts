@@ -9,7 +9,7 @@ export const environment = {
     authDomain: 'timesheet-1b76c.firebaseapp.com',
     databaseURL: 'https://timesheet-1b76c.firebaseio.com',
     projectId: 'timesheet-1b76c',
-    storageBucket: '',
+    storageBucket: 'timesheet-1b76c.appspot.com',
     messagingSenderId: '845899414104',
     appId: '1:845899414104:web:0d25a3fa5cca8111'
   },

@@ -1,11 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-
-interface IapprovalPeriod {
-  approvalPeriod: any[];
-  autoSubmit: boolean;
-  notDifTime: any[];
-  abilityForget: boolean;
-}
+import { ICompany } from '../../myTest/company.service';
 
 @Component({
   selector: 'app-approval-period',
@@ -13,15 +7,21 @@ interface IapprovalPeriod {
   styleUrls: ['./approval-period.component.sass']
 })
 export class ApprovalPeriodComponent implements OnInit {
-  @Input() company;
+  @Input() company: ICompany;
 
-  public arr = ['warm', 'error'];
   public approvDis = false;
 
-  constructor() {}
+  constructor() { }
   onChange(event) {
     this.approvDis = event === 'I don’t need approvals' ? true : false;
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
+
+  changeAutoSubmit() {
+    this.company.autoSubmit = !this.company.autoSubmit;
+  }
+  changeAbilityForget() {
+    this.company.abilityForget = !this.company.abilityForget;
+  }
 }

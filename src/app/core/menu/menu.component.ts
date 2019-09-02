@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Iuser } from '../../myTest/user.service';
+import { IUser } from '../../myTest/user.service';
 
 @Component({
   selector: 'app-menu',
@@ -7,8 +7,8 @@ import { Iuser } from '../../myTest/user.service';
   styleUrls: ['./menu.component.sass']
 })
 export class MenuComponent implements OnInit {
-  @Input() currentUser: Iuser;
-  constructor() {}
+  @Input() currentUser: IUser;
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }
