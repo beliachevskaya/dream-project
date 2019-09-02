@@ -12,6 +12,7 @@ export class ProjectsService {
   team: Team;
   teamMember: TeamMember;
   currentCompany: string;
+  currentProject: Project;
   status: string;
   allMembers: string[] = ['Max', 'Gleb', 'Dima', 'Natalia'];
   projectsChanged = new Subject<Project[]>();
@@ -38,6 +39,24 @@ export class ProjectsService {
       });
   }
 
+  // getAllProjects() {
+  //   this.db
+  //     .collection('projects')
+  //     .valueChanges()
+  //     .subscribe(
+  //       project => {
+  //        return this.allProjects = project;
+  //       }
+  //     );
+  // }
+
+  getProject(name) {
+    this.allProjects.forEach(project => {
+      if (project.name === name) {
+       return this.currentProject = project;
+      }
+    });
+  }
   // onChangeStatus(project, status) {
   //   this.db
   //     .collection('projects')

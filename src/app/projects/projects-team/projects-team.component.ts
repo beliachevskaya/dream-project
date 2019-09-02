@@ -1,5 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { TeamMember, Team } from '../projects.model';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { TeamMember, Team, Project } from '../projects.model';
 import { ProjectsService } from '../projects.service';
 import { NgModel } from '@angular/forms';
 
@@ -19,6 +19,7 @@ export class ProjectsTeamComponent implements OnInit {
   inputNameDefault: string;
   inputRoleDefault: string;
   inputWorkloadDefault: number;
+  project: Project;
   total: number;
   totalArr: number[];
   // tslint:disable-next-line: no-output-on-prefix

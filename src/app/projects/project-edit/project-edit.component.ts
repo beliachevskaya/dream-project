@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ProjectsService } from '../projects.service';
 import { Project, Team, TeamMember } from '../projects.model';
-import { ActivatedRoute} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 // import { CompanyService } from '../../myTest/company.service';
 
@@ -28,40 +28,40 @@ export class ProjectEditComponent implements OnInit, OnDestroy {
   team: Team;
   company: string;
   currentCompany: any;
-  project: Project = new Project();
+  allProjects: any;
+  currentProject: any;
+  project: Project;
   hasControl = false;
   teamMember: TeamMember;
   unSubscriptionCurrentCompany: Subscription;
   private subscription: Subscription;
+  private subscription1: Subscription;
+  private subscription2: Subscription;
 
   constructor(
     private db: AngularFirestore,
     private projectsService: ProjectsService,
-    private activateRoute: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     // private companyService: CompanyService
     ) {
-      this.subscription = activateRoute.params.subscribe(params =>
-        this.name = params[ name ]);
+      this.subscription = activatedRoute.params.subscribe(params =>
+        this.project = params);
+      console.log(this.project);
     }
 
   ngOnInit() {
-
   //   // this.unSubscriptionCurrentCompany = this.companyService.currentCompanyPage.subscribe(() => {
   //   //   this.currentCompany = this.companyService.getCurrentCompany();
   //   // });
-  //   this.project.status = 'in progress';
-  //   this.project.totalWorkload = 0;
-  //   this.project.endDate = '';
-  //   this.project.company = 'MTS';
   }
 
-  // changeControl() {
-  //   if (this.hasControl === true) {
-  //     this.hasControl = false;
-  //   } else {
-  //     this.hasControl = true;
-  //   }
-  // }
+  changeControl() {
+    if (this.hasControl === true) {
+      this.hasControl = false;
+    } else {
+      this.hasControl = true;
+    }
+  }
 
   // changeColor(item) {
   //   this.project.color = item;
@@ -89,6 +89,12 @@ export class ProjectEditComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // this.unSubscriptionCurrentCompany.unsubscribe();
+
     this.subscription.unsubscribe();
+
+    if (this.subscription1) {
+      this.subscription1.unsubscribe();
+      this.subscription1 = null;
+    }
   }
 }
