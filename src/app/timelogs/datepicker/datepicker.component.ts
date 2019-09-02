@@ -1,20 +1,16 @@
 import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  Inject,
-  OnDestroy
+  ChangeDetectionStrategy, ChangeDetectorRef,
+  Component, EventEmitter, Output
 } from '@angular/core';
-import {MatCalendar} from '@angular/material/datepicker';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatDateFormats} from '@angular/material/core';
-import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {FormControl} from '@angular/forms';
 import * as _moment from 'moment';
 
 // @ts-ignore
 import {default as _rollupMoment} from 'moment';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
+import {CustomHeaderComponent} from './custom-header/custom-header.component';
+import {MatDatepickerInputEvent} from "@angular/material/datepicker";
 
 const moment = _rollupMoment || _moment;
 
@@ -42,92 +38,30 @@ export const MY_FORMATS = {
 })
 export class DatepickerComponent {
 
+  constructor(
+    private cdr: ChangeDetectorRef
+  ) {}
+
   date = new FormControl(moment());
 
-  exampleHeader = HeaderComponent;
+  customHeader = CustomHeaderComponent;
 
-  incrementDate() {
-    const date = this.date;
-    date.setValue(moment(date.value).add(1, 'days'));
+  @Output() changeDate = new EventEmitter<boolean>();
+  setDate() {
+    this.changeDate.emit();
   }
 
-  decrementDate() {
-    const date = this.date;
-    date.setValue(moment(date.value).add(-1, 'days'));
-  }
-}
-
-/** Custom header component for datepicker. */
-@Component({
-  selector: 'app-header',
-  styles: [`
-    .example-header {
-      display: flex;
-      align-items: center;
-      padding: 0.5em;
-    }
-
-    .example-header-label {
-      flex: 1;
-      height: 1em;
-      font-weight: 500;
-      text-align: center;
-    }
-
-    .example-double-arrow .mat-icon {
-      margin: -22%;
-    }
-  `],
-  template: `
-    <div class="example-header">
-      <button mat-stroked-button color="primary" (click)="todayClicked()">Today</button>
-      <span class="example-header-label">{{periodLabel}}</span>
-        <button mat-icon-button (click)="previousClicked()">
-            <mat-icon>keyboard_arrow_left</mat-icon>
-        </button>
-      <button mat-icon-button (click)="nextClicked()">
-        <mat-icon>keyboard_arrow_right</mat-icon>
-      </button>
-    </div>
-  `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-})
-export class HeaderComponent<D> implements OnDestroy {
-  private destroyed = new Subject<void>();
-
-  constructor(
-    private calendar: MatCalendar<D>, private dateAdapter: DateAdapter<D>,
-    @Inject(MAT_DATE_FORMATS) private dateFormats: MatDateFormats, cdr: ChangeDetectorRef) {
-    calendar.stateChanges
-      .pipe(takeUntil(this.destroyed))
-      .subscribe(() => cdr.markForCheck());
+  incrementDate(): void {
+    this.date.setValue(moment(this.date.value).add(1, 'days'));
+    this.setDate();
   }
 
-  ngOnDestroy() {
-    this.destroyed.next();
-    this.destroyed.complete();
+  decrementDate(): void {
+    this.date.setValue(moment(this.date.value).add(-1, 'days'));
+    this.setDate();
   }
 
-  get periodLabel() {
-    return this.dateAdapter
-      .format(this.calendar.activeDate, this.dateFormats.parse.dateInput)
-      .toLocaleUpperCase();
-  }
-
-  todayClicked() {
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = date.getMonth();
-    const day = date.getDate();
-    this.calendar.activeDate = this.dateAdapter.createDate( year, month, day);
-  }
-
-  previousClicked() {
-    this.calendar.activeDate = this.dateAdapter.addCalendarMonths(this.calendar.activeDate, -1);
-  }
-
-  nextClicked() {
-    this.calendar.activeDate = this.dateAdapter.addCalendarMonths(this.calendar.activeDate, 1);
+  addEvent(type: string, event: MatDatepickerInputEvent<Date>) {
+    this.setDate();
   }
 }
-
