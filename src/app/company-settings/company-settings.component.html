@@ -1,14 +1,14 @@
 <div class="company-container">
   <app-container class="company-card">
     <app-company-properties
-      [company]="Company"
+      [company]="company"
       (onSaved)="onSaved($event)"
     ></app-company-properties>
   </app-container>
 
   <app-container class="approval-card">
     <mat-card-title>Approval Period:</mat-card-title>
-    <app-approval-period [company]="Company"></app-approval-period>
+    <app-approval-period [company]="company"></app-approval-period>
   </app-container>
 
   <div class="last-row">

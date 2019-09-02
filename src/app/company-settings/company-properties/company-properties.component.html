@@ -29,7 +29,12 @@
 
     <div class="company-properties__box">
       <p>Default Projects:</p>
-      <div *ngFor="let _project of _company.defaultProject[1]; index as i">
+      <div
+        *ngFor="
+          let _project of _company.defaultProject.selectedProject;
+          index as i
+        "
+      >
         <mat-form-field>
           <mat-label>Choose project</mat-label>
           <mat-select
@@ -37,7 +42,7 @@
             (ngModelChange)="onChangeProject($event, i)"
           >
             <mat-option
-              *ngFor="let project of _company.defaultProject[0]"
+              *ngFor="let project of _company.defaultProject.projects"
               [value]="project"
               >{{ project }}</mat-option
             >
@@ -54,7 +59,7 @@
             (ngModelChange)="onChange($event, select)"
           >
             <mat-option
-              *ngFor="let project of _company.defaultProject[0]"
+              *ngFor="let project of _company.defaultProject.projects"
               [value]="project"
               >{{ project }}</mat-option
             >
@@ -67,12 +72,12 @@
       <label id="example-radio-group-label"><p>Start week from:</p></label>
       <mat-radio-group
         class="week-day-radio-group"
-        [(ngModel)]="_company.startWeekDay[1][0]"
+        [(ngModel)]="_company.startWeekDay.selectedDay"
         (change)="onChangeAll()"
       >
         <mat-radio-button
           class="example-radio-button"
-          *ngFor="let day of _company.startWeekDay[0]"
+          *ngFor="let day of _company.startWeekDay.days"
           [(value)]="day"
         >
           {{ day }}

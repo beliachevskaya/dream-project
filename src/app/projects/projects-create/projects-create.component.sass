@@ -1,0 +1,141 @@
+.create-project
+  margin: 20px 20px
+  .first-row
+    display: flex
+    margin: 0px 10px
+    flex-flow: row
+    .create-project__name
+      flex: 2
+      .name-form
+        display: flex
+        flex-flow: row nowrap
+        .name-project
+          width: 200px
+          font-size: 24px
+          font-family: Poppins
+          letter-spacing: 0.01em
+        .circle
+          margin-top: 45px
+          margin-left: 10px
+          border: 1px solid #323C47
+          border-radius: 50%
+          width: 20px
+          height: 20px
+          cursor: pointer
+        .color-picker
+          position: absolute
+          left: 250px
+          top: 90px
+          width: 220px
+          height: 120px
+          background: #FFFFFF
+          box-shadow: 4px 4px 10px rgba(0, 0, 0, .2)
+          border-radius: 15px
+          h3
+            margin-left: 10px
+            font-family: Poppins
+            letter-spacing: 0.01em
+            font-style: normal
+            color: #323C47
+            font-size: 12px
+          .color-picker_elem
+            display: flex
+            flex-wrap: wrap
+            width: 200px
+            height: 75px
+            justify-content: space-between
+            margin-left: 10px
+            .circle_elem
+              border-radius: 50%
+              width: 20px
+              height: 20px
+              margin-right: 5px
+              cursor: pointer
+        .code-project
+          font-family: Poppins
+          font-size: 12px
+          letter-spacing: 0.01em
+          margin-top: 20px
+          margin-left: 30px
+          mat-form-field
+            width: 40px
+            .input-code
+              width: 100%
+        .status-project
+          margin-top: 40px
+          margin-left: 30px
+          button
+            font-family: 'Poppins'
+            font-style: normal
+            font-size: 12px
+            color: #8C8C8C
+    .create-project__buttons
+      flex: 1
+      width: 100%
+      margin-right: 0
+      margin-top: 45px
+      display: flex
+      flex-flow: row nowrap
+      justify-content: flex-end
+      .mat-raised-button.mat-primary
+        margin-left: 2em
+        width: 58px
+        height: 24px
+        background-color: #109CF1
+        font-family: Poppins
+        font-style: normal
+        font-size: 13px
+        line-height: 19px
+        letter-spacing: 0.01em
+      .mat-raised-button.clear
+        margin-left: 1em
+        border: 1px solid #109CF1
+        height: 24px
+        font-family: Poppins
+        font-style: normal
+        font-size: 13px
+        color: #109CF1
+        line-height: 19px
+        letter-spacing: 0.01em
+        i
+          font-size: 14px
+  .second-row
+    font-family: Poppins
+    font-style: normal
+    font-size: 12px
+    color: #323C47
+    line-height: 19px
+    letter-spacing: 0.01em
+    margin: 0px 10px
+    display: flex
+    flex: row
+    .type-project
+      mat-form-field
+        width: 150px
+        padding-left: 10px
+        font-size: 12px
+    .date-project
+      margin-top: -20px
+      display: flex
+      flex: row nowrap
+      .start-project, .end-project
+        mat-form-field
+          width: 110px
+          font-size: 12px
+          margin-top: -30px
+      .end-project
+        margin-left: 10px
+      .hour
+        margin-left: 10px
+        mat-form-field
+          width: 70px
+          font-size: 12px
+          margin-top: -30px
+  .create-project__team
+    margin-top: 20px
+    display: flex
+    flex-flow: row
+    mat-expansion-panel
+      flex: 1
+    .integration
+      flex: 1.3

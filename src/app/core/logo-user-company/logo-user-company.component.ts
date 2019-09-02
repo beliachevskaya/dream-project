@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { CompanyService } from '../../myTest/company.service';
-import { Iuser } from '../../myTest/user.service';
+import { IUser } from '../../myTest/user.service';
 
 @Component({
   selector: 'app-logo-user-company',
@@ -17,14 +17,15 @@ import { Iuser } from '../../myTest/user.service';
   styleUrls: ['./logo-user-company.component.sass']
 })
 export class LogoUserCompanyComponent implements OnInit, OnChanges {
-  @Input() currentUser: Iuser;
+  @Input() currentUser: IUser;
   @Input() firstCompany: string;
   selectedCompany: any;
 
-  constructor(private router: Router, private companyService: CompanyService) {}
+  constructor(private router: Router, private companyService: CompanyService) { }
   isHide = () => this.currentUser.companyList.length < 2;
   ngOnInit() {
     this.router.navigate(['profile']);
+    this.selectedCompany = this.currentUser.companyList[0];
     this.currentUser.companyList.push('+ Create company');
   }
 

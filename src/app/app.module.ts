@@ -3,15 +3,20 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+// import { AngularFireAuthModule } from 'angularfire2/auth';
+// import { AngularFireModule } from 'angularfire2';
+// import { AngularFireDatabaseModule } from 'angularfire2/database';
 
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
 import { AppRoutingModule } from './app-routing.module';
 import { CoreModule } from './core/core.module';
 import { CompanySettingModule } from './company-settings/company-settings.module';
-
+import { ProjectsModule } from './projects/projects.module';
 import { ProfilePageModule } from './profile-page/profile-page.module';
 import { EmployeesModule } from './employees/employees.module';
 
@@ -23,15 +28,20 @@ import { LinkExpiredComponent } from './auth/link-expired/link-expired.component
 
 import { AuthService } from './auth/auth.service';
 import { environment } from '../environments/environment';
+import { ProjectsService } from './projects/projects.service';
 
 // max test
 import { MyUserService } from './myTest/user.service';
 import { CompanyService } from './myTest/company.service';
+import { EmployeesService } from './employees/employees.service';
+import { TestService } from './employees/test.service';
 import { MyComponent } from './myTest/my.component';
 import { HttpClientModule } from '@angular/common/http';
 
 import { TimelogsModule } from './timelogs/timelogs.module';
 
+
+import { ChartsModule } from 'ng2-charts';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,14 +62,20 @@ import { TimelogsModule } from './timelogs/timelogs.module';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    AngularFirestoreModule,
     CoreModule,
     CompanySettingModule,
     TimelogsModule,
     HttpClientModule,
     ProfilePageModule,
-    EmployeesModule
+    ProjectsModule,
+    EmployeesModule,
+    // AngularFireDatabaseModule,
+    AngularFirestoreModule,
+    AngularFireStorageModule,
+    ChartsModule
   ],
-  providers: [AuthService, MyUserService, CompanyService],
+  providers: [AuthService, MyUserService, CompanyService, ProjectsService, EmployeesService, TestService],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

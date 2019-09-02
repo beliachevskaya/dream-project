@@ -20,9 +20,6 @@ export class ProfileInfoComponent implements OnInit {
     this._user = User;
   }
 
-  // get user() {
-  //   return this._user;
-  // }
   getTotalH = () =>
     this.projectList
       .map(t => t.proWorkload)

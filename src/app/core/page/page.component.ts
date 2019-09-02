@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MyUserService, Iuser } from '../../myTest/user.service';
+import { MyUserService, IUser } from '../../myTest/user.service';
 import { CompanyService } from '../../myTest/company.service';
+
 
 @Component({
   selector: 'app-page',
@@ -8,32 +9,35 @@ import { CompanyService } from '../../myTest/company.service';
   styleUrls: ['./page.component.sass']
 })
 export class PageComponent implements OnInit {
-  currentUser: Iuser;
+  DEFAULT_COMPANY = 0;
+  currentUser: IUser;
   currentCompany: any;
   firstCompany: string;
   constructor(
     private userService: MyUserService,
     private companyService: CompanyService
-  ) {}
+  ) { }
 
   onChanged(company) {
-    // this.companyService.changeCompanyPage(company);
-    company === '+ Create company'
-      ? (this.currentCompany = this.companyService.createCompany())
-      : (this.currentCompany = this.companyService.getCompany(company));
+    if (company === '+ Create company') {
+      this.currentCompany = this.companyService.createCompany();
+    } else {
+      this.currentCompany = this.companyService.getCompany(company);
+      this.firstCompany = this.currentCompany;
+      this.companyService.changeCompanyName(company);
+    }
   }
 
   ngOnInit() {
-    this.currentUser = this.userService.get();
-    console.log(this.currentUser);
-    if (this.currentUser.registered !== false) {
-      this.currentCompany = this.companyService.getCompany(
-        this.currentUser.companyList[0]
+    this.currentUser = this.userService.getCurrentUser();
+    if (this.currentUser.role === 'Owner') {
+      this.companyService.getCompany(
+        this.currentUser.companyList[this.DEFAULT_COMPANY]
       );
-    } else {
-      this.currentCompany = this.companyService.get();
     }
-    this.firstCompany = this.currentUser.companyList[0];
+    this.userService.currentUserName.subscribe(() => {
+      console.log('page user chnage');
+    });
     this.companyService.currentCompanyName.subscribe(company => {
       this.firstCompany = company;
     });

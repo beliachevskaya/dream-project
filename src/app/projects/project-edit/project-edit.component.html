@@ -1,0 +1,102 @@
+<div class="create-project">
+  <mat-card>
+    <div class="first-row">
+      <div class="create-project__name">
+        <form class="name-form form-group" (ngSubmit)="addProject()" #myForm="ngForm">
+          <mat-form-field class="name-project">
+            <input matInput placeholder="Project" class="form-control" id="name" required
+            [(ngModel)]="project.name" name="name">
+          </mat-form-field>
+          <div class="circle" (click)="changeControl()" [ngStyle]="{ 'background': project.color }"></div>
+          <ng-template [ngIf]="hasControl">
+            <div class="color-picker">
+              <h3>Pick a color:</h3>
+              <div class="color-picker_elem">
+                <div class="circle_elem"
+                  *ngFor = "let item of colors"
+                  (click)="changeColor(item)"
+                  [ngStyle]="{ 'background': item }">
+                </div>
+              </div>
+            </div>
+          </ng-template>
+          <div class="code-project">
+            <p>Code:
+              <mat-form-field>
+                <span matPrefix># &nbsp;</span>
+                <input matInput type="text" class="input-code form-control" id="code" required
+                [(ngModel)]="project.code" name="code" maxlength="5" minlength="3">
+              </mat-form-field>
+            </p>
+          </div>
+          <div class="status-project">
+            <!-- <button mat-stroked-button disabled>{{project.status.toUpperCase()}}</button> -->
+          </div>
+        </form>
+      </div>
+      <div class="create-project__buttons">
+        <button mat-raised-button class="clear" (click)="onChangeStatusPaused()">Pause<i class="material-icons">pause</i></button>
+        <button mat-raised-button class="clear" (click)="onChangeStatusArchived()">Archive<i class="material-icons">stop</i></button>
+        <button mat-raised-button color="primary" (click)="addProject(project)" [disabled]="!myForm.form.valid">Save</button>
+      </div>
+    </div>
+    <div class="second-row">
+      <div class="create-project__settings form-group">
+        <div class="type-project">
+          <p>Project type:
+            <mat-form-field>
+              <mat-select class="form-control" id="type"
+              [(ngModel)]="project.type" name="type">
+                <mat-option [value]="type" *ngFor="let type of typeProject">
+                  {{type}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </p>
+        </div>
+        <div class="date-project">
+          <div class="start-project">
+            <p>Start Date:</p>
+            <mat-form-field>
+              <input matInput [matDatepicker]="startPicker" class="form-control" id="startDate" required
+              [(ngModel)]="project.startDate" name="startDate">
+              <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+              <mat-datepicker #startPicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="end-project" *ngIf="(project.type !== 'Fixed resources')">
+            <p>End Date:</p>
+            <mat-form-field>
+              <input matInput [matDatepicker]="endPicker" class="form-control" id="endDate" required
+              [(ngModel)]="project.endDate" name="endtDate">
+              <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+              <mat-datepicker #endPicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="hour" *ngIf="(project.type == 'Fixed resources')">
+            <p>Men/hours</p>
+            <mat-form-field>
+              <input matInput type="text" class="input-hours form-control" id="totalWorkload" required
+              [(ngModel)]="project.totalWorkload" name="totalWorkload">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div class="create-project__progress">
+
+      </div>
+    </div>
+  </mat-card>
+  <div class="create-project__team">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Team:
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <app-projects-team (onSaved)="onSaved($event)"></app-projects-team>
+    </mat-expansion-panel>
+    <div class="integration">
+    </div>
+  </div>
+</div>

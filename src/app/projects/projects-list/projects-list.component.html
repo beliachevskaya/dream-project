@@ -1,0 +1,56 @@
+<app-projects-header (onSaved)="onSaved($event)" [currentUser]="currentUser"></app-projects-header>
+<div class="projects-list">
+    <div class="mat-elevation-z8 list">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search for a project">
+      </mat-form-field>
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="color">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+          <td mat-cell *matCellDef="let element"><div [style.background-color]="element.color" class="circle"></div></td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Project Name </th>
+          <td mat-cell
+          *matCellDef="let element">{{element.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="code">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+          <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+        </ng-container>
+        <ng-container matColumnDef="team">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Team </th>
+          <td mat-cell *matCellDef="let element"></td>
+        </ng-container>
+        <ng-container matColumnDef="start">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </th>
+          <td mat-cell *matCellDef="let element"> {{element.startDate | date}} </td>
+        </ng-container>
+        <ng-container matColumnDef="progress">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+          <td mat-cell *matCellDef="let element"></td>
+        </ng-container>
+        <ng-container matColumnDef="end">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> End Date </th>
+          <td mat-cell *matCellDef="let element"> {{element.endDate | date}} </td>
+        </ng-container>
+        <ng-container matColumnDef="play">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+          <td mat-cell *matCellDef="let element">
+            <i *ngIf="(element.status==='in progress')" class="material-icons" (click)="changeStatus(element, 'paused')">pause</i>
+            <i *ngIf="(element.status==='paused' || element.status==='archived')" class="material-icons arrow" (click)="changeStatus(element,'in progress')">play_arrow</i>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="stop">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+          <td mat-cell *matCellDef="let element">
+            <i *ngIf="(element.status==='paused' || element.status==='in progress')" (click)="changeStatus(element, 'archived')" class="material-icons">stop</i>
+            <i *ngIf="(element.status==='archived')" (click)="changeStatus(element, 'in progress')" class="material-icons">pause</i>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+
+</div>

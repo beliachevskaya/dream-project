@@ -1,0 +1,11 @@
+<div class="projects-list__header">
+  <div class="buttons">
+    <button (click)="onChangeStatus('in progress')">Active</button>
+    <button (click)="onChangeStatus('archived')">Archived</button>
+  </div>
+  <button mat-raised-button
+  class="create-button"
+  color="primary"
+  routerLink="project">
+  Create</button>
+</div>

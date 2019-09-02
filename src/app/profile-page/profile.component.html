@@ -1,9 +1,6 @@
 <div class="profile-container">
   <app-container class="profile__info">
-    <app-profile-info
-      [user]="User"
-      [currentUser]="currentUser"
-    ></app-profile-info>
+    <app-profile-info [user]="user" [currentUser]="currentUser"></app-profile-info>
   </app-container>
 
   <!-- <app-container *ngIf="currentUser.registered" class="profile__bar-chart">
@@ -18,13 +15,13 @@
         </div>
       </div>
   </app-container> -->
+  <app-container *ngIf="currentUser.registered">
+    <app-employee-periods></app-employee-periods>
+  </app-container>
 
-  <!-- <app-container
-    *ngIf="currentUser.registered"
-    class="profile__notification-preferences"
-  >
-    <app-notification-preferences></app-notification-preferences>
-  </app-container> -->
+  <app-container *ngIf="currentUser.registered" class="profile__notification-preferences">
+    <app-notification-preferences [user]="user"></app-notification-preferences>
+  </app-container>
 
   <div *ngIf="!currentUser.registered" class="profile__first-login">
     <app-container class="profile__send-email">
