@@ -16,16 +16,16 @@
       </mat-form-field>
 
 
-      <button mat-icon-button [matMenuTriggerFor]="menu" matTooltip="Roles info">
+      <button mat-icon-button [matMenuTriggerFor]="infoRoles" matTooltip="Roles info">
         <mat-icon>help_outline</mat-icon>
       </button>
-      <mat-menu #menu="matMenu">
-        <span mat-menu-item [disableRipple]="true" (click)="$event.stopPropagation()">
+      <mat-menu #infoRoles="matMenu">
+        <div class="information_about">
           <div class="information_about_role" *ngFor="let role of roles" test>
             <p class='role-name'>{{role.value}}</p>
             <p class='role-description'>{{role.description}}</p>
           </div>
-        </span>
+        </div>
       </mat-menu>
 
 
@@ -101,5 +101,5 @@
 </app-container>
 
 <app-container *ngIf="currentUser.role === 'Owner' || currentUser.role === 'Project Manager'">
-  <app-employee-timesheets></app-employee-timesheets>
+  <app-employee-timesheets [abilityForget]='abilityForget'></app-employee-timesheets>
 </app-container>

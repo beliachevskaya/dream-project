@@ -8,14 +8,7 @@ import { MyUserService, IUser } from '../myTest/user.service';
 })
 export class ProfileComponent implements OnInit {
   currentUser: IUser;
-  name = 'Profile One';
   public user = {
-    registered: true,
-    name: 'Profile One',
-    role: 'Employee',
-    workload: 40,
-    email: 'pro1@vn.ed',
-    tel: '+375 29 1111111',
     projectList: [
       {
         proName: 'Office',
@@ -54,7 +47,7 @@ export class ProfileComponent implements OnInit {
         {
           label: '1 week before deadline',
           checked: true,
-          sendTo: ['Email']
+          sendTo: ['Email', 'System', 'Push', 'Slack']
         },
         {
           label: 'Status of a project you’re assigned to has been changed',

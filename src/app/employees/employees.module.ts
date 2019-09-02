@@ -33,7 +33,7 @@ import { ChartsModule } from 'ng2-charts';
     ReactiveFormsModule,
     ChartsModule
   ],
-  exports: [EmployeesComponent, EmployeeInformationComponent, EmployeePeriodsComponent],
+  exports: [EmployeesComponent, EmployeeInformationComponent, EmployeePeriodsComponent, EmployeeTimesheetsComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class EmployeesModule { }

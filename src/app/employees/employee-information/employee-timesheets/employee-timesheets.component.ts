@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 export const timelog = {
   table: [
     {
@@ -35,76 +35,6 @@ export const timelog = {
       Sun: 0,
     },
   ]
-  // pending: [
-  //   {
-  //     day: 'Mon',
-  //     projects: [{
-  //       name: "Office",
-  //       conments: [{ name: '#435: added localization on landing...', time: 2.3 }, { '#435: fix error #13': 1.5 }]
-  //     }, {
-  //       'Mifort Courses': [{ 'NgRx lection': 1.9 }]
-  //     }, {
-  //       Copses: [{ 'add new rules': 1.3 }]
-  //     }, {
-  //       'ADF clone': [{ 'reload server': 0.5 }]
-  //     }]
-  //   },
-  // {
-  //   day: 'Tue',
-  //   projects: [{
-  //     Office: [{ '#435: added localization on landing...': 5.3 }, { '#435: fix error #13': 1.5 }]
-  //   }, {
-  //     'Mifort Courses': [{ 'NgRx lection': 1.9 }]
-  //   }]
-  // },
-  // {
-  //   day: 'Wed',
-  //   projects: [{
-  //     Office: [{ '#435: added localization on landing...': 2.3 }, { '#435: fix error #13': 1.5 }]
-  //   }, {
-  //     'Mifort Courses': [{ 'NgRx lection': 1.9 }]
-  //   }, {
-  //     Copses: [{ 'add new rules': 2.3 }]
-  //   }, {
-  //     'ADF clone': [{ 'reload server': 0.5 }]
-  //   }]
-  // },
-  // {
-  //   day: 'Thu',
-  //   projects: [{
-  //     Office: [{ '#435: added localization on landing...': 2.3 }, { '#435: fix error #13': 1.5 }]
-  //   }, {
-  //     'Mifort Courses': [{ 'NgRx lection': 1.9 }]
-  //   }, {
-  //     Copses: [{ 'add new rules': 1.3 }]
-  //   }, {
-  //     'ADF clone': [{ 'reload server': 0.5 }]
-  //   }]
-  // },
-  // {
-  //   day: 'Fri',
-  //   projects: [{
-  //     Office: [{ '#435: added localization on landing...': 2.3 }, { '#435: fix error #13': 1.5 }]
-  //   }, {
-  //     Copses: [{ 'add new rules': 1.3 }]
-  //   }, {
-  //     'ADF clone': [{ 'reload server': 0.5 }]
-  //   }]
-  // },
-  // {
-  //   day: 'Sat',
-  //   projects: []
-  // },
-  // {
-  //   day: 'Sun',
-  //   projects: []
-  // },
-  // ],
-  // approved: [{
-  //   Mon:
-  // },{
-
-  // }]
 }
 
 @Component({
@@ -113,6 +43,8 @@ export const timelog = {
   styleUrls: ['./employee-timesheets.component.sass']
 })
 export class EmployeeTimesheetsComponent implements OnInit {
+  @Input() abilityForget: boolean;
+
   public data = timelog.table;
   public column =
     ['Comment',
@@ -132,10 +64,6 @@ export class EmployeeTimesheetsComponent implements OnInit {
   }
 
   createColumn(timelog) {
-    // console.log(timelog.pending.reduce((acc, item) => {
-    //   console.log(item);
-    //   acc.push(item.day);
-    // }, ['Comment']));
     const arr = ['Comment'];
     timelog.pending.forEach((item) => {
       arr.push(item.day);

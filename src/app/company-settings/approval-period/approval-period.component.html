@@ -2,20 +2,14 @@
   <div class="approval-block">
     <p>Approval Period:</p>
     <mat-form-field class="select-period">
-      <mat-select
-        [(ngModel)]="company.approvalPeriod.selectedPeriod"
-        (ngModelChange)="onChange($event)"
-      >
-        <mat-option
-          *ngFor="let item of company.approvalPeriod.periods"
-          [value]="item"
-        >
+      <mat-select [(ngModel)]="company.approvalPeriod.selectedPeriod" (ngModelChange)="onChange($event)">
+        <mat-option *ngFor="let item of company.approvalPeriod.periods" [value]="item">
           {{ item }}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
-    <mat-slide-toggle [(checked)]="company.autoSubmit" [disabled]="approvDis">
+    <mat-slide-toggle [(checked)]="company.autoSubmit" [disabled]="approvDis" (change)='changeAutoSubmit()'>
       Submit Time Logs automatically in the end of period
     </mat-slide-toggle>
   </div>
@@ -24,51 +18,27 @@
     <p>Notify about difference between expected and actual time:</p>
 
     <div class="notify-block">
-      <mat-checkbox
-        [(ngModel)]="company.notDifTime.notificationRule1.notification"
-        [disabled]="approvDis"
-      ></mat-checkbox>
-      <p class="notifi-sign">≤</p>
-      <input
-        type="number"
-        [(value)]="company.notDifTime.notificationRule1.time"
-        [disabled]="approvDis"
-      />
+      <mat-checkbox [(ngModel)]="company.notDifTime.notificationRule1.notification" [disabled]="approvDis">
+      </mat-checkbox>
+      <p class="notifi-sign">&lt;</p>
+      <input type="number" matInput [(value)]="company.notDifTime.notificationRule1.time" [disabled]="approvDis" />
       <p class="notifi-sign">%</p>
-      <mat-select
-        class="select-notify"
-        [(value)]="company.notDifTime.notificationRule1.implementation"
-        [disabled]="approvDis"
-      >
-        <mat-option
-          *ngFor="let item of company.notDifTime.defaultImplementation"
-          [value]="item"
-        >
+      <mat-select class="select-notify" [(value)]="company.notDifTime.notificationRule1.implementation"
+        [disabled]="approvDis">
+        <mat-option *ngFor="let item of company.notDifTime.defaultImplementation" [value]="item">
           {{ item }}
         </mat-option>
       </mat-select>
     </div>
     <div class="notify-block">
-      <mat-checkbox
-        [(ngModel)]="company.notDifTime.notificationRule2.notification"
-        [disabled]="approvDis"
-      ></mat-checkbox>
-      <p class="notifi-sign">≤</p>
-      <input
-        type="number"
-        [(value)]="company.notDifTime.notificationRule2.time"
-        [disabled]="approvDis"
-      />
+      <mat-checkbox [(ngModel)]="company.notDifTime.notificationRule2.notification" [disabled]="approvDis">
+      </mat-checkbox>
+      <p class="notifi-sign">&gt;</p>
+      <input type="number" matInput [(ngModel)]="company.notDifTime.notificationRule2.time" [disabled]="approvDis" />
       <p class="notifi-sign">%</p>
-      <mat-select
-        class="select-notify"
-        [(value)]="company.notDifTime.notificationRule2.implementation"
-        [disabled]="approvDis"
-      >
-        <mat-option
-          *ngFor="let item of company.notDifTime.defaultImplementation"
-          [value]="item"
-        >
+      <mat-select class="select-notify" [(ngModel)]="company.notDifTime.notificationRule2.implementation"
+        [disabled]="approvDis">
+        <mat-option *ngFor="let item of company.notDifTime.defaultImplementation" [value]="item">
           {{ item }}
         </mat-option>
       </mat-select>
@@ -76,10 +46,7 @@
   </div>
 
   <div class="approval-block">
-    <mat-slide-toggle
-      [(checked)]="company.abilityForget"
-      [disabled]="approvDis"
-    >
+    <mat-slide-toggle [(checked)]="company.abilityForget" [disabled]="approvDis" (change)='changeAbilityForget()'>
       Ability to forget timesheets
     </mat-slide-toggle>
   </div>

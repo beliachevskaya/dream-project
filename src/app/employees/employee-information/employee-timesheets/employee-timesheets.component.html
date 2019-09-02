@@ -16,7 +16,8 @@
         <input matInput placeholder="Leave your comment here" value="">
       </mat-form-field>
       <div class='button-box'>
-        <button mat-stroked-button (click)="onClick()" class="button  button-forget" color="basic">
+        <button mat-stroked-button (click)="onClick()" *ngIf='!abilityForget' class="button  button-forget"
+          color="basic">
           Forget
         </button>
         <button mat-raised-button (click)="onClick()" class="button button-approve " color="accent">

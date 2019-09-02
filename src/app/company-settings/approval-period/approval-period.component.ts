@@ -11,10 +11,17 @@ export class ApprovalPeriodComponent implements OnInit {
 
   public approvDis = false;
 
-  constructor() {}
+  constructor() { }
   onChange(event) {
     this.approvDis = event === 'I don’t need approvals' ? true : false;
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
+
+  changeAutoSubmit() {
+    this.company.autoSubmit = !this.company.autoSubmit;
+  }
+  changeAbilityForget() {
+    this.company.abilityForget = !this.company.abilityForget;
+  }
 }

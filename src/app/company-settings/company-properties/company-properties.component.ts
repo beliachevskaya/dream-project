@@ -7,18 +7,18 @@ import { ICompany } from '../../myTest/company.service';
   styleUrls: ['./company-properties.component.sass']
 })
 export class CompanyPropertiesComponent implements OnInit {
-  _company: ICompany;
+  @Input() company: ICompany;
   public checked: boolean;
   public buttonDisabled = true;
 
-  @Input()
-  set company(Company: ICompany) {
-    this._company = Company;
-  }
+  // @Input()
+  // set company(Company: ICompany) {
+  //   this._company = Company;
+  // }
 
   @Output() onSaved = new EventEmitter<ICompany>();
-  onSave(data: ICompany) {
-    this.onSaved.emit(data);
+  onSave(company: ICompany) {
+    this.onSaved.emit(company);
   }
 
   onToggle(checked) {
@@ -26,12 +26,12 @@ export class CompanyPropertiesComponent implements OnInit {
     this.onChangeAll();
   }
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   onChange(project, select) {
-    this._company.defaultProject.selectedProject.push(project);
+    this.company.defaultProject.selectedProject.push(project);
     select.value = '';
     this.onChangeAll();
   }
@@ -39,7 +39,7 @@ export class CompanyPropertiesComponent implements OnInit {
     this.buttonDisabled = false;
   }
   onChangeProject(event, i) {
-    this._company.defaultProject.selectedProject[i] = event;
+    this.company.defaultProject.selectedProject[i] = event;
     this.onChangeAll();
   }
 }
