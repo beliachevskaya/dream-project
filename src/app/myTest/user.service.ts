@@ -7,6 +7,16 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { AngularFirestore } from '@angular/fire/firestore';
 import 'rxjs/add/operator/map';
 // import 'rxjs/add/operator/do';
+export const EMPTY_USER = {
+  uid: '',
+  id: '',
+  name: '',
+  email: '',
+  role: '',
+  registered: false,
+  companyList: [],
+  avatar: '../../../assets/image/profile-1.jpg'
+};
 
 export interface IUser {
   id?: string;
@@ -33,39 +43,35 @@ export class MyUserService {
   private userName = new BehaviorSubject('');
   currentUserName = this.userName.asObservable();
   usersСhanged(name: string) {
-    console.log('usersСhanged');
-    console.log(name);
     this.userName.next(name);
   }
 
   constructor(private http: HttpClient, private db: AngularFirestore) {
-    // this.currentUser = {
-    //   name: 'Test',
-    //   role: 'Owner',
-    //   registered: true,
-    //   companyList: ['MTS', 'Microsoft inc.'],
-    //   avatar: '../../../assets/image/profile-1.jpg'
-    // };
     this.getAllUsers();
   }
 
   addCompanyToUser(company: string): IUser {
     this.currentUser.registered = true;
     this.currentUser.role = 'Owner';
-    this.currentUser.companyList.push(company);
-    this.setUser(this.currentUser);
+    if (!this.currentUser.companyList.some(item => item === company)) {
+      this.currentUser.companyList.push(company);
+      this.setUser(this.currentUser);
+    }
     return this.currentUser;
   }
 
-  getUser(userEmail) {
+  getUser(userEmail): void {
     this.db
       .collection('users', ref => ref.where('email', '==', userEmail))
       .valueChanges()
-      .subscribe(user => ([this.currentUser] = user));
-    this.currentUser.registered = true;
+      .subscribe(user => {
+        [this.currentUser] = user; this.currentUser.registered = true;
+      }, error => {
+        console.log(`Error:${error}`);
+      });
   }
 
-  getCurrentUser() {
+  getCurrentUser(): IUser {
     return this.currentUser;
   }
 
@@ -75,21 +81,25 @@ export class MyUserService {
     uid,
     photoUrl: string = '../../../assets/image/profile-1.jpg'
   ) {
-    this.currentUser = {
-      uid: uid,
-      id: '',
-      name: name,
-      email: email,
-      role: '',
-      registered: false,
-      companyList: [],
-      avatar: photoUrl
-    };
+    console.log('reg');
 
-    this.db.collection('users').add(this.currentUser).then(doc => {
-      this.currentUser.id = doc.id;
-      this.setUser(this.currentUser);
-    });
+    if (!this.userList.some(user => user.email === email)) {
+      this.currentUser = {
+        uid: uid,
+        id: '',
+        name: name,
+        email: email,
+        role: '',
+        registered: false,
+        companyList: [],
+        avatar: photoUrl
+      };
+
+      this.db.collection('users').add(this.currentUser).then(doc => {
+        this.currentUser.id = doc.id;
+        this.setUser(this.currentUser);
+      });
+    } else { this.getUser(email) }
   }
 
   setUser(user: IUser) {
@@ -99,7 +109,8 @@ export class MyUserService {
       .doc(user.id)
       .set(user)
       .then(() => this.getAllUsers())
-      .then(() => this.usersСhanged(user.name));
+      .then(() => this.usersСhanged(user.name))
+      .then(() => user.companyList.push('+ Create company'))
   }
 
   getAllUsers() {
@@ -117,6 +128,9 @@ export class MyUserService {
   }
 
 
+  setEmptyUser(): void {
+    this.currentUser = EMPTY_USER;
+  }
 
   //!my back-end DON'T TOUCH IT!!!!!
   regUser(user: IUser) {

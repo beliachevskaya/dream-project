@@ -10,7 +10,6 @@ import { MyUserService, IUser } from '../myTest/user.service';
   styleUrls: ['./employees.component.sass']
 })
 export class EmployeesComponent implements OnInit {
-  // public employees: string[];
   public employees: any[];
   public objEmployees: any[];
   public groupEmployee = { value: 'active' };
@@ -20,6 +19,7 @@ export class EmployeesComponent implements OnInit {
     this.employeesService.setEmployeeList(this.companyService.getCurrentCompany().employeeList);
     this.employeesService.setUserList(this.userService.userList);
   }
+
   private unsubscriber = this.companyService.currentCompanyPage.subscribe(() => {
     this.employeesService.setEmployeeList(this.companyService.getCurrentCompany().employeeList);
     this.employeesService.setUserList(this.userService.userList);

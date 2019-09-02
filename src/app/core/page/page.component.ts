@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MyUserService, IUser } from '../../myTest/user.service';
-import { CompanyService } from '../../myTest/company.service';
+import { CompanyService, ICompany } from '../../myTest/company.service';
 
 
 @Component({
@@ -11,8 +11,13 @@ import { CompanyService } from '../../myTest/company.service';
 export class PageComponent implements OnInit {
   DEFAULT_COMPANY = 0;
   currentUser: IUser;
-  currentCompany: any;
+  currentCompany: ICompany;
   firstCompany: string;
+  private unsubcriber = this.userService.currentUserName.subscribe(() => {
+  });
+  private unsubcriber2 = this.companyService.currentCompanyName.subscribe(company => {
+    this.firstCompany = company;
+  });
   constructor(
     private userService: MyUserService,
     private companyService: CompanyService
@@ -23,23 +28,22 @@ export class PageComponent implements OnInit {
       this.currentCompany = this.companyService.createCompany();
     } else {
       this.currentCompany = this.companyService.getCompany(company);
-      this.firstCompany = this.currentCompany;
+      this.firstCompany = this.currentCompany.name;
       this.companyService.changeCompanyName(company);
     }
   }
 
   ngOnInit() {
     this.currentUser = this.userService.getCurrentUser();
-    if (this.currentUser.role === 'Owner') {
-      this.companyService.getCompany(
-        this.currentUser.companyList[this.DEFAULT_COMPANY]
-      );
+    if (this.currentUser.companyList.length) {
+      this.firstCompany = this.companyService.getCompany(this.currentUser.companyList[this.DEFAULT_COMPANY]).name;
     }
-    this.userService.currentUserName.subscribe(() => {
-      console.log('page user chnage');
-    });
-    this.companyService.currentCompanyName.subscribe(company => {
-      this.firstCompany = company;
-    });
   }
+
+  ngOnDestroy(): void {
+    // this.unsubcriber.unsubscribe
+    // this.unsubcriber2.unsubscribe
+  }
+
+
 }

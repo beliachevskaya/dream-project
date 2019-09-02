@@ -15,6 +15,7 @@ export class EmployeeInformationComponent implements OnInit {
   public currentUser: IUser;
   public employeeCompany: ICompany;
   public deactivateMenu: boolean = false;
+  public abilityForget: boolean;
   public roles = [
     { value: 'Owner', description: 'Can do everything in the system: manage users, projects and company settings.' },
     { value: 'Admin', description: 'Can manage users: invite, deactivate users, change roles, workload on projects.' },
@@ -39,6 +40,7 @@ export class EmployeeInformationComponent implements OnInit {
     this.employeesService.setCurrentImployees(this.name);
     this.employee = this.employeesService.getCurrentImployees();
     this.employeeCompany = this.companyService.getCurrentCompany();
+    this.abilityForget = this.employeeCompany.abilityForget;
     if (!this.employee.workload) { this.employee.workload = this.employeeCompany.workload; }
 
   }
@@ -56,9 +58,7 @@ export class EmployeeInformationComponent implements OnInit {
     this.userService.setUser(employee);
   }
   onDeactivate(employee: IUser): void {
-    console.log(this.employeeCompany.employeeList.active);
     this.employeeCompany.employeeList.active = this.employeeCompany.employeeList.active.filter(name => name !== employee.name);
-    console.log(this.employeeCompany.employeeList.active);
     this.employeeCompany.employeeList.deactivated.push(employee.name);
     this.companyService.setCompany(this.employeeCompany);
     this.openDeactivateMenu();

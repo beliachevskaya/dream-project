@@ -1,9 +1,10 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { MaterialModule } from '../material.module';
 import { CoreModule } from '../core/core.module';
 import { EmployeesModule } from '../employees/employees.module';
-// import {ComponentsModule} from '../components/components.module';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ProfileComponent } from './profile.component';
@@ -25,7 +26,9 @@ import { CreateCompanyComponent } from './create-company/create-company.componen
     MaterialModule,
     CoreModule,
     EmployeesModule,
-    CommonModule
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   entryComponents: [],
   exports: [ProfileComponent],

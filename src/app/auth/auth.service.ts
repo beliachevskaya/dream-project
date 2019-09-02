@@ -50,21 +50,19 @@ export class AuthService {
   login(authData: AuthData) {
     this.angularFireAuth.auth
       .signInWithEmailAndPassword(authData.email, authData.password)
-      .then(result => {
-        this.userService.getUser(authData.email);
-        this.authSuccessfully();
-      })
+      .then(() => this.userService.getUser(authData.email))
+      .then(() => this.authSuccessfully())
       .catch(error => {
         this.errorCode = error.code;
         this.errorMessage = error.message;
         if (this.errorCode === 'auth/wrong-password') {
           this.snackBar.open('Wrong password', 'OK', {
-            duration: 10000,
+            duration: 5000,
             panelClass: 'error'
           });
         } else {
           this.snackBar.open(this.errorMessage, 'OK', {
-            duration: 10000,
+            duration: 5000,
             panelClass: 'error'
           });
         }
@@ -84,7 +82,7 @@ export class AuthService {
   private authSuccessfully() {
     this.isAuthenticated = true;
     this.authChange.next(true);
-    this.ngZone.run(() => this.router.navigate(['/']));
+    this.ngZone.run(() => setTimeout(() => this.router.navigate(['/']), 1000));
   }
 
   restorePassword(email: string) {
@@ -137,6 +135,7 @@ export class AuthService {
           res.user.photoURL
         );
         resolve(res);
+        reject('error')
         this.authSuccessfully();
       });
     });

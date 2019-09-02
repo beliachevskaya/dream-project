@@ -3,20 +3,12 @@
     <app-profile-info [user]="user" [currentUser]="currentUser"></app-profile-info>
   </app-container>
 
-  <!-- <app-container *ngIf="currentUser.registered" class="profile__bar-chart">
-    <app-bar-chart></app-bar-chart>
-  </app-container> -->
-
-  <!-- <app-container *ngIf="currentUser.registered" class="profile__pending">
-    <div class="inline">
-        <app-table [tableData]="tableData" (onRemove)="removeItem($event)"></app-table>
-        <div class="donut_chart">
-          <app-donut-chart></app-donut-chart>
-        </div>
-      </div>
-  </app-container> -->
   <app-container *ngIf="currentUser.registered">
     <app-employee-periods></app-employee-periods>
+  </app-container>
+
+  <app-container *ngIf="currentUser.registered">
+    <app-employee-timesheets></app-employee-timesheets>
   </app-container>
 
   <app-container *ngIf="currentUser.registered" class="profile__notification-preferences">

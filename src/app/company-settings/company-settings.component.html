@@ -1,9 +1,6 @@
 <div class="company-container">
   <app-container class="company-card">
-    <app-company-properties
-      [company]="company"
-      (onSaved)="onSaved($event)"
-    ></app-company-properties>
+    <app-company-properties [company]="company" (onSaved)="onSaved($event)"></app-company-properties>
   </app-container>
 
   <app-container class="approval-card">
@@ -14,7 +11,7 @@
   <div class="last-row">
     <app-container class="comments-card">
       <mat-card-title>Comments:</mat-card-title>
-      <app-comments></app-comments>
+      <app-comments [company]="company"></app-comments>
     </app-container>
 
     <app-container class="integration-card">

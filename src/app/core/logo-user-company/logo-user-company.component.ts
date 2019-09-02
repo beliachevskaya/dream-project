@@ -20,12 +20,17 @@ export class LogoUserCompanyComponent implements OnInit, OnChanges {
   @Input() currentUser: IUser;
   @Input() firstCompany: string;
   selectedCompany: any;
+  private unsubcriber2 = this.companyService.currentCompanyName.subscribe(company => {
+    this.selectedCompany = company;
+  })
+
 
   constructor(private router: Router, private companyService: CompanyService) { }
   isHide = () => this.currentUser.companyList.length < 2;
   ngOnInit() {
     this.router.navigate(['profile']);
-    this.selectedCompany = this.currentUser.companyList[0];
+    this.selectedCompany = this.firstCompany;
+    this.currentUser.companyList = this.currentUser.companyList.filter(company => company !== '+ Create company');
     this.currentUser.companyList.push('+ Create company');
   }
 
@@ -34,16 +39,11 @@ export class LogoUserCompanyComponent implements OnInit, OnChanges {
   onChange(company) {
     this.onChanged.emit(company);
   }
+
   ngOnChanges() {
-    if (this.firstCompany) {
-      if (
-        this.currentUser.companyList.some(item => item === this.firstCompany)
-      ) {
-        this.selectedCompany = this.firstCompany;
-      } else {
-        this.selectedCompany = this.firstCompany;
-        this.currentUser.companyList.unshift(this.selectedCompany);
-      }
+    // this.selectedCompany = this.firstCompany;
+    if (this.firstCompany && this.selectedCompany) {
+      if (!this.currentUser.companyList.some(item => item === this.firstCompany)) this.currentUser.companyList.unshift(this.selectedCompany)
     }
   }
   onKlick() {

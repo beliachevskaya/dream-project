@@ -9,17 +9,10 @@ import { MyUserService, IUser } from '../myTest/user.service';
 })
 export class CompanySettingsComponent implements OnInit {
   public company: ICompany;
+  public currentUser: IUser;
   public user = {
     integrationApp: ['Jira', 'Slack'],
-    integratedApp: [
-      'Asana',
-      'Trello',
-      'IdeaJet',
-      'Git',
-      'Telegram',
-      'WhattsApp',
-      'GitHub'
-    ]
+    integratedApp: ['Asana', 'Trello', 'IdeaJet', 'Git', 'Telegram', 'WhattsApp', 'GitHub']
   };
   unsubscriber = this.companyService.currentCompanyPage.subscribe(() => {
     this.company = this.companyService.getCurrentCompany();
@@ -30,7 +23,8 @@ export class CompanySettingsComponent implements OnInit {
   ) { }
   onSaved(company: ICompany) {
     this.company = company;
-    this.companyService.saveCompany(this.company);
+    this.currentUser = this.userService.getCurrentUser();
+    this.companyService.saveCompany(this.company, this.currentUser.name);
     this.companyService.changeCompanyName(this.company.name);
     this.userService.addCompanyToUser(this.company.name);
   }

@@ -9,11 +9,11 @@ import { FormControl } from '@angular/forms';
 export class NotificationPreferencesComponent implements OnInit {
   @Input() user: any;
   public buttonDisabled = false;
-  toppings = new FormControl();
+  items = new FormControl();
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
   onToggle = checked => (checked = !checked);
 
   onSave = event => console.log(event);

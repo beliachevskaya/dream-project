@@ -1,12 +1,9 @@
 <div class="profile-info">
   <div class="profile-info__avatar">
-    <div
-      class="profile__photo"
-      [ngStyle]="{
+    <div class="profile__photo" [ngStyle]="{
         background: 'url(' + currentUser.avatar + ') no-repeat ',
         'background-size': '100%'
-      }"
-    ></div>
+      }"></div>
   </div>
 
   <div class="profile-info__user">
@@ -15,10 +12,10 @@
       Role: {{ currentUser.role }}
     </p>
     <p *ngIf="currentUser.registered" class="text">
-      Workload: {{ _user.workload }} h/week
+      Workload: {{ currentUser.workload[0] }} h/{{currentUser.workload[1] }}
     </p>
     <p class="text gray">{{ currentUser.email }}</p>
-    <p *ngIf="_user.tel" class="text gray">{{ currentUser.tel }}</p>
+    <p *ngIf="currentUser.tel" class="text gray">{{ currentUser.tel }}</p>
   </div>
 
   <div *ngIf="currentUser.registered" class="profile-info__projects">
