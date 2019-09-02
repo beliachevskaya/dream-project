@@ -1,29 +1,3 @@
-<<<<<<< HEAD
-import { NgModule } from '@angular/core';
-
-// import { MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule } from '@angular/material';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatRadioModule } from '@angular/material/radio';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatCardModule } from '@angular/material/card';
-import { MatSelectModule } from '@angular/material/select';
-import { MatIconModule } from '@angular/material/icon';
-import { MatTableModule } from '@angular/material/table';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
-import {
-  MatInputModule,
-  MatNativeDateModule,
-  MatSlideToggleModule
-} from '@angular/material';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatButtonModule } from '@angular/material/button';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatExpansionModule } from '@angular/material/expansion';
-=======
 import {NgModule} from '@angular/core';
 import {A11yModule} from '@angular/cdk/a11y';
 import {DragDropModule} from '@angular/cdk/drag-drop';
@@ -66,7 +40,6 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
->>>>>>> b1b96a80bbbc8fedd782e5d94e6aff4b28bcedfd
 
 @NgModule({
   declarations: [],
@@ -103,13 +76,11 @@ import {MatTreeModule} from '@angular/material/tree';
     MatSelectModule,
     MatSidenavModule,
     MatSliderModule,
-<<<<<<< HEAD
     MatDialogModule,
     MatButtonModule,
     MatSnackBarModule,
     MatButtonToggleModule,
-    MatExpansionModule
-=======
+    MatExpansionModule,
     MatSlideToggleModule,
     MatSnackBarModule,
     MatSortModule,
@@ -122,7 +93,6 @@ import {MatTreeModule} from '@angular/material/tree';
     ScrollingModule,
   ],
   entryComponents: [
->>>>>>> b1b96a80bbbc8fedd782e5d94e6aff4b28bcedfd
   ],
   exports: [
     A11yModule,
@@ -157,13 +127,11 @@ import {MatTreeModule} from '@angular/material/tree';
     MatSelectModule,
     MatSidenavModule,
     MatSliderModule,
-<<<<<<< HEAD
     MatDialogModule,
     MatButtonModule,
     MatSnackBarModule,
     MatButtonToggleModule,
-    MatExpansionModule
-=======
+    MatExpansionModule,
     MatSlideToggleModule,
     MatSnackBarModule,
     MatSortModule,
@@ -174,7 +142,6 @@ import {MatTreeModule} from '@angular/material/tree';
     MatTreeModule,
     PortalModule,
     ScrollingModule,
->>>>>>> b1b96a80bbbc8fedd782e5d94e6aff4b28bcedfd
   ]
 })
 export class MaterialModule {

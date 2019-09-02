@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ProjectsService } from '../projects.service';
 import { Project, Team, TeamMember } from '../projects.model';
 import { Subscription } from 'rxjs/Subscription';
-// import { CompanyService } from '../../myTest/company.service';
+import { CompanyService } from '../../myTest/company.service';
 
 @Component({
   selector: 'app-projects-create',
@@ -36,17 +36,19 @@ export class ProjectsCreateComponent implements OnInit, OnDestroy {
   constructor(
     private db: AngularFirestore,
     private projectsService: ProjectsService,
-    // private companyService: CompanyService
+    private companyService: CompanyService
     ) { }
 
   ngOnInit() {
-    // this.unSubscriptionCurrentCompany = this.companyService.currentCompanyPage.subscribe(() => {
-    //   this.currentCompany = this.companyService.getCurrentCompany();
-    // });
+    this.unSubscriptionCurrentCompany = this.companyService.currentCompanyPage.subscribe(() => {
+      this.currentCompany = this.companyService.getCurrentCompany();
+    });
+    console.log(this.currentCompany);
     this.project.status = 'in progress';
     this.project.totalWorkload = 0;
     this.project.endDate = '';
-    this.project.company = 'MTS';
+    this.project.company = this.currentCompany.name;
+    this.project.team = this.currentCompany.employeeList.active;
   }
 
   changeControl() {
@@ -82,6 +84,6 @@ export class ProjectsCreateComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    // this.unSubscriptionCurrentCompany.unsubscribe();
+    this.unSubscriptionCurrentCompany.unsubscribe();
   }
 }

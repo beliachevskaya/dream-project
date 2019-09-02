@@ -1,15 +1,18 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { TeamMember, Team, Project } from '../projects.model';
 import { ProjectsService } from '../projects.service';
 import { NgModel } from '@angular/forms';
+import { CompanyService } from '../../myTest/company.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-projects-team',
   templateUrl: './projects-team.component.html',
   styleUrls: ['./projects-team.component.sass']
 })
-export class ProjectsTeamComponent implements OnInit {
-  allMembers: string[] = [];
+export class ProjectsTeamComponent implements OnInit, OnDestroy {
+  currentCompany: any;
+  allMembers: string[];
   roles: string[] = ['Project Manager', 'Employee'];
   teamMember: TeamMember;
   team: Team;
@@ -22,13 +25,20 @@ export class ProjectsTeamComponent implements OnInit {
   project: Project;
   total: number;
   totalArr: number[];
+  unSubscriptionCurrentCompany: Subscription;
   // tslint:disable-next-line: no-output-on-prefix
   @Output() onSaved = new EventEmitter<Team>();
 
-  constructor(private projectsService: ProjectsService) { }
+  constructor(
+    private projectsService: ProjectsService,
+    private companyService: CompanyService
+    ) { }
 
   ngOnInit() {
-    this.allMembers = this.projectsService.allMembers;
+    this.unSubscriptionCurrentCompany = this.companyService.currentCompanyPage.subscribe(() => {
+      this.currentCompany = this.companyService.getCurrentCompany();
+    });
+    this.allMembers = this.currentCompany.employeeList.active;
     this.isAddName = false;
     this.isAddRole = false;
     this.isAddWorkload = false;
@@ -107,5 +117,9 @@ export class ProjectsTeamComponent implements OnInit {
     this.team.splice(index, 1);
     console.log(this.team);
     this.addTotalWorkload();
+  }
+
+  ngOnDestroy() {
+    this.unSubscriptionCurrentCompany.unsubscribe();
   }
 }

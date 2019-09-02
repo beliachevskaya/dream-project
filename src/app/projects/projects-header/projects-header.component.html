@@ -6,5 +6,7 @@
   <button mat-raised-button
   class="create-button"
   color="primary"
-  routerLink="project">Create</button>
+  routerLink="project"
+  *ngIf="currentUser.role === 'Owner'">
+  Create</button>
 </div>

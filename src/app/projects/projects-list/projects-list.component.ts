@@ -4,7 +4,8 @@ import { Project, Team } from '../projects.model';
 import { ProjectsService } from '../projects.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Subscription } from 'rxjs';
-
+import { CompanyService } from '../../myTest/company.service';
+import { MyUserService } from '../../myTest/user.service';
 @Component({
   selector: 'app-projects-list',
   templateUrl: './projects-list.component.html',
@@ -19,19 +20,32 @@ export class ProjectsListComponent implements OnInit, OnDestroy {
   currentCompanyProjectsListArch: Project[];
   currentCompanyProjectsListAct: Project[];
   status: string = 'in progress';
+  currentUser: any;
   // tslint:disable-next-line: no-inferrable-types
-  currentCompany: string = 'MTS';
+  currentCompany: any;
   private exChangedSubscription: Subscription;
+  private unSubscriptionCurrentCompany: Subscription;
+  private unsubscriber: Subscription;
 
-
-  constructor(private projectsService: ProjectsService, private db: AngularFirestore) {}
+  constructor(
+    private projectsService: ProjectsService,
+    private db: AngularFirestore,
+    private companyService: CompanyService,
+    private userService: MyUserService
+    ) {}
 
   ngOnInit() {
+    this.currentUser = this.userService.getCurrentUser;
+    console.log(this.currentUser);
+    this.unsubscriber = this.companyService.currentCompanyPage.subscribe(() => {
+      this.currentCompany = this.companyService.getCurrentCompany();
+    });
+    console.log(this.currentCompany);
     this.projectsService.fetchProjectsChanged();
     this.exChangedSubscription = this.projectsService.projectsChanged.subscribe(
       (projects: Project[]) => {
         this.currentCompanyProjectsList = projects.filter(project => {
-          if ((project.company === this.currentCompany) && (project.status !== 'archived')) {
+          if ((project.company === this.currentCompany.name) && (project.status !== 'archived')) {
             return project;
           }
         });
@@ -53,13 +67,13 @@ export class ProjectsListComponent implements OnInit, OnDestroy {
       (projects: Project[]) => {
         if (this.status !== 'archived') {
           this.currentCompanyProjectsList = projects.filter(project => {
-            if ((project.company === this.currentCompany) && (project.status !== 'archived')) {
+            if ((project.company === this.currentCompany.name) && (project.status !== 'archived')) {
               return project;
             }
           });
         } else if (this.status === 'archived') {
           this.currentCompanyProjectsList = projects.filter(project => {
-            if ((project.company === this.currentCompany) && (project.status === 'archived')) {
+            if ((project.company === this.currentCompany.name) && (project.status === 'archived')) {
               return project;
             }
           });
@@ -87,5 +101,11 @@ export class ProjectsListComponent implements OnInit, OnDestroy {
       this.exChangedSubscription.unsubscribe();
       this.exChangedSubscription = null;
     }
+    if (this.unSubscriptionCurrentCompany) {
+      this.unSubscriptionCurrentCompany.unsubscribe();
+      this.unSubscriptionCurrentCompany = null;
+    }
+    this.unsubscriber.unsubscribe();
   }
 }
+

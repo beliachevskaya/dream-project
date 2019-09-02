@@ -7,6 +7,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class ProjectsHeaderComponent implements OnInit {
   status: string = 'in progress';
+  currentUser;
 
   @Output() onSaved = new EventEmitter<string>();
 

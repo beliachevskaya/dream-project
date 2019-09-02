@@ -3,6 +3,7 @@ import { Project, Team, TeamMember } from './projects.model';
 import { Subject } from 'rxjs/Subject';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
+import { CompanyService } from '../myTest/company.service';
 
 export interface User {
   name: string;
@@ -11,7 +12,6 @@ export interface User {
 export class ProjectsService {
   team: Team;
   teamMember: TeamMember;
-  currentCompany: string;
   currentProject: Project;
   status: string;
   allMembers: string[] = ['Max', 'Gleb', 'Dima', 'Natalia'];
@@ -19,10 +19,13 @@ export class ProjectsService {
   allProjects: any[];
   projects: Project[] = [];
   currentCompanyProjectsList: Project[];
+  currentCompany: any[];
+
 
   constructor(
     private db: AngularFirestore,
-    private router: Router
+    private router: Router,
+    private companyService: CompanyService
     )  {}
 
   addProjectToDatabase(project: Project) {
@@ -39,33 +42,4 @@ export class ProjectsService {
       });
   }
 
-  // getAllProjects() {
-  //   this.db
-  //     .collection('projects')
-  //     .valueChanges()
-  //     .subscribe(
-  //       project => {
-  //        return this.allProjects = project;
-  //       }
-  //     );
-  // }
-
-  getProject(name) {
-    this.allProjects.forEach(project => {
-      if (project.name === name) {
-       return this.currentProject = project;
-      }
-    });
-  }
-  // onChangeStatus(project, status) {
-  //   this.db
-  //     .collection('projects')
-  //     .valueChanges()
-  //     .subscribe((projects: Project[]) => {
-  //       this.projects.filter(project => {
-  //         if ((project.company === this.currentCompany) && (project === project)) {
-  //           return project.status = status;
-  //       }
-  //   });
-  // }
 }
