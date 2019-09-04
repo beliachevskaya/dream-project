@@ -4,7 +4,7 @@ import {DataService} from '../data.service';
 import {HeaderTimelogsComponent} from '../header-timelogs/header-timelogs.component';
 import * as moment from 'moment';
 import {Moment} from 'moment';
-import {auditTime, debounce, debounceTime, takeWhile} from 'rxjs/operators';
+import {debounce, debounceTime} from 'rxjs/operators';
 import {TimesheetGroup} from './timesheet.model';
 import {timer} from 'rxjs';
 
@@ -27,7 +27,7 @@ export interface Timesheets {
 
 export interface Data {
   timesheets: Timesheets[];
-  projects: string[];
+  projects: Project[];
 }
 
 const  saveTimeout = 300;
@@ -50,7 +50,7 @@ export class TimelogDayComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['project', 'time', 'comment'];
   date: string = moment().format('L');
   time: string = null;
-  projects: string[] = [];
+  projects: Project[] =  [];
   valueChangesTimesheet$;
   valueChangesTimesheets$;
   saveStatus = 'Save';
@@ -160,21 +160,24 @@ export class TimelogDayComponent implements OnInit, OnDestroy {
   }
 
   setDataInForm(date) {
-    this.dataService.getTimesheetFormArray(date).subscribe(timesheets => {
-      this.valueChangesTimesheets$.unsubscribe();
-      this.timesheetsForm.setControl('timesheets', timesheets);
-      this.isDisabled = !this.timesheetsForm.valid;
-      this.subscribeTimesheetsForm();
-      this.cdr.detectChanges();
-    });
     this.dataService.getProjects().subscribe(projects => {
       this.projects = projects;
-      this.cdr.detectChanges();
+      this.dataService.getTimesheetFormArray(date).subscribe(timesheets => {
+        this.valueChangesTimesheets$.unsubscribe();
+        this.timesheetsForm.setControl('timesheets', timesheets);
+        this.isDisabled = !this.timesheetsForm.valid;
+        this.subscribeTimesheetsForm();
+        this.cdr.detectChanges();
+      });
     });
   }
 
   ngOnDestroy(): void {
     this.valueChangesTimesheet$.unsubscribe();
     this.valueChangesTimesheets$.unsubscribe();
+  }
+
+  test() {
+    this.dataService.setTestData();
   }
 }

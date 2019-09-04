@@ -1,60 +1,55 @@
-import {ChangeDetectionStrategy, Component, forwardRef, Input, OnInit} from '@angular/core';
-import {Timesheet} from '../timelog-day/timelog-day.component';
+import {ChangeDetectionStrategy, Component, forwardRef, Input} from '@angular/core';
 import {Project} from '../timelog-day/timelog-day.component';
-import {NG_VALUE_ACCESSOR} from '@angular/forms';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 @Component({
   selector: 'app-timelog-select',
   templateUrl: './timelog-select.component.html',
   styleUrls: ['./timelog-select.component.sass'],
-  // providers: [
-  //   {
-  //     provide: NG_VALUE_ACCESSOR,
-  //     useExisting: forwardRef(() => TimelogSelectComponent),
-  //     multi: true,
-  //   }
-  // ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => TimelogSelectComponent),
+      multi: true,
+    }
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TimelogSelectComponent implements OnInit {
+export class TimelogSelectComponent implements ControlValueAccessor {
 
-  constructor() {
+  @Input()
+  projects: Project[] = [];
+
+  project: Project = null;
+
+  projectSelect(project: Project): void {
+    this.writeValue(project.name);
+    this.onTouched();
   }
 
-  // @Input()
-  projects: Project[] =  [
-    {name: 'Windows', color: 'red'},
-    {name: 'Skype', color: 'yellow'},
-    {name: 'Mifot', color: 'blue'},
-    {name: 'Microsoft', color: 'green'}
-  ];
-
-  // @Input()
-  timesheets: Timesheet =  {project: 'Windows', time: '2.25', comment: '#435: added localization on landing page'};
-
-  project: object = this.projects;
-
-  // writeValue(value) {
-  //   if (!value || typeof value !== 'string') {
-  //     return
-  //   }
-  //   const selectedEl = this.options.find(el => el.value === value);
-  //   if (selectedEl) {
-  //     this.selectedOption = selectedEl;
-  //     this.onChange(this.selectedOption.value);
-  //   }
-  // }
-
-  ngOnInit() {
-    // const firstElement = 2;
-    // this.project = this.projects[firstElement];
+  writeValue(project: string): void {
+    if (!project || typeof project !== 'string') {
+      return;
+    }
+    const selectedEl = this.projects.find(el => el.name === project);
+    if (selectedEl) {
+      this.project = selectedEl;
+      this.onChange(this.project.name);
+    }
   }
 
-  // registerOnChange(fn) {
-  //   this.onChange = fn;
-  // }
-  //
-  // registerOnTouched(fn) {
-  //   this.onTouched = fn;
-  // }
+  onChange: any = (): void => {
+  }
+
+  onTouched: any = (): void => {
+  }
+
+  registerOnChange(fn): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn): void {
+    this.onTouched = fn;
+  }
+
 }

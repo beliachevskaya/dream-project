@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import {map} from 'rxjs/operators';
-import {Data, Timesheet} from './timelog-day/timelog-day.component';
+import {Data, Project, Timesheet} from './timelog-day/timelog-day.component';
 import {Observable} from 'rxjs';
 import {FormArray} from '@angular/forms';
 import {TimesheetGroup} from './timelog-day/timesheet.model';
@@ -10,7 +10,7 @@ import {TimesheetGroup} from './timelog-day/timesheet.model';
 const data2 = {
   timesheets: [
     {
-      date: '09/01/2019',
+      date: '09/03/2019',
       saveTime: '11:22 PM',
       timesheet: [
         {project: 'Windows', time: 2.25, comment: '#435: added localization on landing page'},
@@ -18,7 +18,7 @@ const data2 = {
       ]
     },
     {
-      date: '09/02/2019',
+      date: '09/04/2019',
       saveTime: '11:22 PM',
       timesheet: [
         {project: 'Windows', time: 4.25, comment: '#435: added localization on landing page'},
@@ -26,7 +26,7 @@ const data2 = {
       ]
     },
     {
-      date: '09/03/2019',
+      date: '09/05/2019',
       saveTime: '11:22 PM',
       timesheet: [
         {project: 'Windows', time: 1.25, comment: '#435: added localization on landing page'},
@@ -36,10 +36,10 @@ const data2 = {
   ]
   ,
   projects: [
-    'Windows',
-    'Skype',
-    'Mifort',
-    'Microsoft',
+    {name: 'Windows', color: 'red'},
+    {name: 'Skype', color: 'yellow'},
+    {name: 'Mifort', color: 'blue'},
+    {name: 'Microsoft', color: 'green'}
   ]
 };
 
@@ -51,31 +51,31 @@ export class DataService {
     private http: HttpClient
   ) {
   }
-  //
-  // setTestData() {
-  //   const lock = new HttpParams()
-  //     .append('f', 'LOCKGET')
-  //     .append('n', 'GLEB_TIMESHEET')
-  //     .append('p', '12345');
-  //
-  //   const update = new HttpParams()
-  //     .append('f', 'UPDATE')
-  //     .append('n', 'GLEB_TIMESHEET')
-  //     .append('p', '12345')
-  //     .append('v', JSON.stringify(data2));
-  //
-  //
-  //
-  //   this.http
-  //     .post('https://fe.it-academy.by/AjaxStringStorage2.php', lock)
-  //     .subscribe((requestValue) => {
-  //       this.http
-  //         .post('https://fe.it-academy.by/AjaxStringStorage2.php', update)
-  //         .subscribe((requestValue2) => {
-  //           console.log(requestValue2);
-  //         });
-  //     });
-  // }
+
+  setTestData() {
+    const lock = new HttpParams()
+      .append('f', 'LOCKGET')
+      .append('n', 'GLEB_TIMESHEET')
+      .append('p', '12345');
+
+    const update = new HttpParams()
+      .append('f', 'UPDATE')
+      .append('n', 'GLEB_TIMESHEET')
+      .append('p', '12345')
+      .append('v', JSON.stringify(data2));
+
+
+
+    this.http
+      .post('https://fe.it-academy.by/AjaxStringStorage2.php', lock)
+      .subscribe((requestValue) => {
+        this.http
+          .post('https://fe.it-academy.by/AjaxStringStorage2.php', update)
+          .subscribe((requestValue2) => {
+            console.log(requestValue2);
+          });
+      });
+  }
 
   setTimesheetData(timesheet: Timesheet[], date, saveTime): void {
     const newTimesheet = {date, saveTime, timesheet};
@@ -130,7 +130,7 @@ export class DataService {
   );
   }
 
-  getProjects(): Observable<string[]> {
+  getProjects(): Observable<Project[]> {
     return this.getData()
       .pipe(map((data: Data) =>  {
           return data.projects;
